@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import '/src/styles/base/color';
+@import '/src/styles/base/font';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: signika;
+}
+
+body {
+  background-color: $background-color;
+}
