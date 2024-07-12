@@ -1,0 +1,33 @@
+@import '../base/mixins';
+@import '../base/color';
+
+header {
+    @include absolute(0, 0, 20);
+    @include dimension(100vw, auto);
+    background-color: $white-color;
+
+    nav {
+        margin-top: .3em;
+
+        .navLink {
+            @include dimension(auto, 100%);
+            display: flex;
+            align-items: center;
+            padding-left: .5em;
+            padding-right: .5em;
+            border-bottom: .3em solid $white-color;
+            cursor: pointer;
+
+            &:hover {
+                border-color: $primary-color;
+                color: $primary-color;
+            }
+        }
+    }
+    .login {
+        background-color: $primary-color;
+        color: $white-color;
+        border-radius: 4em;
+    }
+
+}

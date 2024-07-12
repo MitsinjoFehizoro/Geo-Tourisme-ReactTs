@@ -1,0 +1,11 @@
+@mixin dimension ($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin absolute ($top, $left, $z-index: 1) {
+    position: absolute;
+    top: $top;
+    left: $left;
+    z-index: $z-index;
+}

@@ -1,0 +1,14 @@
+@import '../base/mixins';
+@import '../base/color';
+
+.porteur {
+    @include dimension(100vw, 80vh);
+    overflow: hidden;
+
+    .fond {
+        @include absolute(0, 0);
+        @include dimension (100%, 80vh);
+        background-color: $secondary-color;
+        opacity: 0.7;
+    }
+}
