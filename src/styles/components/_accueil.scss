@@ -4,11 +4,30 @@
 .porteur {
     @include dimension(100vw, 80vh);
     overflow: hidden;
+    position: relative;
 
     .fond {
         @include absolute(0, 0);
-        @include dimension (100%, 80vh);
+        @include dimension (100%, 100%);
         background-color: $secondary-color;
         opacity: 0.7;
+    }
+
+    .detail {
+        @include absolute(0, 0);
+        form {
+            background-color: $background-color;
+
+            .div {
+                background-color: $white-color ;
+                @include dimension(100%, auto);
+                border-radius: 6px;
+                margin-bottom: 8px;
+            }
+
+            .input {
+                padding: .5em 1em;
+            }
+        }
     }
 }
