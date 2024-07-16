@@ -3,6 +3,7 @@
 
 header {
     @include absolute(0, 0, 20);
+    position: fixed;
     @include dimension(100vw, auto);
     background-color: $white-color;
 

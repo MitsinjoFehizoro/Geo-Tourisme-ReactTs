@@ -1,0 +1,9 @@
+@import '../base/mixins';
+@import '../base/color';
+
+section {
+    .destination_title {
+        position: absolute;
+        bottom: -2.3em;
+    }
+}

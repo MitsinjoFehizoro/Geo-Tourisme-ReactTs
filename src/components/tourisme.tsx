@@ -7,8 +7,8 @@ import vato from '../assets/images/Bemaraha/vato.jpg';
 const Tourisme: FunctionComponent = () => {
 
     return (
-        <section className="flex flex-row px-5 pt-14 pb-96">
-            <div >
+        <section className="flex flex-row justify-around px-5 py-14">
+            <div className="image ">
                 <div className="flex flex-row">
                     <div className="w-24 h-24 bg-secondary rounded-full"></div>
                     <div className="h-full flex justify-center pl-2">
@@ -21,7 +21,13 @@ const Tourisme: FunctionComponent = () => {
                     <div className="pneu w-12 h-12"></div>
                 </div>
             </div>
-
+            <div className="slide px-2 flex flex-col justify-center">
+                <h1 className="text-3xl text-primary">TOURISME</h1>
+                <p className="text-black">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, esse blanditiis distinctio repellat, voluptas odio laboriosam magnam in sapiente consequuntur reiciendis architecto porro est, nam incidunt culpa. Voluptatibus, omnis voluptates.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa perferendis totam vel suscipit voluptatibus possimus facilis! Eaque nihil nisi sapiente debitis, quae est possimus! Tempora ipsa earum commodi repellendus perspiciatis!
+                </p>
+            </div>
         </section>
     )
 }

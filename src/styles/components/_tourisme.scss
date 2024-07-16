@@ -11,8 +11,16 @@ section {
     .pneu {
         position: absolute;
         bottom: 5em;
-        right: -5em;
+        right: -3em;
         border: .6em solid $primary-color;
         border-radius: 50%;
+    }
+
+    .image {
+        @include dimension(35vw ,auto)
+    }
+
+    .slide {
+        @include dimension(40vw, auto)
     }
 }

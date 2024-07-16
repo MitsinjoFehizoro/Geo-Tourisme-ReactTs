@@ -32,7 +32,7 @@ const Accueil: FunctionComponent<Props> = ({ heightNavigationBar }) => {
                             <span className="w-full py-2 text-center">participants</span>
                             <i className={`fa fa-add ${i_accueil}`}></i>
                         </div>
-                        <CustomButton text="Rechercher" />
+                        <CustomButton text="Planifier" />
                     </form>
                 </div>
             </div>
