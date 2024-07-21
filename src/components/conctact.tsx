@@ -7,7 +7,7 @@ const Contact: FunctionComponent = () => {
     return (
         <section className="relative">
             <div className="w-full h-60 "></div>
-            <div className="w-full h-96 relative overflow-hidden">
+            <div className="w-full h-80 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full bg-secondary/70"></div>
                 <img src={tsingy} className="w-full h-auto" alt="" />
             </div>
@@ -15,6 +15,9 @@ const Contact: FunctionComponent = () => {
                 <InfoCard />
                 <ContactCard />
             </div>
+            <footer className="w-full pt-7 pb-5 flex flex-row items-center justify-around text-background absolute bottom-0 bg-secondary/80">
+                <p className="text-sm"><i className="fa fa-copyright mr-2"></i>Powered by MitsinjoFehizoro - 2024</p>
+            </footer>
         </section>
 
     )
