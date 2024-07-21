@@ -7,7 +7,7 @@ import vato from '../assets/images/Bemaraha/vato.jpg';
 const Tourisme: FunctionComponent = () => {
 
     return (
-        <section className="flex flex-row justify-around px-5 py-14">
+        <section className="flex flex-row justify-around px-5 pt-14 pb-20">
             <div className="image ">
                 <div className="flex flex-row">
                     <div className="w-24 h-24 bg-secondary rounded-full"></div>
