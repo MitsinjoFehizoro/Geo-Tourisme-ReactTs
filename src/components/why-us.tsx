@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import '../styles/components/_why-us.scss'
 import soleil from '../assets/images/Isalo/soleil.jpg'
-import GarantiCard from "./garanti-card";
+import GarantiCard from "./card/garanti-card";
 const WhyUs: FunctionComponent = () => {
     return (
         <section className="why">
@@ -13,7 +13,6 @@ const WhyUs: FunctionComponent = () => {
                     <GarantiCard />
                     <GarantiCard />
                     <GarantiCard />
-                    {/* <GarantiCard /> */}
                 </div>
             </div>
         </section>

@@ -1,0 +1,7 @@
+@import "../base/mixins";
+@import "../base/color";
+
+.style {
+  @include absolute(1em, 2em);
+  transform: rotate(-50deg);
+}

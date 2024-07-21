@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { p_destination } from "../styles/base/tailwind";
-import DestinationCard from "./destination-card";
+import DestinationCard from "./card/destination-card";
 import gesier from "../assets/images/Chute de la lylie et geyser/gesier.jpg"
 
 const Destination: FunctionComponent = () => {

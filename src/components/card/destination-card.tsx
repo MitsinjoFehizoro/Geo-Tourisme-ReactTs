@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import '../styles/components/_destination-card.scss'
+import '../../styles/components/card/_destination-card.scss'
 type Props = {
     picture: string
 }

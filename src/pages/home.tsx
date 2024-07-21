@@ -4,6 +4,7 @@ import NavigationBar from "../components/navigation-bar";
 import Tourisme from "../components/tourisme";
 import Destination from "../components/destination";
 import WhyUs from "../components/why-us";
+import Temoin from "../components/Temoin";
 
 const Home: FunctionComponent = () => {
     const [height, setHeight] = useState<number>(0)
@@ -17,6 +18,7 @@ const Home: FunctionComponent = () => {
             <Tourisme />
             <Destination />
             <WhyUs />
+            <Temoin />
         </>
     )
 }
