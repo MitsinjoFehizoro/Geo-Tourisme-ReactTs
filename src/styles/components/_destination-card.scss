@@ -1,9 +1,16 @@
-@import '../base/mixins';
-@import '../base/color';
+@import "../base/mixins";
+@import "../base/color";
 
 section {
-    .destination_title {
-        position: absolute;
-        bottom: -2.3em;
-    }
+  .destination_title {
+    position: absolute;
+    bottom: -2.3em;
+  }
+  .truncature {
+    display: -webkit-box;
+    -webkit-box-orient:vertical ;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

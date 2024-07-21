@@ -36,6 +36,7 @@ const Accueil: FunctionComponent<Props> = ({ heightNavigationBar }) => {
                     </form>
                 </div>
             </div>
+
         </section>
     )
 }

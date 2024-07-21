@@ -15,8 +15,9 @@ const DestinationCard: FunctionComponent<Props> = ({ picture }) => {
                     <p className="text-center text-background text-sm">A partir de 500.000 Ariary</p>
                 </div>
             </div>
-            <p className="text-center pt-12">
+            <p className="truncature text-center pt-12">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta sint dolore modi dolor sequi. Voluptas libero quos at molestias nihil, laboriosam animi facere iusto
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod consequatur assumenda numquam. Molestiae aperiam saepe dolorum facilis voluptates soluta tenetur rem. Tempora, iure suscipit voluptatem quasi non deserunt labore recusandae!
             </p>
             <p className="w-36 mt-6 pb-2 border-b-2 border-black text-sm text-center">VOIR PLUS DE DETAIL</p>
         </div>

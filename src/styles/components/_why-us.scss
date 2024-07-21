@@ -1,0 +1,20 @@
+@import '../base/mixins';
+@import '../base/color';
+
+.why {
+    @include dimension(100vw, 80vh);
+    position: relative;
+    overflow: hidden;
+
+    .fond {
+        @include absolute(0, 0);
+        @include dimension (100%, 100%);
+        background-color: $secondary-color;
+        opacity: 0.9;
+    }
+
+    .info {
+        @include dimension(100%, 100%);
+        @include absolute(0, 0);
+    }
+}
