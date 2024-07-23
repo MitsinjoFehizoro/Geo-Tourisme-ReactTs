@@ -1,34 +1,41 @@
-@import '../base/mixins';
-@import '../base/color';
+@import "../base/mixins";
+@import "../base/color";
 
 header {
-    @include absolute(0, 0, 20);
+  @include absolute(0, 0, 20);
+  position: fixed;
+  @include dimension(100vw, auto);
+  background-color: $white-color;
+  padding-top: 4px;
+  .progress {
     position: fixed;
-    @include dimension(100vw, auto);
-    background-color: $white-color;
+    top: 0;
+    left: 0;
+    @include dimension(100%, 4px);
+    transform-origin: 0%;
+    background-color: $primary-color;
+  }
+  nav {
+    margin-top: 0.3em;
 
-    nav {
-        margin-top: .3em;
+    .navLink {
+      @include dimension(auto, 100%);
+      display: flex;
+      align-items: center;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      border-bottom: 0.3em solid $white-color;
+      cursor: pointer;
 
-        .navLink {
-            @include dimension(auto, 100%);
-            display: flex;
-            align-items: center;
-            padding-left: .5em;
-            padding-right: .5em;
-            border-bottom: .3em solid $white-color;
-            cursor: pointer;
-
-            &:hover {
-                border-color: $primary-color;
-                color: $primary-color;
-            }
-        }
+      &:hover {
+        border-color: $primary-color;
+        color: $primary-color;
+      }
     }
-    .login {
-        background-color: $primary-color;
-        color: $white-color;
-        border-radius: 4em;
-    }
-
+  }
+  .login {
+    background-color: $primary-color;
+    color: $white-color;
+    border-radius: 4em;
+  }
 }

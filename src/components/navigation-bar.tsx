@@ -2,12 +2,14 @@ import { FunctionComponent, useEffect, useRef } from "react";
 import '../styles/components/_navigation-bar.scss';
 import logo from '../assets/logo/logo-color.png';
 import { NavLink } from "react-router-dom";
+import { motion, useScroll } from 'framer-motion'
 
 type Props = {
     onHeightChange: (h: number) => void
 }
 
 const NavigationBar: FunctionComponent<Props> = ({ onHeightChange }) => {
+    const { scrollYProgress } = useScroll()
     const ref = useRef<HTMLDivElement>(null)
     useEffect(() => {
         if (ref.current)
@@ -16,6 +18,7 @@ const NavigationBar: FunctionComponent<Props> = ({ onHeightChange }) => {
 
     return (
         <header className="flex flex-row justify-around" ref={ref}>
+            <motion.div className="progress" style={{ scaleX: scrollYProgress }}></motion.div>
             <img src={logo} className="w-48 h-auto" alt="" />
             <nav className="flex flex-row justify-evenly w-1/3 ">
                 <NavLink className="navLink" to='/'>Accueil</NavLink>
