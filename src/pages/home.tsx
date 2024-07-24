@@ -13,12 +13,13 @@ const Home: FunctionComponent = () => {
     const handleHeight = (h: number) => {
         setHeight(h)
     }
+
     return (
         <>
             <NavigationBar onHeightChange={handleHeight} />
             <Accueil heightNavigationBar={height} />
             <Tourisme />
-            <Separation/>
+            <Separation />
             <Destination />
             <WhyUs />
             <Temoin />

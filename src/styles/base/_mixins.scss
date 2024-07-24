@@ -9,3 +9,10 @@
     left: $left;
     z-index: $z-index;
 }
+
+@mixin fixed ($top, $left, $z-index: 1) {
+    position: fixed;
+    top: $top;
+    left: $left;
+    z-index: $z-index;
+}

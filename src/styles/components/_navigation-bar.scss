@@ -2,8 +2,7 @@
 @import "../base/color";
 
 header {
-  @include absolute(0, 0, 20);
-  position: fixed;
+  @include fixed(0, 0, 20);
   @include dimension(100vw, auto);
   background-color: $white-color;
   padding-top: 4px;
