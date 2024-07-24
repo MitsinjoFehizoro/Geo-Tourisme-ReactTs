@@ -1,8 +1,8 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import '../styles/components/_accueil.scss'
 import { i_accueil } from "../styles/base/tailwind";
 import CustomButton from "./custom-button";
-import { AnimatePresence, Variants, motion } from 'framer-motion'
+import { AnimatePresence, Variants, easeOut, motion } from 'framer-motion'
 import tetezana from '../assets/images/Bemaraha/tetezana.jpg'
 import tsingy from '../assets/images/Bemaraha/tsingy.jpg'
 import chute from '../assets/images/Chute de la lylie et geyser/chute2.jpg'
@@ -12,6 +12,64 @@ type Props = {
     heightNavigationBar: number
 }
 const Accueil: FunctionComponent<Props> = ({ heightNavigationBar }) => {
+    //Pour avoir la partie scrollée
+    const [scrollY, setScrollY] = useState<number>(0)
+    const handleScrollY = () => {
+        setScrollY(window.scrollY)
+    }
+
+    //Pour avoir l'hauteur de la section
+    const sectionRef = useRef<HTMLDivElement>(null)
+    const [heightSection, setHeightSection] = useState<number>(0)
+    const handleHeightSection = () => {
+        if (sectionRef.current)
+            setHeightSection(sectionRef.current.offsetHeight)
+    }
+
+    //Pour avoir l'hauteur de la div
+    const divRef = useRef<HTMLDivElement>(null)
+    const [heightDiv, setHeightDiv] = useState<number>(0)
+    const handleHeightDiv = () => {
+        if (divRef.current)
+            setHeightDiv(divRef.current.offsetHeight)
+    }
+
+    const handleResize = () => {
+        handleHeightSection()
+        handleHeightDiv()
+    }
+
+    //fonction calcul topDiv
+    const [topDiv, setTopDiv] = useState<number>(0)
+
+    useEffect(() => {
+        handleResize()
+        handleScrollY()
+
+        window.addEventListener('resize', handleResize)
+        window.addEventListener('scroll', handleScrollY)
+        return () => { //nettoyage quand le composant est démonté
+            window.removeEventListener('resize', handleResize)
+            window.removeEventListener('scroll', handleScrollY)
+        }
+    }, [])
+
+    useEffect(() => {
+        setTopDiv((heightSection - heightDiv + heightNavigationBar + scrollY) / 2)
+    }, [heightSection, heightDiv, scrollY, heightNavigationBar])
+
+    return (
+        <section className="porteur" ref={sectionRef} >
+            <SlideImage />
+            <div className="animation flex flex-row justify-evenly absolute z-10 left-0" ref={divRef} style={{ top: topDiv + 'px' }} >
+                <Introduction />
+                <Formulaire />
+            </div>
+        </section>
+    )
+}
+const SlideImage: FunctionComponent = () => {
+
     const images = [tetezana, chute, tsingy, gesier]
     const [indexImageVisible, setIndexImageVisible] = useState<number>(0)
     const variantsImage: Variants = {
@@ -24,14 +82,13 @@ const Accueil: FunctionComponent<Props> = ({ heightNavigationBar }) => {
         const changeInterval = setInterval(() => {
             setIndexImageVisible(prevIndex => (prevIndex + 1) % images.length)
         }, 5000)
-        console.log(indexImageVisible);
         return () => clearInterval(changeInterval)
     }, [images.length, indexImageVisible])
 
     return (
-
-        <section className="porteur" >
+        <div className="slide">
             <div className="fond"></div>
+
             <AnimatePresence>
                 {
                     images.map((src, index) =>
@@ -51,16 +108,9 @@ const Accueil: FunctionComponent<Props> = ({ heightNavigationBar }) => {
                     )
                 }
             </AnimatePresence>
-
-            <div className="detail h-full flex flex-row justify-evenly " style={{ paddingTop: heightNavigationBar + 'px' }}>
-                <Introduction />
-                <Formulaire />
-            </div>
-
-        </section>
+        </div>
     )
 }
-
 const Introduction: FunctionComponent = () => {
     return (
         <div className="flex flex-col justify-center  w-1/3">

@@ -3,6 +3,8 @@
 
 
 section {
+    position: relative;
+    background-color: $background-color;
     .tsingy {
         bottom: -2em;
         right: -2em;

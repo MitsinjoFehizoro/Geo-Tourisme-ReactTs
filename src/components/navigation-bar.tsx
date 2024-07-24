@@ -13,7 +13,8 @@ const NavigationBar: FunctionComponent<Props> = ({ onHeightChange }) => {
     useEffect(() => {
         if (ref.current)
             onHeightChange(ref.current.offsetHeight)
-    })
+    }, [])
+    
     const { scrollYProgress } = useScroll()
     const animateScaleX = useSpring(scrollYProgress, {
         stiffness: 100,
