@@ -1,24 +1,57 @@
-import { FunctionComponent, useState } from "react";
-import tetezana from '../assets/images/Bemaraha/tetezana.jpg'
+import { FunctionComponent, useEffect, useState } from "react";
 import '../styles/components/_accueil.scss'
 import { i_accueil } from "../styles/base/tailwind";
 import CustomButton from "./custom-button";
-import { Variants, motion } from 'framer-motion'
+import { AnimatePresence, Variants, motion } from 'framer-motion'
+import tetezana from '../assets/images/Bemaraha/tetezana.jpg'
+import tsingy from '../assets/images/Bemaraha/tsingy.jpg'
+import chute from '../assets/images/Chute de la lylie et geyser/chute2.jpg'
+import gesier from '../assets/images/Chute de la lylie et geyser/gesier2.jpg'
 
 type Props = {
     heightNavigationBar: number
 }
 const Accueil: FunctionComponent<Props> = ({ heightNavigationBar }) => {
+    const images = [tetezana, chute, tsingy, gesier]
+    const [indexImageVisible, setIndexImageVisible] = useState<number>(0)
+    const variantsImage: Variants = {
+        hidden: { opacity: 0.5 },
+        visible: { opacity: 1 },
+        exit: { opacity: 0.5 }
+    }
 
+    useEffect(() => {
+        const changeInterval = setInterval(() => {
+            setIndexImageVisible(prevIndex => (prevIndex + 1) % images.length)
+        }, 5000)
+        console.log(indexImageVisible);
+        return () => clearInterval(changeInterval)
+    }, [images.length, indexImageVisible])
 
     return (
 
         <section className="porteur" >
-            <div className="fond" ></div>
-            <motion.img
-                src={tetezana}
-                className="w-full h-auto"
-                alt="" />
+            <div className="fond"></div>
+            <AnimatePresence>
+                {
+                    images.map((src, index) =>
+                        index === indexImageVisible && (
+                            <motion.img
+                                key={index}
+                                src={src}
+                                className="motion w-full h-auto"
+                                alt="Image en slide"
+                                variants={variantsImage}
+                                initial='hidden'
+                                animate='visible'
+                                exit='exit'
+                                transition={{ duration: .5, ease: 'easeInOut' }}
+                            />
+                        )
+                    )
+                }
+            </AnimatePresence>
+
             <div className="detail h-full flex flex-row justify-evenly " style={{ paddingTop: heightNavigationBar + 'px' }}>
                 <Introduction />
                 <Formulaire />
