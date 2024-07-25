@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useRef, useState } from "react";
 import '../styles/components/_accueil.scss'
 import { i_accueil } from "../styles/base/tailwind";
 import CustomButton from "./custom-button";
-import { AnimatePresence, Variants, easeOut, motion } from 'framer-motion'
+import { AnimatePresence, Variants, motion } from 'framer-motion'
 import tetezana from '../assets/images/Bemaraha/tetezana.jpg'
 import tsingy from '../assets/images/Bemaraha/tsingy.jpg'
 import chute from '../assets/images/Chute de la lylie et geyser/chute2.jpg'
@@ -120,14 +120,56 @@ const Introduction: FunctionComponent = () => {
     )
 }
 const Formulaire: FunctionComponent = () => {
+    const [stateDestination, setStateDestination] = useState<boolean>(false)
+    const variantsDestination: Variants = {
+        hidden: { opacity: 0, scale: 0, height: 0, transition: { when: 'afterChildren', staggerChildren: .05 } },
+        visible: { opacity: 1, scale: 1, height: 'auto', transition: { when: 'beforeChildren', staggerChildren: .05 } }
+    }
+    const variantsDestinationChild: Variants = {
+        hidden: { opacity: 0, y: -10 },
+        visible: { opacity: 1, y: 0 }
+    }
+    const handleStateDestination = () => {
+        setStateDestination(prevState => !prevState)
+    }
+    const menus = ["Teste", "Teste", "Teste", "Teste"]
     return (
         <div className="flex justify-center items-center  w-1/3">
             <form className="w-80 px-5 py-5 rounded-md">
-                <div className="div">
-                    <div className="w-full py-2 px-4">
-                        <i className="fa fa-location-dot text-sm mr-2"></i>
-                        <span>Où allez-vous?</span>
+                <div className="relative">
+                    <div
+                        className="flex flex-row justify-between items-center w-full h-10 px-4 mb-2 bg-white rounded-md cursor-pointer"
+                        onClick={handleStateDestination}
+                    >
+                        <p>Où allez-vous?</p>
+                        {
+                            stateDestination ? (
+                                <i className="fa fa-caret-down text-sm mr-2"></i>
+                            ) : (
+                                <i className="fa fa-caret-up text-sm mr-2"></i>
+                            )
+                        }
                     </div>
+                    <div className="absolute w-full h-0">
+                        <motion.div
+                            className="motion bg-white rounded-md py-4 px-2"
+                            variants={variantsDestination}
+                            animate={stateDestination ? 'visible' : 'hidden'}
+                        >
+                            {
+                                menus.map(menu => (
+                                    <motion.p
+                                        className="motion flex items-center px-4 w-full h-9 bg-background/50 rounded mb-1"
+                                        variants={variantsDestinationChild}
+                                    >
+                                        {menu}
+                                    </motion.p>
+                                ))
+                            }
+                        </motion.div>
+                    </div>
+
+
                 </div>
                 <input className="div input" type="date" name="" id="" />
                 <div className="div flex flex-row justify-between items-center px-4">
