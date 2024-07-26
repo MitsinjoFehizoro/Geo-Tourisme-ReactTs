@@ -23,6 +23,7 @@ section {
     }
 
     .slide {
-        @include dimension(40vw, auto)
+        @include dimension(45vw, auto);
+        background-color: red;
     }
 }
