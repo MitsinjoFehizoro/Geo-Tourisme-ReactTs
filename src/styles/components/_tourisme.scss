@@ -1,29 +1,21 @@
-@import '../base/mixins';
-@import '../base/color';
-
+@import "../base/mixins";
+@import "../base/color";
 
 section {
-    position: relative;
-    background-color: $background-color;
-    .tsingy {
-        bottom: -2em;
-        right: -2em;
-    }
+  position: relative;
+  background-color: $background-color;
+  .tsingy {
+    bottom: -2em;
+  }
 
-    .pneu {
-        position: absolute;
-        bottom: 5em;
-        right: -3em;
-        border: .6em solid $primary-color;
-        border-radius: 50%;
-    }
+  .pneu {
+    border: 0.6em solid $primary-color;
+    border-radius: 50%;
+  }
 
-    .image {
-        @include dimension(35vw ,auto)
+  .slide {
+    p {
+      padding: 0 0.2em;
     }
-
-    .slide {
-        @include dimension(45vw, auto);
-        background-color: red;
-    }
+  }
 }

@@ -1,6 +1,10 @@
 import { Variants } from "framer-motion"
+export const variantsSlide: Variants = {
+    prev: { x: '0%' },
+    next: { x: "-50%" }
+}
 
-export const variants_slide: Variants = {
+export const variantsParentSlide: Variants = {
     offscreen: { opacity: 0, y: 100 },
     onscreen: {
         opacity: 1,

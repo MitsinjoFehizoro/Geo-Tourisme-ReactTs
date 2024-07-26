@@ -1,11 +1,13 @@
 import { FunctionComponent } from "react";
+import { motion } from 'framer-motion'
+import { variantsStandard } from "../styles/animations/standard-variants";
 
-const Separation : FunctionComponent =()=>{
+const Separation: FunctionComponent = () => {
 
-    return(
-        <section className="relative px-36 flex items-center">
-           <div className="w-full h-1  rounded-full bg-white" ></div> 
-        </section>
+    return (
+        <motion.section initial='offscreen' whileInView='onscreen' viewport={{ once: true, amount: .8 }} className="motion relative px-36 flex items-center">
+            <motion.div variants={variantsStandard} className="motion w-full h-1  rounded-full bg-white" ></motion.div>
+        </motion.section>
     )
 }
 export default Separation

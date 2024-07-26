@@ -88,7 +88,6 @@ const SlideImage: FunctionComponent = () => {
     return (
         <div className="slide">
             <div className="fond"></div>
-
             <AnimatePresence>
                 {
                     images.map((src, index) =>
@@ -102,7 +101,6 @@ const SlideImage: FunctionComponent = () => {
                                 initial='hidden'
                                 animate='visible'
                                 exit='exit'
-                                transition={{ duration: .5, ease: 'easeInOut' }}
                             />
                         )
                     )
