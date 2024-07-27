@@ -1,12 +1,13 @@
-import { FunctionComponent, useState } from "react";
+import { forwardRef, useState } from "react";
 import '../styles/components/_destination.scss';
 import DestinationCard from "./card/destination-card";
 import gesier from "../assets/images/Chute de la lylie et geyser/gesier.jpg"
 import baobab from '../assets/images/Makay et allée des Baobabs/baobab.jpg';
-import { AnimatePresence, Variants, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { variantsStandard } from "../styles/animations/standard-variants";
-const Destination: FunctionComponent = () => {
+import { variantsSlideDestination } from "../styles/animations/destination-variants";
 
+const Destination = forwardRef((_, ref) => {
     const slides = [
         {
             title: 'Geo-tourisme',
@@ -18,20 +19,10 @@ const Destination: FunctionComponent = () => {
         }
     ]
 
-
-
     const [selectedSlide, setSelectedSlide] = useState(slides[0])
-    const variantsSlide: Variants = {
-        hidden: { opacity: 0, y: 10 },
-        visible: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: -10 }
-    }
-
-    if (slides[0] === selectedSlide)
-        console.log(slides[0], selectedSlide);
-
     return (
         <motion.section
+            ref={ref}
             initial='offscreen'
             whileInView='onscreen'
             viewport={{ once: true, amount: .4 }}
@@ -54,7 +45,7 @@ const Destination: FunctionComponent = () => {
                     animate='visible'
                     exit='exit'
                     transition={{ duration: 0.2 }}
-                    variants={variantsSlide}
+                    variants={variantsSlideDestination}
                     className="h-full mt-4 grid grid-cols-3 place-items-center place-content-center">
                     <DestinationCard picture={selectedSlide.image} />
                     <DestinationCard picture={selectedSlide.image} />
@@ -66,4 +57,5 @@ const Destination: FunctionComponent = () => {
         </motion.section>
     )
 }
+)
 export default Destination

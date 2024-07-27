@@ -1,11 +1,11 @@
-import { FunctionComponent } from "react";
+import { forwardRef } from "react";
 import tsingy from '../assets/images/Bemaraha/tsingy.jpg'
 import ContactCard from "./card/contact-card";
 import InfoCard from "./card/info-card";
-const Contact: FunctionComponent = () => {
 
+const Contact = forwardRef((_, ref) => {
     return (
-        <section className="relative">
+        <section ref={ref} className="relative">
             <div className="w-full h-60 "></div>
             <div className="w-full h-80 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full bg-secondary/70"></div>
@@ -21,5 +21,6 @@ const Contact: FunctionComponent = () => {
         </section>
 
     )
-}
+})
+
 export default Contact

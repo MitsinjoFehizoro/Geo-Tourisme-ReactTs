@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, RefObject, useRef, useState } from "react";
 import Accueil from "../components/accueil";
 import NavigationBar from "../components/navigation-bar";
 import Tourisme from "../components/tourisme";
@@ -14,16 +14,30 @@ const Home: FunctionComponent = () => {
         setHeight(h)
     }
 
+    const refAccueil = useRef(null)
+    const refTourisme = useRef(null)
+    const refDestination = useRef(null)
+    const refApropos = useRef(null)
+    const refContact = useRef(null)
+
+    const refs: { [key: string]: RefObject<HTMLDivElement> } = {
+        accueil: refAccueil,
+        tourisme: refTourisme,
+        destination: refDestination,
+        apropos: refApropos,
+        contact: refContact
+    }
+
     return (
         <>
-            <NavigationBar onHeightChange={handleHeight} />
-            <Accueil heightNavigationBar={height} />
-            <Tourisme />
+            <NavigationBar refs={refs} onHeightChange={handleHeight} />
+            <Accueil ref={refs.accueil} heightNavigationBar={height} />
+            <Tourisme ref={refs.tourisme} />
             <Separation />
-            <Destination />
-            <WhyUs />
+            <Destination ref={refs.destination} />
+            <WhyUs ref={refs.apropos} />
             <Temoin />
-            <Contact />
+            <Contact ref={refs.contact} />
         </>
     )
 }

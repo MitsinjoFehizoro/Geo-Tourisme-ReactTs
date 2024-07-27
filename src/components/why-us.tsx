@@ -1,13 +1,13 @@
-import { FunctionComponent } from "react";
+import { forwardRef } from "react";
 import '../styles/components/_why-us.scss'
 import soleil from '../assets/images/Isalo/soleil.jpg'
 import GarantiCard from "./card/garanti-card";
 import { motion } from 'framer-motion'
 import { variantsStandard } from "../styles/animations/standard-variants";
 
-const WhyUs: FunctionComponent = () => {
+const WhyUs = forwardRef((_, ref) => {
     return (
-        <section className="why relative overflow-hidden ">
+        <section ref={ref} className="why relative overflow-hidden ">
             <div className="absolute top-0 left-0 w-full h-full bg-secondary/90"></div>
             <img src={soleil} className="w-full h-auto" alt="" />
             <motion.div
@@ -25,5 +25,5 @@ const WhyUs: FunctionComponent = () => {
             </motion.div>
         </section>
     )
-}
+})
 export default WhyUs

@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { FunctionComponent, forwardRef, useEffect, useRef, useState } from "react";
 import '../styles/components/_accueil.scss'
 import { i_accueil } from "../styles/base/tailwind";
 import CustomButton from "./custom-button";
@@ -11,7 +11,7 @@ import gesier from '../assets/images/Chute de la lylie et geyser/gesier2.jpg'
 type Props = {
     heightNavigationBar: number
 }
-const Accueil: FunctionComponent<Props> = ({ heightNavigationBar }) => {
+const Accueil = forwardRef<HTMLDivElement, Props>(({ heightNavigationBar }, ref) => {
     //Pour avoir la partie scrollée
     const [scrollY, setScrollY] = useState<number>(0)
     const handleScrollY = () => {
@@ -59,15 +59,19 @@ const Accueil: FunctionComponent<Props> = ({ heightNavigationBar }) => {
     }, [heightSection, heightDiv, scrollY, heightNavigationBar])
 
     return (
-        <section className="porteur" ref={sectionRef} >
-            <SlideImage />
-            <div className="animation flex flex-row justify-evenly absolute z-10 left-0" ref={divRef} style={{ top: topDiv + 'px' }} >
-                <Introduction />
-                <Formulaire />
-            </div>
-        </section>
+        <div ref={ref}>
+            <section className="porteur" ref={sectionRef} >
+                <SlideImage />
+                <div className="animation flex flex-row justify-evenly absolute z-10 left-0" ref={divRef} style={{ top: topDiv + 'px' }} >
+                    <Introduction />
+                    <Formulaire />
+                </div>
+            </section>
+        </div>
+
     )
-}
+})
+
 const SlideImage: FunctionComponent = () => {
 
     const images = [tetezana, chute, tsingy, gesier]
@@ -130,7 +134,7 @@ const Formulaire: FunctionComponent = () => {
     const handleStateDestination = () => {
         setStateDestination(prevState => !prevState)
     }
-    const menus = ["Teste", "Teste", "Teste", "Teste"]
+    const menus = ["Teste1", "Teste2", "Teste3", "Teste4"]
     return (
         <div className="flex justify-center items-center  w-1/3">
             <form className="w-80 px-5 py-5 rounded-md">
@@ -157,6 +161,7 @@ const Formulaire: FunctionComponent = () => {
                             {
                                 menus.map(menu => (
                                     <motion.p
+                                        key={menu}
                                         className="flex items-center px-4 w-full h-9 bg-background/50 rounded mb-1"
                                         variants={variantsDestinationChild}
                                     >

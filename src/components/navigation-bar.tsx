@@ -1,20 +1,20 @@
-import { FunctionComponent, useEffect, useRef } from "react";
+import { FunctionComponent, RefObject, useEffect, useRef, useState } from "react";
 import '../styles/components/_navigation-bar.scss';
 import logo from '../assets/logo/logo-color.png';
 import { NavLink } from "react-router-dom";
 import { motion, useScroll, useSpring } from 'framer-motion'
 
 type Props = {
-    onHeightChange: (h: number) => void
+    onHeightChange: (h: number) => void,
+    refs: { [key: string]: RefObject<HTMLDivElement> }
 }
 
-const NavigationBar: FunctionComponent<Props> = ({ onHeightChange }) => {
+const NavigationBar: FunctionComponent<Props> = ({ onHeightChange, refs }) => {
     const ref = useRef<HTMLDivElement>(null)
     useEffect(() => {
         if (ref.current)
             onHeightChange(ref.current.offsetHeight)
-    }, [])
-    
+    }, [onHeightChange])
     const { scrollYProgress } = useScroll()
     const animateScaleX = useSpring(scrollYProgress, {
         stiffness: 100,
@@ -22,21 +22,51 @@ const NavigationBar: FunctionComponent<Props> = ({ onHeightChange }) => {
         restDelta: 0.01
     })
 
+    const links = [
+        {
+            name: 'Accueil',
+            destination: refs.accueil
+        },
+        {
+            name: 'Geo/Tourisme',
+            destination: refs.tourisme
+        },
+        {
+            name: 'Destination',
+            destination: refs.destination
+        },
+        {
+            name: 'À propos',
+            destination: refs.apropos
+        },
+        {
+            name: 'Contact',
+            destination: refs.contact
+        },
+    ]
+    const [linkActif, setLinkActif] = useState(links[0])
+    const handleScrool = (ref: RefObject<HTMLDivElement>) => {
+        ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+
     return (
-        <header className="flex flex-row justify-around" ref={ref}>
-            <motion.div className="progress" style={{ scaleX: animateScaleX }}></motion.div>
-            <img src={logo} className="w-48 h-auto" alt="" />
-            <nav className="flex flex-row justify-evenly w-1/3 ">
-                <NavLink className="navLink" to='/'>Accueil</NavLink>
-                <NavLink className="navLink" to='/'>Tourisme</NavLink>
-                <NavLink className="navLink" to='/'>Geo-tourisme</NavLink>
-                <NavLink className="navLink" to='/'>À propos</NavLink>
-                <NavLink className="navLink" to='/'>Contact</NavLink>
-            </nav>
-            <div className="flex items-center">
-                <NavLink to='/' className="login px-6 py-2">se connecter</NavLink>
-            </div>
-        </header >
+        <section className="">
+            <header className="flex flex-row justify-around" ref={ref}>
+                <motion.div className="progress" style={{ scaleX: animateScaleX }}></motion.div>
+                <img src={logo} className="w-48 h-auto" alt="" />
+                <nav className="flex flex-row justify-evenly w-1/3 ">
+                    {
+                        links.map(link =>
+                            <a key={link.name} className={link.name === linkActif.name ? 'navLink actif' : 'navLink'} onClick={() => { handleScrool(link.destination), setLinkActif(link) }}>{link.name}</a>
+                        )
+                    }
+                </nav>
+                <div className="flex items-center">
+                    <NavLink to='/' className="login px-6 py-2">se connecter</NavLink>
+                </div>
+            </header >
+        </section >
+
 
     )
 }

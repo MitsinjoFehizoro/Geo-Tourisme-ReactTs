@@ -21,13 +21,15 @@ header {
       @include dimension(auto, 100%);
       display: flex;
       align-items: center;
-      padding-left: 0.5em;
-      padding-right: 0.5em;
-      border-bottom: 0.3em solid $white-color;
+      padding: 0 .5em;
+      border-bottom: 4px solid $white-color;
       cursor: pointer;
-      transition: ease-in .2s;
+      transition: ease-in 0.2s;
 
       &:hover {
+        color: $primary-color;
+      }
+      &.actif {
         border-color: $primary-color;
         color: $primary-color;
       }
