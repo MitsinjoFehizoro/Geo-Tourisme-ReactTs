@@ -10,9 +10,6 @@
   box-sizing: border-box;
   font-family: signika;
 }
-*:not(.motion) {
-  transition: ease-in 0.2s;
-}
 
 body {
   background-color: $background-color;

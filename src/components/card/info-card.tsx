@@ -1,10 +1,17 @@
 import { FunctionComponent } from "react";
 import { i_contact } from "../../styles/base/tailwind";
+import {  motion } from 'framer-motion'
+import { variantsInfoCard } from "../../styles/animations/contact-variants";
 
 const InfoCard: FunctionComponent = () => {
-
+   
     return (
-        <div className="w-6/12 p-8 h-full bg-white rounded">
+        <motion.div
+            initial='offscreen'
+            whileInView='onscreen'
+            viewport={{ once: true, amount : .5}}
+            variants={variantsInfoCard}
+            className="w-6/12 p-8 h-full bg-white rounded">
             <h1 className="text-3xl text-primary">Information de contact</h1>
             <div className="mt-4">
                 <p className="text-sm">Vous pouvez nous trouver à :</p>
@@ -29,7 +36,7 @@ const InfoCard: FunctionComponent = () => {
                 <i className={`fa-brands fa-instagram ${i_contact}`}></i>
                 <i className={`fa fa-envelope ${i_contact}`}></i>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

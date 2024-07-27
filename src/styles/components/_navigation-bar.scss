@@ -25,6 +25,7 @@ header {
       padding-right: 0.5em;
       border-bottom: 0.3em solid $white-color;
       cursor: pointer;
+      transition: ease-in .2s;
 
       &:hover {
         border-color: $primary-color;

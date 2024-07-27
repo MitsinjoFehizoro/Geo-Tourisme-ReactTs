@@ -95,7 +95,7 @@ const SlideImage: FunctionComponent = () => {
                             <motion.img
                                 key={index}
                                 src={src}
-                                className="motion w-full h-auto"
+                                className="w-full h-auto"
                                 alt="Image en slide"
                                 variants={variantsImage}
                                 initial='hidden'
@@ -150,14 +150,14 @@ const Formulaire: FunctionComponent = () => {
                     </div>
                     <div className="absolute w-full h-0">
                         <motion.div
-                            className="motion bg-white rounded-md py-4 px-2"
+                            className="bg-white rounded-md py-4 px-2"
                             variants={variantsDestination}
                             animate={stateDestination ? 'visible' : 'hidden'}
                         >
                             {
                                 menus.map(menu => (
                                     <motion.p
-                                        className="motion flex items-center px-4 w-full h-9 bg-background/50 rounded mb-1"
+                                        className="flex items-center px-4 w-full h-9 bg-background/50 rounded mb-1"
                                         variants={variantsDestinationChild}
                                     >
                                         {menu}

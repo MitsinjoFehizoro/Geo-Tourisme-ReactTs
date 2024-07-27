@@ -37,17 +37,17 @@ const Tourisme: FunctionComponent = () => {
 
     return (
         <section className="flex flex-row justify-around px-5 pt-14 pb-20">
-            <motion.div initial='offscreen' whileInView='onscreen' viewport={{ amount: .8, once: true }} className="w-5/12 motion">
+            <motion.div initial='offscreen' whileInView='onscreen' viewport={{ amount: .8, once: true }} className="w-5/12">
                 <div className="flex flex-row">
-                    <motion.div variants={variants_rond} className="motion w-24 h-24 bg-secondary rounded-full"></motion.div>
+                    <motion.div variants={variants_rond} className="w-24 h-24 bg-secondary rounded-full"></motion.div>
                     <div className="h-full flex justify-center pl-2">
-                        <motion.img variants={variantsImage_1} src={vato} alt="" className="motion w-96 h-96 rounded-full" />
+                        <motion.img variants={variantsImage_1} src={vato} alt="" className="w-96 h-96 rounded-full" />
                     </div>
                 </div>
                 <div className="relative">
-                    <motion.img variants={variantsImage_2} src={baobab} alt="" className="motion w-52 h-52 rounded-full absolute left-0 bottom-0 border-8 border-background " />
-                    <motion.img variants={variantsImage_3} src={tsingy} alt="" className="motion tsingy w-32 h-32 rounded-full absolute right-4  border-4 border-background " />
-                    <motion.div variants={variants_rond_creux} className="motion pneu w-12 h-12 absolute bottom-24 right-0"></motion.div>
+                    <motion.img variants={variantsImage_2} src={baobab} alt="" className="w-52 h-52 rounded-full absolute left-0 bottom-0 border-8 border-background " />
+                    <motion.img variants={variantsImage_3} src={tsingy} alt="" className="tsingy w-32 h-32 rounded-full absolute right-4  border-4 border-background " />
+                    <motion.div variants={variants_rond_creux} className="pneu w-12 h-12 absolute bottom-24 right-0"></motion.div>
                 </div>
             </motion.div>
             <motion.div
@@ -55,7 +55,7 @@ const Tourisme: FunctionComponent = () => {
                 whileInView='onscreen'
                 viewport={{ amount: 0.5, once: true }}
                 variants={variantsParentSlide}
-                className=" w-6/12 slide motion flex flex-row justify-center items-center"
+                className=" w-6/12 slide flex flex-row justify-center items-center"
             >
                 <i className="fa fa-angle-left text-xl text-primary px-3 py-1 rounded-full hover:bg-white cursor-pointer" onClick={handleSlide}></i>
                 <div className="w-full h-full relative overflow-hidden" ref={porteRef}>
@@ -64,7 +64,7 @@ const Tourisme: FunctionComponent = () => {
                         initial='prev'
                         animate={showPrevSlide ? 'prev' : 'next'}
                         transition={{ type: 'spring', bounce: .4, duration: 1 }}
-                        className="motion absolute top-0 h-full flex flex-row items-center ">
+                        className="absolute top-0 h-full flex flex-row items-center ">
                         {
                             slideTourisme.map((slide, index) => (
                                 <div
