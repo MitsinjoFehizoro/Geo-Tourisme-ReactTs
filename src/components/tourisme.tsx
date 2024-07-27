@@ -6,6 +6,7 @@ import vato from '../assets/images/Bemaraha/vato.jpg';
 import { motion } from 'framer-motion'
 import { variants_rond, variants_rond_creux, variantsImage_1, variantsImage_2, variantsImage_3, variantsParentSlide, variantsSlide } from "../styles/animations/tourisme-variants";
 
+
 const Tourisme: FunctionComponent = () => {
     const indiceStyle = ['w-3 h-3 rounded-full bg-primary mx-1', 'w-8 h-2 rounded-full bg-white mx-1']
     const slideTourisme = [

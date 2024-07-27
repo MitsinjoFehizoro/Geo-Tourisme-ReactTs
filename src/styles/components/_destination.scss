@@ -1,0 +1,18 @@
+@import "../../styles/base/color";
+@import "../../styles/base/mixins";
+
+ul{
+    li{
+        position: relative;
+        padding: 0 1em .5em 1em;
+        cursor: pointer;
+        &.selected{
+            color: $primary-color;
+            cursor: text;
+            .underline{
+                background-color: $primary-color;
+                @include dimension(100%, 2px)
+            }
+        }
+    }
+}
