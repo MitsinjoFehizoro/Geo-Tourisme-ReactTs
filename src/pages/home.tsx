@@ -7,6 +7,7 @@ import WhyUs from "../components/why-us";
 import Temoin from "../components/Temoin";
 import Contact from "../components/conctact";
 import Separation from "../components/separation";
+import { motion } from 'framer-motion'
 
 const Home: FunctionComponent = () => {
     const [height, setHeight] = useState<number>(0)
@@ -27,12 +28,15 @@ const Home: FunctionComponent = () => {
         apropos: refApropos,
         contact: refContact
     }
+    const MotionTourisme = motion(Tourisme)
 
     return (
         <>
             <NavigationBar refs={refs} onHeightChange={handleHeight} />
             <Accueil ref={refs.accueil} heightNavigationBar={height} />
-            <Tourisme ref={refs.tourisme} />
+            <MotionTourisme
+                onViewportEnter={() => console.log("jkdfjakjkf")}
+                ref={refs.tourisme} />
             <Separation />
             <Destination ref={refs.destination} />
             <WhyUs ref={refs.apropos} />

@@ -1,4 +1,4 @@
-import {  forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import '../styles/components/_tourisme.scss';
 import tsingy from '../assets/images/Bemaraha/tsingy.jpg';
 import baobab from '../assets/images/Makay et allée des Baobabs/baobab.jpg';
@@ -40,7 +40,10 @@ const Tourisme = forwardRef((_, ref) => {
     };
 
     return (
-        <section ref={ref} className="flex flex-row justify-around px-5 pt-14 pb-20">
+        <motion.section
+            viewport={{ amount: .5 }}
+            onViewportEnter={() => console.log('okkk')}
+            ref={ref} className="flex flex-row justify-around px-5 pt-14 pb-20">
             <motion.div initial="offscreen" whileInView="onscreen" viewport={{ amount: 0.8, once: true }} className="w-5/12">
                 <div className="flex flex-row">
                     <motion.div variants={variants_rond} className="w-24 h-24 bg-secondary rounded-full"></motion.div>
@@ -88,7 +91,7 @@ const Tourisme = forwardRef((_, ref) => {
                 </div>
                 <i className="fa fa-angle-right z-50 text-xl text-primary px-3 py-1 rounded-full hover:bg-white cursor-pointer" onClick={handleSlide}></i>
             </motion.div>
-        </section>
+        </motion.section>
     );
 });
 

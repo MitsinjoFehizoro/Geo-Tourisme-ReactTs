@@ -3,6 +3,7 @@ import '../styles/components/_navigation-bar.scss';
 import logo from '../assets/logo/logo-color.png';
 import { NavLink } from "react-router-dom";
 import { motion, useScroll, useSpring } from 'framer-motion'
+import { useLink } from "../hooks/useLink";
 
 type Props = {
     onHeightChange: (h: number) => void,
@@ -22,42 +23,44 @@ const NavigationBar: FunctionComponent<Props> = ({ onHeightChange, refs }) => {
         restDelta: 0.01
     })
 
-    const links = [
-        {
-            name: 'Accueil',
-            destination: refs.accueil
-        },
-        {
-            name: 'Geo/Tourisme',
-            destination: refs.tourisme
-        },
-        {
-            name: 'Destination',
-            destination: refs.destination
-        },
-        {
-            name: 'À propos',
-            destination: refs.apropos
-        },
-        {
-            name: 'Contact',
-            destination: refs.contact
-        },
-    ]
-    const [linkActif, setLinkActif] = useState(links[0])
-    const handleScrool = (ref: RefObject<HTMLDivElement>) => {
-        ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    }
+    // const links = [
+    //     {
+    //         name: 'Accueil',
+    //         destination: refs.accueil
+    //     },
+    //     {
+    //         name: 'Geo/Tourisme',
+    //         destination: refs.tourisme
+    //     },
+    //     {
+    //         name: 'Destination',
+    //         destination: refs.destination
+    //     },
+    //     {
+    //         name: 'À propos',
+    //         destination: refs.apropos
+    //     },
+    //     {
+    //         name: 'Contact',
+    //         destination: refs.contact
+    //     },
+    // ]
+
+    const { links, linkActif, toggleLinkActif, toggleScrollActif } = useLink()
 
     return (
-        <section className="">
+        <section>
             <header className="flex flex-row justify-around" ref={ref}>
                 <motion.div className="progress" style={{ scaleX: animateScaleX }}></motion.div>
                 <img src={logo} className="w-48 h-auto" alt="" />
                 <nav className="flex flex-row justify-evenly w-1/3 ">
                     {
                         links.map(link =>
-                            <a key={link.name} className={link.name === linkActif.name ? 'navLink actif' : 'navLink'} onClick={() => { handleScrool(link.destination), setLinkActif(link) }}>{link.name}</a>
+                            <a
+                                key={link}
+                                className={link === linkActif ? 'navLink actif' : 'navLink'}
+                                onClick={() => {toggleLinkActif(link), toggleScrollActif(refs.tourisme)}}
+                            >{link}</a>
                         )
                     }
                 </nav>
