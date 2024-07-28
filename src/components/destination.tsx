@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import '../styles/components/_destination.scss';
 import DestinationCard from "./card/destination-card";
 import gesier from "../assets/images/Chute de la lylie et geyser/gesier.jpg"
@@ -6,8 +6,9 @@ import baobab from '../assets/images/Makay et allée des Baobabs/baobab.jpg';
 import { AnimatePresence, motion } from 'framer-motion'
 import { variantsStandard } from "../styles/animations/standard-variants";
 import { variantsSlideDestination } from "../styles/animations/destination-variants";
+import { useLink } from "../hooks/useLink";
 
-const Destination = forwardRef((_, ref) => {
+const Destination: FunctionComponent = () => {
     const slides = [
         {
             title: 'Geo-tourisme',
@@ -18,15 +19,16 @@ const Destination = forwardRef((_, ref) => {
             image: baobab
         }
     ]
-
     const [selectedSlide, setSelectedSlide] = useState(slides[0])
+    const { links, toggleLinkActif } = useLink()
     return (
         <motion.section
-            ref={ref}
+            ref={links['destination'].refDestination}
             initial='offscreen'
             whileInView='onscreen'
             viewport={{ once: true, amount: .4 }}
             transition={{ staggerChildren: .2 }}
+            onViewportEnter={()=>toggleLinkActif('destination')}
             className="bg-background pb-10 pt-14">
             <motion.h1 variants={variantsStandard} className="text-secondary text-center text-3xl">Où allez-vous miantenant?</motion.h1>
             <motion.ul variants={variantsStandard} className="flex flex-row justify-center items-center h-10 mt-4">
@@ -57,5 +59,4 @@ const Destination = forwardRef((_, ref) => {
         </motion.section>
     )
 }
-)
 export default Destination

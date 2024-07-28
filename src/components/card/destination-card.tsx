@@ -12,11 +12,11 @@ const DestinationCard: FunctionComponent<Props> = ({ picture }) => {
         <motion.div
             initial='offscreen'
             whileInView='onscreen'
-            viewport={{ once : true, amount: .8 }}
+            viewport={{ once: true, amount: .5 }}
             transition={{ staggerChildren: .2 }}
             className="flex justify-center items-center flex-col w-80 mb-14"
-            >
-            <div  className="relative w-full h-80 flex justify-center">
+        >
+            <div className="relative w-full h-80 flex justify-center">
                 <motion.img variants={variantsStandard} src={picture} alt="" className="w-full h-full" />
                 <motion.div variants={variantsStandard} className="destination_title w-52  bg-secondary py-2">
                     <p className="text-center text-white text-xl pb-1">GESIER</p>

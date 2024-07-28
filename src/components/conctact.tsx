@@ -1,11 +1,18 @@
-import { forwardRef } from "react";
+import { FunctionComponent } from "react";
 import tsingy from '../assets/images/Bemaraha/tsingy.jpg'
 import ContactCard from "./card/contact-card";
 import InfoCard from "./card/info-card";
+import { useLink } from "../hooks/useLink";
+import { motion } from 'framer-motion'
 
-const Contact = forwardRef((_, ref) => {
+const Contact: FunctionComponent = () => {
+
+    const { links, toggleLinkActif } = useLink()
     return (
-        <section ref={ref} className="relative">
+        <motion.section
+            ref={links['contact'].refDestination}
+            onViewportEnter={() => toggleLinkActif('contact')}
+            className="relative">
             <div className="w-full h-60 "></div>
             <div className="w-full h-80 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full bg-secondary/70"></div>
@@ -18,9 +25,8 @@ const Contact = forwardRef((_, ref) => {
             <footer className="w-full pt-7 pb-5 flex flex-row items-center justify-around text-background absolute bottom-0 bg-secondary/80">
                 <p className="text-sm"><i className="fa fa-copyright mr-2"></i>Powered by MitsinjoFehizoro - 2024</p>
             </footer>
-        </section>
+        </motion.section>
 
     )
-})
-
+}
 export default Contact

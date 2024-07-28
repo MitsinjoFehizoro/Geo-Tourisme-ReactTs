@@ -1,13 +1,18 @@
-import { forwardRef } from "react";
+import { FunctionComponent } from "react";
 import '../styles/components/_why-us.scss'
 import soleil from '../assets/images/Isalo/soleil.jpg'
 import GarantiCard from "./card/garanti-card";
 import { motion } from 'framer-motion'
 import { variantsStandard } from "../styles/animations/standard-variants";
+import { useLink } from "../hooks/useLink";
 
-const WhyUs = forwardRef((_, ref) => {
+const WhyUs: FunctionComponent = () => {
+    const { links, toggleLinkActif } = useLink()
     return (
-        <section ref={ref} className="why relative overflow-hidden ">
+        <motion.section
+            ref={links['apropos'].refDestination}
+            onViewportEnter={() => toggleLinkActif('apropos')}
+            className="why relative overflow-hidden ">
             <div className="absolute top-0 left-0 w-full h-full bg-secondary/90"></div>
             <img src={soleil} className="w-full h-auto" alt="" />
             <motion.div
@@ -23,7 +28,7 @@ const WhyUs = forwardRef((_, ref) => {
                     <GarantiCard />
                 </motion.div>
             </motion.div>
-        </section>
+        </motion.section>
     )
-})
+}
 export default WhyUs

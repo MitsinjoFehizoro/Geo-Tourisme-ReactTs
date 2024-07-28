@@ -1,4 +1,4 @@
-import { FunctionComponent, RefObject, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef } from "react";
 import '../styles/components/_navigation-bar.scss';
 import logo from '../assets/logo/logo-color.png';
 import { NavLink } from "react-router-dom";
@@ -6,11 +6,10 @@ import { motion, useScroll, useSpring } from 'framer-motion'
 import { useLink } from "../hooks/useLink";
 
 type Props = {
-    onHeightChange: (h: number) => void,
-    refs: { [key: string]: RefObject<HTMLDivElement> }
+    onHeightChange: (h: number) => void
 }
 
-const NavigationBar: FunctionComponent<Props> = ({ onHeightChange, refs }) => {
+const NavigationBar: FunctionComponent<Props> = ({ onHeightChange }) => {
     const ref = useRef<HTMLDivElement>(null)
     useEffect(() => {
         if (ref.current)
@@ -23,29 +22,6 @@ const NavigationBar: FunctionComponent<Props> = ({ onHeightChange, refs }) => {
         restDelta: 0.01
     })
 
-    // const links = [
-    //     {
-    //         name: 'Accueil',
-    //         destination: refs.accueil
-    //     },
-    //     {
-    //         name: 'Geo/Tourisme',
-    //         destination: refs.tourisme
-    //     },
-    //     {
-    //         name: 'Destination',
-    //         destination: refs.destination
-    //     },
-    //     {
-    //         name: 'À propos',
-    //         destination: refs.apropos
-    //     },
-    //     {
-    //         name: 'Contact',
-    //         destination: refs.contact
-    //     },
-    // ]
-
     const { links, linkActif, toggleLinkActif, toggleScrollActif } = useLink()
 
     return (
@@ -55,12 +31,12 @@ const NavigationBar: FunctionComponent<Props> = ({ onHeightChange, refs }) => {
                 <img src={logo} className="w-48 h-auto" alt="" />
                 <nav className="flex flex-row justify-evenly w-1/3 ">
                     {
-                        links.map(link =>
+                        Object.entries(links).map(([key, link]) =>
                             <a
-                                key={link}
-                                className={link === linkActif ? 'navLink actif' : 'navLink'}
-                                onClick={() => {toggleLinkActif(link), toggleScrollActif(refs.tourisme)}}
-                            >{link}</a>
+                                key={key}
+                                className={link == linkActif ? 'navLink actif' : 'navLink'}
+                                onClick={() => { toggleLinkActif(key), toggleScrollActif(key) }}
+                            >{link.title}</a>
                         )
                     }
                 </nav>

@@ -1,12 +1,13 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import '../styles/components/_tourisme.scss';
 import tsingy from '../assets/images/Bemaraha/tsingy.jpg';
 import baobab from '../assets/images/Makay et allée des Baobabs/baobab.jpg';
 import vato from '../assets/images/Bemaraha/vato.jpg';
 import { motion } from 'framer-motion';
 import { variants_rond, variants_rond_creux, variantsImage_1, variantsImage_2, variantsImage_3, variantsParentSlide, variantsSlide } from "../styles/animations/tourisme-variants";
+import { useLink } from "../hooks/useLink";
 
-const Tourisme = forwardRef((_, ref) => {
+const Tourisme: FunctionComponent = () => {
     const indiceStyle = ['w-3 h-3 rounded-full bg-primary mx-1', 'w-8 h-2 rounded-full bg-white mx-1'];
     const slideTourisme = [
         {
@@ -39,12 +40,16 @@ const Tourisme = forwardRef((_, ref) => {
         setShowPrevSlide(prevState => !prevState);
     };
 
+    const { links, toggleLinkActif } = useLink()
+
     return (
         <motion.section
             viewport={{ amount: .5 }}
-            onViewportEnter={() => console.log('okkk')}
-            ref={ref} className="flex flex-row justify-around px-5 pt-14 pb-20">
-            <motion.div initial="offscreen" whileInView="onscreen" viewport={{ amount: 0.8, once: true }} className="w-5/12">
+            onViewportEnter={() => toggleLinkActif('tourisme')}
+            ref={links['tourisme'].refDestination}
+            className="flex flex-row justify-around px-5 pt-14 pb-20">
+            <motion.div
+                initial="offscreen" whileInView="onscreen" viewport={{ amount: 0.8, once: true }} className="w-5/12">
                 <div className="flex flex-row">
                     <motion.div variants={variants_rond} className="w-24 h-24 bg-secondary rounded-full"></motion.div>
                     <div className="h-full flex justify-center pl-2">
@@ -93,8 +98,6 @@ const Tourisme = forwardRef((_, ref) => {
             </motion.div>
         </motion.section>
     );
-});
-
-Tourisme.displayName = 'Tourisme';
+}
 
 export default Tourisme;

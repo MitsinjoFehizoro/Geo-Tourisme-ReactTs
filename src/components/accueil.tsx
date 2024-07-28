@@ -1,4 +1,4 @@
-import { FunctionComponent, forwardRef, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import '../styles/components/_accueil.scss'
 import { i_accueil } from "../styles/base/tailwind";
 import CustomButton from "./custom-button";
@@ -7,23 +7,24 @@ import tetezana from '../assets/images/Bemaraha/tetezana.jpg'
 import tsingy from '../assets/images/Bemaraha/tsingy.jpg'
 import chute from '../assets/images/Chute de la lylie et geyser/chute2.jpg'
 import gesier from '../assets/images/Chute de la lylie et geyser/gesier2.jpg'
+import { useLink } from "../hooks/useLink";
 
 type Props = {
     heightNavigationBar: number
 }
-const Accueil = forwardRef<HTMLDivElement, Props>(({ heightNavigationBar }, ref) => {
-    //Pour avoir la partie scrollée
+
+const Accueil: FunctionComponent<Props> = ({ heightNavigationBar }) => {
     const [scrollY, setScrollY] = useState<number>(0)
     const handleScrollY = () => {
         setScrollY(window.scrollY)
     }
 
     //Pour avoir l'hauteur de la section
-    const sectionRef = useRef<HTMLDivElement>(null)
+    const porteurRef = useRef<HTMLDivElement>(null)
     const [heightSection, setHeightSection] = useState<number>(0)
     const handleHeightSection = () => {
-        if (sectionRef.current)
-            setHeightSection(sectionRef.current.offsetHeight)
+        if (porteurRef.current)
+            setHeightSection(porteurRef.current.offsetHeight)
     }
 
     //Pour avoir l'hauteur de la div
@@ -58,19 +59,25 @@ const Accueil = forwardRef<HTMLDivElement, Props>(({ heightNavigationBar }, ref)
         setTopDiv((heightSection - heightDiv + heightNavigationBar + scrollY) / 2)
     }, [heightSection, heightDiv, scrollY, heightNavigationBar])
 
+    const { links, toggleLinkActif } = useLink()
+
     return (
-        <div ref={ref}>
-            <section className="porteur" ref={sectionRef} >
+        <motion.section
+            viewport={{ amount: .8 }}
+            onViewportEnter={() => toggleLinkActif('accueil')}
+            ref={links['accueil'].refDestination}
+        >
+            <div className="porteur" ref={porteurRef} >
                 <SlideImage />
                 <div className="animation flex flex-row justify-evenly absolute z-10 left-0" ref={divRef} style={{ top: topDiv + 'px' }} >
                     <Introduction />
                     <Formulaire />
                 </div>
-            </section>
-        </div>
+            </div>
+        </motion.section>
 
     )
-})
+}
 
 const SlideImage: FunctionComponent = () => {
 
