@@ -32,7 +32,7 @@ const Destination: FunctionComponent = () => {
     }, [])
     useEffect(() => {
         setSelectedSlide(slides[0])
-    }, [stateGetDestination.data])
+    }, [stateGetDestination])
 
     return (
         <motion.section

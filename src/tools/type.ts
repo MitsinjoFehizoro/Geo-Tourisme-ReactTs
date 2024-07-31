@@ -1,13 +1,12 @@
 export type stateSupabase = {
-    isLoading: boolean,
-    data?: destination[] | null,
+    isLoading: boolean
     error?: string | null
 }
 export type destination = {
     id: string,
     title: string,
     description: string,
-    history: string,
+    history: string ,
     galeries: string[],
     type: string,
     created_at: Date,

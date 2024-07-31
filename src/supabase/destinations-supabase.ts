@@ -6,7 +6,6 @@ export const useGetDestinations = () => {
     const [stateGetDestination, setStateGetDestination] = useState<stateSupabase>(
         {
             isLoading: false,
-            data: null,
             error: null
         }
     )
@@ -16,12 +15,12 @@ export const useGetDestinations = () => {
     const getDestinations = async () => {
         try {
             setStateGetDestination({ ...stateGetDestination, isLoading: true })
-            const { data: destinations } = await supabase
+            const { data } = await supabase
                 .from('destinations')
                 .select('*')
-            setTourismes(destinations?.filter(destination => destination.type === 'tourisme'))
-            setGeo(destinations?.filter(destination => destination.type === 'geo'))
-            setStateGetDestination({ ...stateGetDestination, isLoading: false, data: destinations })
+            setTourismes(data?.filter(destination => destination.type === 'tourisme'))
+            setGeo(data?.filter(destination => destination.type === 'geo'))
+            setStateGetDestination({ ...stateGetDestination, isLoading: false })
         } catch (error) {
             let errorMessage = "Un erreur se produit !"
             if (error instanceof Error) errorMessage = error.message
@@ -41,18 +40,20 @@ export const useGetDestinationById = () => {
     const [stateGetDestination, setStateGetDestination] = useState<stateSupabase>(
         {
             isLoading: false,
-            data: null,
             error: null
         }
     )
+    const [destination, setDestination] = useState<destination>()
     const getDestination = async (id: string) => {
         try {
             setStateGetDestination({ ...stateGetDestination, isLoading: true })
-            const { data: destination } = await supabase
+            const { data } = await supabase
                 .from('destinations')
                 .select('*')
                 .eq('id', id)
-            setStateGetDestination({ ...stateGetDestination, isLoading: false, data: destination })
+                .single()
+            setDestination(data)
+            setStateGetDestination({ ...stateGetDestination, isLoading: false })
         } catch (error) {
             let errorMessage = "Un erreur se produit !"
             if (error instanceof Error) errorMessage = error.message
@@ -61,6 +62,6 @@ export const useGetDestinationById = () => {
     }
 
     return {
-        setStateGetDestination, getDestination
+        stateGetDestination, getDestination, destination
     }
 }

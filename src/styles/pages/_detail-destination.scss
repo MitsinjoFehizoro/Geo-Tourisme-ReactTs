@@ -4,16 +4,29 @@
 section {
     .fotsy {
         background-color: $white-color;
-        @include dimension(25vw, 90vh);
-
+        @include dimension(25vw, 105vh);
         .points {
             color: $black-color;
-            margin-bottom: -1em;
+            margin-bottom: -.8em;
         }
     }
 
-    .porteur {
+    .galeries {
         @include absolute(0, 0);
-        @include dimension(100%, auto);
+        @include dimension(100%, 100%);
+        img {
+            @include dimension(90vh, 90vh)
+        }
+        .monContaint{
+            margin-left: -2em;
+            .description {
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 5;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+       
     }
 }
