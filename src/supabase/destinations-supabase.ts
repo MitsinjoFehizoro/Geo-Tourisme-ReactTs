@@ -1,4 +1,4 @@
-import { stateSupabase } from './../tools/type';
+import { destination, stateSupabase } from './../tools/type';
 import { useState } from "react"
 import { supabase } from "./supabase-client"
 
@@ -10,6 +10,8 @@ export const useGetDestinations = () => {
             error: null
         }
     )
+    const [tourismes, setTourismes] = useState<destination[]>()
+    const [geo, setGeo] = useState<destination[]>()
 
     const getDestinations = async () => {
         try {
@@ -17,14 +19,20 @@ export const useGetDestinations = () => {
             const { data: destinations } = await supabase
                 .from('destinations')
                 .select('*')
+            setTourismes(destinations?.filter(destination => destination.type === 'tourisme'))
+            setGeo(destinations?.filter(destination => destination.type === 'geo'))
             setStateGetDestination({ ...stateGetDestination, isLoading: false, data: destinations })
         } catch (error) {
-            setStateGetDestination({ ...stateGetDestination, isLoading: false, error: error })
+            let errorMessage = "Un erreur se produit !"
+            if (error instanceof Error) errorMessage = error.message
+            setStateGetDestination({ ...stateGetDestination, isLoading: false, error: errorMessage })
         }
     }
 
     return {
         stateGetDestination,
+        tourismes,
+        geo,
         getDestinations
     }
 }

@@ -2,13 +2,12 @@ import { FunctionComponent } from "react";
 import '../../styles/components/card/_destination-card.scss'
 import { motion } from 'framer-motion'
 import { variantsStandard } from "../../styles/animations/standard-variants";
+import { destination } from "../../tools/type";
 type Props = {
-    destination: any
+    destination: destination
 }
 
 const DestinationCard: FunctionComponent<Props> = ({ destination }) => {
-    console.log(destination.galerie);
-
     return (
         <motion.div
             initial='offscreen'
