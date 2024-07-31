@@ -8,14 +8,12 @@ type links = { [key: string]: link }
 
 interface linkContext {
     links: links,
-    setLinks: (links: links) => void
     linkActif: link | null,
     setLinkActif: (link: link) => void
 }
 
 const LinkContext = createContext<linkContext>({
     links: {},
-    setLinks: () => { },
     linkActif: null,
     setLinkActif: () => { }
 })
@@ -44,7 +42,7 @@ export const LinkContextProvider: FunctionComponent<PropsWithChildren> = ({ chil
     const refApropos = useRef(null)
     const refContact = useRef(null)
 
-    const [links, setLinks] = useState<links>(
+    const [links] = useState<links>(
         {
             'accueil': { title: 'Accueil', refDestination: refAccueil },
             'tourisme': { title: 'Tourisme', refDestination: refTourisme },
@@ -55,7 +53,7 @@ export const LinkContextProvider: FunctionComponent<PropsWithChildren> = ({ chil
     )
     const [linkActif, setLinkActif] = useState<link>(links['accueil'])
     return (
-        <LinkContext.Provider value={{ links, setLinks, linkActif, setLinkActif }}>
+        <LinkContext.Provider value={{ links, linkActif, setLinkActif }}>
             {children}
         </LinkContext.Provider>
     )

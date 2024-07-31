@@ -8,12 +8,9 @@ import tsingy from '../assets/images/Bemaraha/tsingy.jpg'
 import chute from '../assets/images/Chute de la lylie et geyser/chute2.jpg'
 import gesier from '../assets/images/Chute de la lylie et geyser/gesier2.jpg'
 import { useLink } from "../hooks/useLink";
+import { useHeightNav } from "../hooks/useHeightNav";
 
-type Props = {
-    heightNavigationBar: number
-}
-
-const Accueil: FunctionComponent<Props> = ({ heightNavigationBar }) => {
+const Accueil: FunctionComponent = () => {
     const [scrollY, setScrollY] = useState<number>(0)
     const handleScrollY = () => {
         setScrollY(window.scrollY)
@@ -40,9 +37,8 @@ const Accueil: FunctionComponent<Props> = ({ heightNavigationBar }) => {
         handleHeightDiv()
     }
 
-    //fonction calcul topDiv
+    //calcul topDiv
     const [topDiv, setTopDiv] = useState<number>(0)
-
     useEffect(() => {
         handleResize()
         handleScrollY()
@@ -55,9 +51,10 @@ const Accueil: FunctionComponent<Props> = ({ heightNavigationBar }) => {
         }
     }, [])
 
+    const {heightNav} = useHeightNav()
     useEffect(() => {
-        setTopDiv((heightSection - heightDiv + heightNavigationBar + scrollY) / 2)
-    }, [heightSection, heightDiv, scrollY, heightNavigationBar])
+        setTopDiv((heightSection - heightDiv + heightNav + scrollY) / 2)
+    }, [heightSection, heightDiv, scrollY, heightNav])
 
     const { links, toggleLinkActif } = useLink()
 

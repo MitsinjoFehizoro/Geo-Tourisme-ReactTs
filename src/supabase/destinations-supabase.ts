@@ -36,3 +36,31 @@ export const useGetDestinations = () => {
         getDestinations
     }
 }
+
+export const useGetDestinationById = () => {
+    const [stateGetDestination, setStateGetDestination] = useState<stateSupabase>(
+        {
+            isLoading: false,
+            data: null,
+            error: null
+        }
+    )
+    const getDestination = async (id: string) => {
+        try {
+            setStateGetDestination({ ...stateGetDestination, isLoading: true })
+            const { data: destination } = await supabase
+                .from('destinations')
+                .select('*')
+                .eq('id', id)
+            setStateGetDestination({ ...stateGetDestination, isLoading: false, data: destination })
+        } catch (error) {
+            let errorMessage = "Un erreur se produit !"
+            if (error instanceof Error) errorMessage = error.message
+            setStateGetDestination({ ...stateGetDestination, isLoading: false, error: errorMessage })
+        }
+    }
+
+    return {
+        setStateGetDestination, getDestination
+    }
+}

@@ -1,0 +1,19 @@
+@import "../base/color";
+@import "../base/mixins";
+
+section {
+    .fotsy {
+        background-color: $white-color;
+        @include dimension(25vw, 90vh);
+
+        .points {
+            color: $black-color;
+            margin-bottom: -1em;
+        }
+    }
+
+    .porteur {
+        @include absolute(0, 0);
+        @include dimension(100%, auto);
+    }
+}
