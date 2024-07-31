@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import '../styles/components/_destination.scss';
 import DestinationCard from "./card/destination-card";
 import gesier from "../assets/images/Chute de la lylie et geyser/gesier.jpg"
@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { variantsStandard } from "../styles/animations/standard-variants";
 import { variantsSlideDestination } from "../styles/animations/destination-variants";
 import { useLink } from "../hooks/useLink";
+import { useGetDestinations } from "../supabase/destinations-supabase";
 
 const Destination: FunctionComponent = () => {
     const slides = [
@@ -21,6 +22,12 @@ const Destination: FunctionComponent = () => {
     ]
     const [selectedSlide, setSelectedSlide] = useState(slides[0])
     const { links, toggleLinkActif } = useLink()
+
+    const { stateGetDestination, getDestinations } = useGetDestinations()
+    useEffect(() => {
+        getDestinations()
+    }, [])
+
     return (
         <motion.section
             ref={links['destination'].refDestination}
@@ -28,7 +35,7 @@ const Destination: FunctionComponent = () => {
             whileInView='onscreen'
             viewport={{ once: true, amount: .4 }}
             transition={{ staggerChildren: .2 }}
-            onViewportEnter={()=>toggleLinkActif('destination')}
+            onViewportEnter={() => toggleLinkActif('destination')}
             className="bg-background pb-10 pt-14">
             <motion.h1 variants={variantsStandard} className="text-secondary text-center text-3xl">Où allez-vous miantenant?</motion.h1>
             <motion.ul variants={variantsStandard} className="flex flex-row justify-center items-center h-10 mt-4">
@@ -49,9 +56,22 @@ const Destination: FunctionComponent = () => {
                     transition={{ duration: 0.2 }}
                     variants={variantsSlideDestination}
                     className="h-full mt-4 grid grid-cols-3 place-items-center place-content-center">
-                    <DestinationCard picture={selectedSlide.image} />
-                    <DestinationCard picture={selectedSlide.image} />
-                    <DestinationCard picture={selectedSlide.image} />
+                    {
+                        stateGetDestination.isLoading && (
+                            <div>loading</div>
+                        )
+
+                    }
+                    {
+                        stateGetDestination.error && (
+                            <div>error</div>
+                        )
+                    }
+                    {
+                        stateGetDestination.data?.map(destination =>
+                            <DestinationCard key={destination.title} destination={destination} />
+                        )
+                    }
                 </motion.div>
 
             </AnimatePresence>

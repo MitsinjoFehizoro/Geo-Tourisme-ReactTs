@@ -25,13 +25,14 @@ header {
       border-bottom: 4px solid $white-color;
       cursor: pointer;
       transition: ease-in 0.2s;
-
+      cursor: pointer;
       &:hover {
         color: $primary-color;
       }
       &.actif {
         border-color: $primary-color;
         color: $primary-color;
+        cursor: text;
       }
     }
   }
