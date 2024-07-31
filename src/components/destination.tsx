@@ -5,17 +5,34 @@ import { variantsStandard } from "../styles/animations/standard-variants";
 import { variantsSlideDestination } from "../styles/animations/destination-variants";
 import { useLink } from "../hooks/useLink";
 import { useGetDestinations } from "../supabase/destinations-supabase";
+import DestinationCard from "./card/destination-card";
 
 const Destination: FunctionComponent = () => {
-    const slides = ['Geo-tourisme', 'Tourisme']
-    const [selectedSlide, setSelectedSlide] = useState(slides[0])
+
 
     const { links, toggleLinkActif } = useLink()
 
     const { stateGetDestination, tourismes, geo, getDestinations } = useGetDestinations()
+    const [selectedSlide, setSelectedSlide] = useState({
+        title: "Geo-tourisme",
+        destinations: geo
+    })
+    const slides = [
+        {
+            title: "Geo-tourisme",
+            destinations: geo
+        },
+        {
+            title: "Tourisme",
+            destinations: tourismes
+        }
+    ]
     useEffect(() => {
         getDestinations()
     }, [])
+    useEffect(() => {
+        setSelectedSlide(slides[0])
+    }, [stateGetDestination.data])
 
     return (
         <motion.section
@@ -30,24 +47,29 @@ const Destination: FunctionComponent = () => {
             <motion.ul variants={variantsStandard} className="flex flex-row justify-center items-center h-10 mt-4">
                 {
                     slides.map(slide =>
-                        <li key={slide} onClick={() => setSelectedSlide(slide)} className={slide === selectedSlide ? 'selected' : ''} >
-                            <p>{slide}</p>
+                        <li key={slide.title} onClick={() => setSelectedSlide(slide)} className={slide.title === selectedSlide.title ? 'selected' : ''} >
+                            <p>{slide.title}</p>
                             <motion.p className="underline absolute bottom-0 left-0" layout />
                         </li>)
                 }
             </motion.ul>
             <AnimatePresence mode="wait">
                 <motion.div
-                    key={selectedSlide}
+                    key={selectedSlide.title}
                     initial='hidden'
                     animate='visible'
                     exit='exit'
                     transition={{ duration: 0.2 }}
                     variants={variantsSlideDestination}
-                    className="h-full mt-4 grid grid-cols-3 place-items-center place-content-center">
-                        dgdffdgdf
-                </motion.div>
+                    className="h-full mt-4 grid grid-cols-3 place-items-center place-content-center"
+                >
+                    {
+                        selectedSlide.destinations?.map(destination =>
+                            <DestinationCard destination={destination} key={destination.id} />
+                        )
+                    }
 
+                </motion.div>
             </AnimatePresence>
 
         </motion.section>

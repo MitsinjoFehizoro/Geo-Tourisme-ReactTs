@@ -1,4 +1,4 @@
-import { FunctionComponent, RefObject, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import Accueil from "../components/accueil";
 import NavigationBar from "../components/navigation-bar";
 import Tourisme from "../components/tourisme";
