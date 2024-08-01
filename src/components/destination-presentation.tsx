@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from "react"
 import { useHeightNav } from "../hooks/useHeightNav"
 import { destination, stateSupabase } from "../tools/type"
-import { AnimatePresence, Variants, motion } from "framer-motion"
+import {motion } from "framer-motion"
 
 type Props = {
     destination: destination

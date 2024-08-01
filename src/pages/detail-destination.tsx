@@ -14,6 +14,9 @@ const DetailDestination: FunctionComponent = () => {
             getDestination(id)
         }
     }, [])
+    useEffect(() => {
+        console.log(destination?.organisations);
+    })
     return (
         <>
             {

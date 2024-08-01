@@ -49,7 +49,11 @@ export const useGetDestinationById = () => {
             setStateGetDestination({ ...stateGetDestination, isLoading: true })
             const { data } = await supabase
                 .from('destinations')
-                .select('*')
+                .select(`*,
+                    organisations (
+                        *
+                    )`
+                )
                 .eq('id', id)
                 .single()
             setDestination(data)
