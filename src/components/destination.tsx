@@ -9,7 +9,6 @@ import DestinationCard from "./card/destination-card";
 
 const Destination: FunctionComponent = () => {
 
-
     const { links, toggleLinkActif } = useLink()
 
     const { stateGetDestination, tourismes, geo, getDestinations } = useGetDestinations()

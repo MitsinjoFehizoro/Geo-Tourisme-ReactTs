@@ -5,6 +5,7 @@ section {
     .fotsy {
         background-color: $white-color;
         @include dimension(25vw, 105vh);
+
         .points {
             color: $black-color;
             margin-bottom: -.8em;
@@ -14,11 +15,14 @@ section {
     .galeries {
         @include absolute(0, 0);
         @include dimension(100%, 100%);
+
         img {
             @include dimension(90vh, 90vh)
         }
-        .monContaint{
+
+        .monContaint {
             margin-left: -2em;
+
             .description {
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
@@ -26,7 +30,20 @@ section {
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
+
+            .simple {
+                @include dimension(20em, 14em);
+                background-color: $white-color;
+                padding: 2em;
+            }
+            .modal {
+                @include dimension(100%, 100%);
+                @include absolute(0, 0);
+                background-color: $white-color;
+                padding: 2em;
+                border-bottom: 4px solid $primary-color;
+            }
         }
-       
+
     }
 }

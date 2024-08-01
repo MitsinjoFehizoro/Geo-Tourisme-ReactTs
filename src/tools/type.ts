@@ -6,8 +6,9 @@ export type destination = {
     id: string,
     title: string,
     description: string,
-    history: string ,
+    history: string,
     galeries: string[],
+    localisation: string,
     type: string,
     created_at: Date,
     updated_at: Date
