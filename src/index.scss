@@ -12,7 +12,6 @@
 }
 
 body {
-  background-color: $background-color;
   color: $black-color;
 
   &::-webkit-scrollbar {
@@ -29,7 +28,7 @@ body {
     scrollbar-color: $primary-color;
 
     &:hover {
-      scrollbar-color: $primary-color transparent; 
+      scrollbar-color: $primary-color transparent;
     }
   }
 }

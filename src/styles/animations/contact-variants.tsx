@@ -12,7 +12,7 @@ export const variantsInfoCard: Variants = {
 }
 
 export const variantsContactCard: Variants = {
-    offscreen: { opacity: 0, x: '50%', y: '-30%' },
+    offscreen: { opacity: 0, x: '10%', y: '-50%' },
     onscreen: {
         opacity: 1, y: 0, x: 0,
         transition: {

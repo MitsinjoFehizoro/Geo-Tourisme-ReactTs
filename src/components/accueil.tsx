@@ -51,7 +51,7 @@ const Accueil: FunctionComponent = () => {
         }
     }, [])
 
-    const {heightNav} = useHeightNav()
+    const { heightNav } = useHeightNav()
     useEffect(() => {
         setTopDiv((heightSection - heightDiv + heightNav + scrollY) / 2)
     }, [heightSection, heightDiv, scrollY, heightNav])

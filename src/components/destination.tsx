@@ -60,7 +60,7 @@ const Destination: FunctionComponent = () => {
                     exit='exit'
                     transition={{ duration: 0.2 }}
                     variants={variantsSlideDestination}
-                    className="h-full mt-4 grid grid-cols-3 place-items-center place-content-center"
+                    className="w-full h-full mt-4 grid grid-cols-3 place-items-center place-content-center"
                 >
                     {
                         selectedSlide.destinations?.map(destination =>

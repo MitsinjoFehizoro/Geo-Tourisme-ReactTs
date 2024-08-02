@@ -12,7 +12,7 @@ const Contact: FunctionComponent = () => {
         <motion.section
             ref={links['contact'].refDestination}
             onViewportEnter={() => toggleLinkActif('contact')}
-            className="relative">
+            className="relative w-full">
             <div className="w-full h-60 "></div>
             <div className="w-full h-80 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full bg-secondary/70"></div>
