@@ -8,7 +8,8 @@ import Contact from "../components/conctact";
 import Separation from "../components/separation";
 const Home: FunctionComponent = () => {
     return (
-        <>
+
+        <section className="body">
             <Accueil />
             <Tourisme />
             <Separation />
@@ -16,7 +17,7 @@ const Home: FunctionComponent = () => {
             <WhyUs />
             <Temoin />
             <Contact />
-        </>
+        </section>
     )
 }
 

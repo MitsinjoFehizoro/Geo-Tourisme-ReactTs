@@ -35,7 +35,13 @@ section {
                 @include dimension(20em, 14em);
                 background-color: $white-color;
                 padding: 2em;
+
+                .organisations {
+                    @include dimension(100%, 9em);
+                    overflow-x: auto;
+                }
             }
+
             .modal {
                 @include dimension(100%, 100%);
                 @include absolute(0, 0);

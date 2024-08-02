@@ -1,6 +1,5 @@
 import { FunctionComponent, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import '../styles/pages/_detail-destination.scss'
 import { useGetDestinationById } from "../supabase/destinations-supabase";
 import DestinationPresentation from "../components/destination-presentation";
 
