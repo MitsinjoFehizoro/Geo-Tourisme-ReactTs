@@ -16,7 +16,7 @@ section {
         @include absolute(0, 0);
         @include dimension(100%, 100%);
 
-        img {
+        img, .img {
             @include dimension(90vh, 90vh)
         }
 

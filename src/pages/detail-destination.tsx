@@ -18,21 +18,7 @@ const DetailDestination: FunctionComponent = () => {
     })
     return (
         <>
-            {
-                stateGetDestination.isLoading && (
-                    <div className="mt-96">loading</div>
-                )
-            }
-            {
-                stateGetDestination.error && (
-                    <div>error</div>
-                )
-            }
-            {
-                destination && (
-                    <DestinationPresentation stateGetDestination={stateGetDestination} destination={destination} />
-                )
-            }
+            <DestinationPresentation stateGetDestination={stateGetDestination} destination={destination} />
         </>
     )
 }

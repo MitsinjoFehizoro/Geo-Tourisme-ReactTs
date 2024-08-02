@@ -6,6 +6,7 @@ import { variantsSlideDestination } from "../styles/animations/destination-varia
 import { useLink } from "../hooks/useLink";
 import { useGetDestinations } from "../supabase/destinations-supabase";
 import DestinationCard from "./card/destination-card";
+import LoadingDestinationCard from "./loading/LoadingDestinationCard";
 
 const Destination: FunctionComponent = () => {
 
@@ -63,8 +64,20 @@ const Destination: FunctionComponent = () => {
                     className="w-full h-full mt-4 grid grid-cols-3 place-items-center place-content-center"
                 >
                     {
-                        selectedSlide.destinations?.map(destination =>
-                            <DestinationCard destination={destination} key={destination.id} />
+                        stateGetDestination.isLoading && (
+                            <>
+                                <LoadingDestinationCard />
+                                <LoadingDestinationCard />
+                                <LoadingDestinationCard />
+                            </>
+
+                        )
+                    }
+                    {
+                        selectedSlide.destinations && (
+                            selectedSlide.destinations.map(destination =>
+                                <DestinationCard destination={destination} key={destination.id} />
+                            )
                         )
                     }
 
