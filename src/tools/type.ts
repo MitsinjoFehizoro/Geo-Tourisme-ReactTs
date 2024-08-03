@@ -21,6 +21,17 @@ export type organisation = {
     end: Date,
     local_price: number,
     stranger_price: number,
+    porgrams: program[],
+    created_at: Date,
+    updated_at: Date
+}
+
+export type program = {
+    id: string,
+    date: Date,
+    title: string,
+    description: string,
+    galerie: string,
     created_at: Date,
     updated_at: Date
 }
