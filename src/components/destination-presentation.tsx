@@ -15,8 +15,8 @@ type Props = {
 const DestinationPresentation: FunctionComponent<Props> = ({ destination, stateGetDestination }) => {
     const { heightNav } = useHeightNav()
     return (
-        <section style={{ marginTop: heightNav }}>
-            <div className="fotsy flex flex-col justify-center">
+        <section className="parent" style={{ marginTop: heightNav }}>
+            <div className="fotsy flex flex-col justify-end pb-8">
                 {
                     Array.from({ length: 20 }, (_, i) => (
                         <p className="points text-3xl" key={i}>. . . . . . . . . . . . . .</p>
@@ -27,7 +27,7 @@ const DestinationPresentation: FunctionComponent<Props> = ({ destination, stateG
                 {
                     stateGetDestination.isLoading && (
                         <>
-                            <div className="slide animate-pulse bg-transparent" />
+                            <div className="slide" />
                             <div className="monContaint relative grid grid-cols-2 place-items-center place-content-center gap-4">
                                 {
                                     Array.from({ length: 4 }).map((_, index) => (

@@ -1,10 +1,11 @@
 @import "../base/color";
 @import "../base/mixins";
 
-section {
+.parent {
+    @include dimension (100%, 105vh);
     .fotsy {
         background-color: $white-color;
-        @include dimension(25vw, 105vh);
+        @include dimension(20vw, 80vh);
 
         .points {
             color: $black-color;
@@ -15,10 +16,12 @@ section {
     .galeries {
         @include absolute(0, 0);
         @include dimension(100%, 100%);
-
+        .slide {
+            @include dimension(45vw, 45vw);
+            position: relative;
+        }
         .monContaint {
             margin-left: -2em;
-
             .description {
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
@@ -48,11 +51,5 @@ section {
                 cursor: text;
             }
         }
-
-        .slide { //image slide
-            @include dimension(90vh, 90vh);
-            position: relative;
-        }
-
     }
 }

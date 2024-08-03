@@ -1,9 +1,10 @@
 import { FunctionComponent } from "react";
 import '../../styles/components/card/_destination-card.scss'
 import { motion } from 'framer-motion'
-import { variantsStandard } from "../../styles/animations/standard-variants";
 import { destination } from "../../tools/type";
 import { NavLink } from "react-router-dom";
+import { variantsStandard } from "../../styles/animations/standard-variants";
+
 type Props = {
     destination: destination
 }

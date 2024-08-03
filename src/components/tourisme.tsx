@@ -4,9 +4,9 @@ import tsingy from '../assets/images/Bemaraha/tsingy.jpg';
 import baobab from '../assets/images/Makay et allée des Baobabs/baobab.jpg';
 import vato from '../assets/images/Bemaraha/vato.jpg';
 import { motion } from 'framer-motion';
-import { variants_rond, variants_rond_creux, variantsImage_1, variantsImage_2, variantsImage_3, variantsParentSlide, variantsSlide } from "../styles/animations/tourisme-variants";
 import { useLink } from "../hooks/useLink";
 import { i_slide, p_indiceSlideActive, p_indiceSlideInactive } from "../styles/base/tailwind";
+import { variantsImage_1, variantsImage_2, variantsImage_3, variantsParentSlide, variantsSlide, variants_rond, variants_rond_creux } from "../styles/animations/tourisme-variants";
 
 const Tourisme: FunctionComponent = () => {
     const slideTourisme = [

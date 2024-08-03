@@ -9,6 +9,7 @@ import chute from '../assets/images/Chute de la lylie et geyser/chute2.jpg'
 import gesier from '../assets/images/Chute de la lylie et geyser/gesier2.jpg'
 import { useLink } from "../hooks/useLink";
 import { useHeightNav } from "../hooks/useHeightNav";
+import { variantsDestination, variantsDestinationChild } from "../styles/animations/accueil-variants";
 
 const Accueil: FunctionComponent = () => {
     const [scrollY, setScrollY] = useState<number>(0)
@@ -127,14 +128,6 @@ const Introduction: FunctionComponent = () => {
 }
 const Formulaire: FunctionComponent = () => {
     const [stateDestination, setStateDestination] = useState<boolean>(false)
-    const variantsDestination: Variants = {
-        hidden: { opacity: 0, scale: 0, height: 0, transition: { when: 'afterChildren', staggerChildren: .05 } },
-        visible: { opacity: 1, scale: 1, height: 'auto', transition: { when: 'beforeChildren', staggerChildren: .05 } }
-    }
-    const variantsDestinationChild: Variants = {
-        hidden: { opacity: 0, y: -10 },
-        visible: { opacity: 1, y: 0 }
-    }
     const handleStateDestination = () => {
         setStateDestination(prevState => !prevState)
     }

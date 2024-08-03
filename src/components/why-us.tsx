@@ -3,8 +3,8 @@ import '../styles/components/_why-us.scss'
 import soleil from '../assets/images/Isalo/soleil.jpg'
 import GarantiCard from "./card/garanti-card";
 import { motion } from 'framer-motion'
-import { variantsStandard } from "../styles/animations/standard-variants";
 import { useLink } from "../hooks/useLink";
+import { variantsStandard } from "../styles/animations/standard-variants";
 
 const WhyUs: FunctionComponent = () => {
     const { links, toggleLinkActif } = useLink()
