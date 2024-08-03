@@ -21,7 +21,7 @@ export type organisation = {
     end: Date,
     local_price: number,
     stranger_price: number,
-    porgrams: program[],
+    programs: program[],
     created_at: Date,
     updated_at: Date
 }

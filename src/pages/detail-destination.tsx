@@ -15,7 +15,11 @@ const DetailDestination: FunctionComponent = () => {
     return (
         <>
             <DestinationPresentation stateGetDestination={stateGetDestination} destination={destination} />
-            <ProgramDestination />
+            {
+                destination && (
+                    <ProgramDestination destination={destination} />
+                )
+            }
         </>
     )
 }
