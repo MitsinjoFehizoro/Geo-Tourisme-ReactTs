@@ -16,11 +16,6 @@ section {
         @include absolute(0, 0);
         @include dimension(100%, 100%);
 
-        img,
-        .img {
-            @include dimension(90vh, 90vh)
-        }
-
         .monContaint {
             margin-left: -2em;
 
@@ -52,6 +47,11 @@ section {
                 border-bottom: 4px solid $primary-color;
                 cursor: text;
             }
+        }
+
+        .slide { //image slide
+            @include dimension(90vh, 90vh);
+            position: relative;
         }
 
     }

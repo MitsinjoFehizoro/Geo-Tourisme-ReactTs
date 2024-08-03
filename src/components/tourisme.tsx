@@ -6,9 +6,9 @@ import vato from '../assets/images/Bemaraha/vato.jpg';
 import { motion } from 'framer-motion';
 import { variants_rond, variants_rond_creux, variantsImage_1, variantsImage_2, variantsImage_3, variantsParentSlide, variantsSlide } from "../styles/animations/tourisme-variants";
 import { useLink } from "../hooks/useLink";
+import { i_slide, p_indiceSlideActive, p_indiceSlideInactive } from "../styles/base/tailwind";
 
 const Tourisme: FunctionComponent = () => {
-    const indiceStyle = ['w-3 h-3 rounded-full bg-primary mx-1', 'w-8 h-2 rounded-full bg-white mx-1'];
     const slideTourisme = [
         {
             title: 'TOURISME',
@@ -69,7 +69,7 @@ const Tourisme: FunctionComponent = () => {
                 variants={variantsParentSlide}
                 className="w-6/12 slide flex flex-row justify-center items-center"
             >
-                <i className="fa fa-angle-left text-xl text-primary px-3 py-1 rounded-full hover:bg-white cursor-pointer" onClick={handleSlide}></i>
+                <i className={`${i_slide} fa fa-angle-left`} onClick={handleSlide}></i>
                 <div className="w-full h-full relative overflow-hidden" ref={porteRef}>
                     <motion.div
                         variants={variantsSlide}
@@ -90,11 +90,11 @@ const Tourisme: FunctionComponent = () => {
                         ))}
                     </motion.div>
                     <div className="absolute bottom-12 w-full flex flex-row justify-center items-center mt-4">
-                        <p className={showPrevSlide ? indiceStyle[0] : indiceStyle[1]}></p>
-                        <p className={!showPrevSlide ? indiceStyle[0] : indiceStyle[1]}></p>
+                        <p className={showPrevSlide ? p_indiceSlideActive : p_indiceSlideInactive}></p>
+                        <p className={!showPrevSlide ? p_indiceSlideActive : p_indiceSlideInactive}></p>
                     </div>
                 </div>
-                <i className="fa fa-angle-right z-50 text-xl text-primary px-3 py-1 rounded-full hover:bg-white cursor-pointer" onClick={handleSlide}></i>
+                <i className={`${i_slide} fa fa-angle-right`} onClick={handleSlide}></i>
             </motion.div>
         </motion.section>
     );

@@ -13,9 +13,6 @@ const DetailDestination: FunctionComponent = () => {
             getDestination(id)
         }
     }, [])
-    useEffect(() => {
-        console.log(destination?.organisations);
-    })
     return (
         <>
             <DestinationPresentation stateGetDestination={stateGetDestination} destination={destination} />
