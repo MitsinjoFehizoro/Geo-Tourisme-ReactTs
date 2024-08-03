@@ -6,7 +6,7 @@ import { variantsSlideDestination } from "../styles/animations/destination-varia
 import { useLink } from "../hooks/useLink";
 import { useGetDestinations } from "../supabase/destinations-supabase";
 import DestinationCard from "./card/destination-card";
-import LoadingDestinationCard from "./loading/LoadingDestinationCard";
+import LoadingDestinationCard from "./loading/loading-destination-card";
 
 const Destination: FunctionComponent = () => {
 

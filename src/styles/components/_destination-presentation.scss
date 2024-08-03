@@ -16,7 +16,8 @@ section {
         @include absolute(0, 0);
         @include dimension(100%, 100%);
 
-        img, .img {
+        img,
+        .img {
             @include dimension(90vh, 90vh)
         }
 
@@ -35,6 +36,7 @@ section {
                 @include dimension(20em, 14em);
                 background-color: $white-color;
                 padding: 2em;
+                cursor: pointer;
 
                 .organisations {
                     @include dimension(100%, 9em);
@@ -48,6 +50,7 @@ section {
                 background-color: $white-color;
                 padding: 2em;
                 border-bottom: 4px solid $primary-color;
+                cursor: text;
             }
         }
 
