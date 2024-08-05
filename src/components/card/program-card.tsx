@@ -1,23 +1,27 @@
-import { FunctionComponent, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 import { variantsDestination, variantsDestinationChild } from "../../styles/animations/accueil-variants";
 import { destination, organisation } from "../../tools/type";
 import { formatDateMoyen } from "../../tools/format-date";
 import DetailProgamCard from "./detail-program-card";
 import '../../styles/components/card/_program-card.scss'
+import { useChoiceOrganisation } from "../../hooks/useChoiceOrganisation";
 
 
 type Props = {
     destination: destination
 }
 const ProgramCard: FunctionComponent<Props> = ({ destination }) => {
-    const [selectedOrganisation, setSelectedOrganisation] = useState<organisation>(destination.organisations[0])
     const [stateDateDispo, setDateDispo] = useState<boolean>(false)
-    const handleStateDateDispo = (organisation?: organisation) => {
+    const handleStateDateDispo = (organisation: organisation) => {
         setDateDispo(prevState => !prevState)
-        if (organisation)
-            setSelectedOrganisation(organisation)
+        handleOrganisationChoice(organisation)
     }
+    const { organisationChoice, handleOrganisationChoice } = useChoiceOrganisation()
+    useEffect(() => {
+        handleOrganisationChoice(destination.organisations[0])
+    }, [])
+
     const refScroll = useRef<HTMLDivElement>(null)
     const { scrollYProgress } = useScroll({ container: refScroll })
     return (
@@ -25,8 +29,12 @@ const ProgramCard: FunctionComponent<Props> = ({ destination }) => {
             <div className="shadow-sm flex flex-col justify-center border-l-8 border-primary py-4 mb-2">
                 <h1 className="text-secondary text-xl font-bold uppercase px-4">Où allons-nous le : </h1>
                 <div className="relative">
-                    <div className="flex flex-row items-center justify-between px-4 cursor-pointer" onClick={() => handleStateDateDispo()}>
-                        <p><span>{formatDateMoyen(selectedOrganisation.start)}</span>&nbsp;-&nbsp;<span>{formatDateMoyen(selectedOrganisation.end)}</span></p>
+                    <div className="flex flex-row items-center justify-between px-4 cursor-pointer" onClick={() => setDateDispo(prevState => !prevState)}>
+                        {
+                            organisationChoice && (
+                                <p><span>{formatDateMoyen(organisationChoice.start)}</span>&nbsp;-&nbsp;<span>{formatDateMoyen(organisationChoice.end)}</span></p>
+                            )
+                        }
                         {
                             stateDateDispo ? (
                                 <i className="fa fa-caret-down text-sm mr-2"></i>
@@ -74,7 +82,7 @@ const ProgramCard: FunctionComponent<Props> = ({ destination }) => {
                 </svg>
                 <div className="overflow-auto bg-background pr-2" style={{ height: '90vh' }} ref={refScroll}>
                     {
-                        selectedOrganisation.programs.map(program =>
+                        organisationChoice?.programs.map(program =>
                             <DetailProgamCard program={program} key={program.id} />
                         )
                     }
