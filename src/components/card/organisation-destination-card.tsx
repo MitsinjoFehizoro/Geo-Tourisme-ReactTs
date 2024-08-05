@@ -2,11 +2,13 @@ import { FunctionComponent, useState } from "react"
 import { organisation } from "../../tools/type"
 import { motion } from 'framer-motion'
 import { formatDateLong, formatDateSimple } from "../../tools/format-date"
+import { useChoiceOrganisation } from "../../hooks/useChoiceOrganisation"
 type Props = {
     organisations: organisation[]
 }
 const OrganistaionDestinationCard: FunctionComponent<Props> = ({ organisations }) => {
     const [simpleMode, setSimpleMode] = useState(true)
+    const { handleOrganisationChoice } = useChoiceOrganisation()
     return (
         <motion.div
             layout
@@ -21,14 +23,18 @@ const OrganistaionDestinationCard: FunctionComponent<Props> = ({ organisations }
             <div className="organisations">
                 {
                     organisations.map(organisation => (
-                        <div key={organisation.id} className="h-10 mb-2 flex flex-row items-center justify-center bg-background rounded">
+                        <motion.div
+                            whileHover={simpleMode ? {} : { scale: 1.05 }} key={organisation.id}
+                            className="h-10 mb-2 flex flex-row items-center justify-center bg-background rounded cursor-pointer"
+                            onClick={simpleMode ? () => { } : () => handleOrganisationChoice(organisation)}
+                        >
                             <span>{simpleMode ? formatDateSimple(organisation.start) : formatDateLong(organisation.start)}</span>&nbsp;-&nbsp;
                             <span>{simpleMode ? formatDateSimple(organisation.end) : formatDateLong(organisation.end)}</span>
-                        </div>
+                        </motion.div>
                     ))
                 }
-            </div>
-        </motion.div>
+            </div >
+        </motion.div >
     )
 
 }

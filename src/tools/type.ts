@@ -1,3 +1,4 @@
+import { destination } from './type';
 export type stateSupabase = {
     isLoading: boolean
     error?: string | null
@@ -22,6 +23,7 @@ export type organisation = {
     local_price: number,
     stranger_price: number,
     programs: program[],
+    destination: destination,
     created_at: Date,
     updated_at: Date
 }

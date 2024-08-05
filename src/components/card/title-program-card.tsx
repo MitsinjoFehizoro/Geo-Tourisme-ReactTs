@@ -6,7 +6,7 @@ import { variantsDestination, variantsDestinationChild } from "../../styles/anim
 import { motion } from "framer-motion";
 
 type Props = {
-    title : string
+    title: string
     destination: destination
 }
 const TitleProgramCard: FunctionComponent<Props> = ({ title, destination }) => {
@@ -21,7 +21,7 @@ const TitleProgramCard: FunctionComponent<Props> = ({ title, destination }) => {
     }, [])
     return (
         <div className="shadow-sm flex flex-col justify-center border-l-8 border-primary py-4 mb-2">
-            <h1 className="text-secondary text-xl font-bold uppercase px-4">{title}</h1>
+            <h1 className="text-secondary text-lg uppercase px-4">{title}</h1>
             <div className="relative">
                 <div className="flex flex-row items-center justify-between px-4 cursor-pointer" onClick={() => setDateDispo(prevState => !prevState)}>
                     {

@@ -17,7 +17,7 @@ const Program : FunctionComponent<Props> = ({ destination }) => {
     return (
         <div className="w-96 flex flex-col">
             <TitleProgramCard title="Où allons-nous le :" destination={destination} />
-            <div className="relative py-4 pl-2 bg-background overflow-hidden">
+            <div className="relative py-4 px-2 rounded-md shadow overflow-hidden">
                 <svg className="absolute top-6 left-4 z-10" id='progress' width="90" height="90" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="30" pathLength="1" className="stroke-background/80" />
                     <motion.circle
@@ -29,7 +29,7 @@ const Program : FunctionComponent<Props> = ({ destination }) => {
                         style={{ pathLength: scrollYProgress }}
                     />
                 </svg>
-                <div className="overflow-auto bg-background pr-2" style={{ height: '90vh' }} ref={refScroll}>
+                <div className="overflow-auto rounded" style={{ height: '90vh' }} ref={refScroll}>
                     {
                         organisationChoice?.programs.map(program =>
                             <DetailProgamCard program={program} key={program.id} />
