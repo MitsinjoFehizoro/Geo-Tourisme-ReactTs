@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithChildren, createContext, useContext, useEffect, useState } from "react"
+import { FunctionComponent, PropsWithChildren, createContext, useContext, useState } from "react"
 import { organisation } from "../tools/type"
 
 interface organisationChoiceContext {
@@ -13,9 +13,6 @@ const OrganisationChoiceContext = createContext<organisationChoiceContext>({
 
 export const useChoiceOrganisation = () => {
     const { organisationChoice, setOrganisationChoice } = useContext(OrganisationChoiceContext)
-    useEffect(()=>{
-
-    }, [])
     const handleOrganisationChoice = (organisation: organisation) => {
         setOrganisationChoice(organisation)
     }
