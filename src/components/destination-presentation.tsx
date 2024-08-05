@@ -27,7 +27,7 @@ const DestinationPresentation: FunctionComponent<Props> = ({ destination, stateG
                 {
                     stateGetDestination.isLoading && (
                         <>
-                            <div className="slide" />
+                            <div className="slide bg-white/80 p-8" />
                             <div className="monContaint relative grid grid-cols-2 place-items-center place-content-center gap-4">
                                 {
                                     Array.from({ length: 4 }).map((_, index) => (

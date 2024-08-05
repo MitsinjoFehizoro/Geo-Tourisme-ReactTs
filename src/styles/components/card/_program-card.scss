@@ -1,0 +1,13 @@
+@import "../../base/mixins";
+@import "../../base/color";
+
+
+circle {
+    stroke-width: 20%;
+    fill: none;
+}
+
+#progress .indicator {
+    stroke: $primary-color;
+    opacity: .7;
+}

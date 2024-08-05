@@ -1,9 +1,10 @@
-import { FunctionComponent, useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { FunctionComponent, useRef, useState } from "react";
+import { motion, useScroll } from "framer-motion";
 import { variantsDestination, variantsDestinationChild } from "../../styles/animations/accueil-variants";
 import { destination, organisation } from "../../tools/type";
 import { formatDateMoyen } from "../../tools/format-date";
 import DetailProgamCard from "./detail-program-card";
+import '../../styles/components/card/_program-card.scss'
 
 
 type Props = {
@@ -17,11 +18,10 @@ const ProgramCard: FunctionComponent<Props> = ({ destination }) => {
         if (organisation)
             setSelectedOrganisation(organisation)
     }
-    useEffect(() => {
-        console.log(selectedOrganisation);
-    }, [destination])
+    const refScroll = useRef<HTMLDivElement>(null)
+    const { scrollYProgress } = useScroll({ container: refScroll })
     return (
-        <div className="w-96  flex flex-col">
+        <div className="w-96 flex flex-col">
             <div className="shadow-sm flex flex-col justify-center border-l-8 border-primary py-4 mb-2">
                 <h1 className="text-secondary text-xl font-bold uppercase px-4">Où allons-nous le : </h1>
                 <div className="relative">
@@ -35,11 +35,11 @@ const ProgramCard: FunctionComponent<Props> = ({ destination }) => {
                             )
                         }
                     </div>
-                    <div className="absolute w-full h-0 shadow">
+                    <div className="absolute z-20 w-full h-0">
                         <motion.div
                             variants={variantsDestination}
                             animate={stateDateDispo ? 'visible' : 'hidden'}
-                            className="bg-white rounded-md py-4 px-2 mr-2"
+                            className="bg-white rounded-md py-4 px-2 mr-2 shadow-2xl"
                         >
                             {
                                 destination.organisations.map(organisation => (
@@ -60,8 +60,19 @@ const ProgramCard: FunctionComponent<Props> = ({ destination }) => {
                     </div>
                 </div>
             </div>
-            <div className="py-4 pl-2 bg-background overflow-hidden">
-                <div className="overflow-auto bg-background pr-2" style={{ height: '90vh' }}>
+            <div className="relative py-4 pl-2 bg-background overflow-hidden">
+                <svg className="absolute top-6 left-4 z-10" id='progress' width="90" height="90" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="30" pathLength="1" className="stroke-background/80" />
+                    <motion.circle
+                        cx="50"
+                        cy="50"
+                        r="30"
+                        pathLength="1"
+                        className="indicator"
+                        style={{ pathLength: scrollYProgress }}
+                    />
+                </svg>
+                <div className="overflow-auto bg-background pr-2" style={{ height: '90vh' }} ref={refScroll}>
                     {
                         selectedOrganisation.programs.map(program =>
                             <DetailProgamCard program={program} key={program.id} />
