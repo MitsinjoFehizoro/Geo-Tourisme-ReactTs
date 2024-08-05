@@ -17,7 +17,7 @@ const Program : FunctionComponent<Props> = ({ destination }) => {
     return (
         <div className="w-96 flex flex-col">
             <TitleProgramCard title="Où allons-nous le :" destination={destination} />
-            <div className="relative py-4 px-2 rounded-md shadow overflow-hidden">
+            <div className="relative p-4 rounded-md shadow overflow-hidden">
                 <svg className="absolute top-6 left-4 z-10" id='progress' width="90" height="90" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="30" pathLength="1" className="stroke-background/80" />
                     <motion.circle
@@ -36,7 +36,6 @@ const Program : FunctionComponent<Props> = ({ destination }) => {
                         )
                     }
                 </div>
-
             </div>
         </div>
 

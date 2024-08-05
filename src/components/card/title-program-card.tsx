@@ -20,7 +20,7 @@ const TitleProgramCard: FunctionComponent<Props> = ({ title, destination }) => {
         handleOrganisationChoice(destination.organisations[0])
     }, [])
     return (
-        <div className="shadow-sm flex flex-col justify-center border-l-8 border-primary py-4 mb-2">
+        <div className="shadow-sm flex flex-col justify-center border-l-4 border-primary py-4 mb-2">
             <h1 className="text-secondary text-lg uppercase px-4">{title}</h1>
             <div className="relative">
                 <div className="flex flex-row items-center justify-between px-4 cursor-pointer" onClick={() => setDateDispo(prevState => !prevState)}>

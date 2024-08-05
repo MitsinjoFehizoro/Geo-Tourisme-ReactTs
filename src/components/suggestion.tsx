@@ -3,6 +3,7 @@ import TitleProgramCard from "./card/title-program-card";
 import CustomTextarea from "./form/custom-textarea";
 import { destination } from "../tools/type";
 import CustomButton from "./custom-button";
+import StandardCard from "./card/standard-card";
 
 type Props = {
     destination: destination
@@ -12,11 +13,32 @@ const Suggestion: FunctionComponent<Props> = ({ destination }) => {
     return (
         <div className="w-full">
             <TitleProgramCard title="Votre suggestion pour le :" destination={destination} />
-            <form className="w-full rounded-md shadow p-4">
-                <CustomTextarea />
-                <CustomButton text="Envoyer"/>
-            </form>
+            <StandardCard>
+                <form action="">
+                    <CustomTextarea />
+                    <CustomButton text="Envoyer" />
+                </form>
+            </StandardCard>
+            <StandardCard>
+                <SuggesstionCard />
+                <SuggesstionCard />
+                <SuggesstionCard />
+            </StandardCard>
         </div>
     )
 }
 export default Suggestion
+
+const SuggesstionCard: FunctionComponent = () => {
+    return (
+        <div className="mb-6">
+            <div className="pb-1 mb-1 border-b-[1px]">
+                <p className="capitalize text-secondary text-sm">Mitsinjo</p>
+                <p className="text-xs">mitsinjofehizoro@gmail.com</p>
+            </div>
+            <div className="bg-background rounded-md py-2 px-4">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor cum eos doloremque veritatis inventore dolores, ipsum natus laborum quae fugit
+            </div>
+        </div>
+    )
+}
