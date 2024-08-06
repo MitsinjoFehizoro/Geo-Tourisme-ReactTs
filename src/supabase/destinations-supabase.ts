@@ -15,9 +15,12 @@ export const useGetDestinations = () => {
     const getDestinations = async () => {
         try {
             setStateGetDestination({ ...stateGetDestination, isLoading: true })
-            const { data } = await supabase
+            const { data, error } = await supabase
                 .from('destinations')
                 .select('*')
+            if(error){
+                console.error(error)
+            }
             setTourismes(data?.filter(destination => destination.type === 'tourisme'))
             setGeo(data?.filter(destination => destination.type === 'geo'))
             setStateGetDestination({ ...stateGetDestination, isLoading: false })
@@ -25,6 +28,7 @@ export const useGetDestinations = () => {
             let errorMessage = "Un erreur se produit !"
             if (error instanceof Error) errorMessage = error.message
             setStateGetDestination({ ...stateGetDestination, isLoading: false, error: errorMessage })
+
         }
     }
 
