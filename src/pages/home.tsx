@@ -6,9 +6,11 @@ import WhyUs from "../components/why-us";
 import Temoin from "../components/Temoin";
 import Contact from "../components/conctact";
 import Separation from "../components/separation";
+import NavigationBar from "../components/navigation-bar";
 const Home: FunctionComponent = () => {
     return (
         <>
+            <NavigationBar />
             <Accueil />
             <Tourisme />
             <Separation />
