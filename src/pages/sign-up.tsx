@@ -6,6 +6,8 @@ import StandardCard from "../components/card/standard-card";
 import CustomInput from "../components/form/custom-input";
 import CustomButton from "../components/custom-button";
 import { NavLink } from "react-router-dom";
+import Toast from "../components/toast";
+import { useToast } from "../hooks/useToast";
 
 const SignUp: FunctionComponent = () => {
 
@@ -36,8 +38,12 @@ const SignUp: FunctionComponent = () => {
     useEffect(() => {
         User()
     }, [])
+
+    const { addToast } = useToast()
     return (
-        <section className="w-full h-[100vh] bg-background flex justify-center items-center">
+        <section
+            onClick={() => addToast({ toast: "Erreur de la connexion reessayer dans quelques instants.", isSucces: false })}
+            className="w-full h-[100vh] bg-background flex justify-center items-center">
             <div className="w-9/12 h-full flex flex-row  ">
                 <div className="w-1/2 h-full flex items-center">
                     <div className="w-96">

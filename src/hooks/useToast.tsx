@@ -1,4 +1,5 @@
 import { FunctionComponent, PropsWithChildren, createContext, useContext, useEffect, useState } from "react"
+import Toast from "../components/toast"
 
 interface toast {
     toast: string,
@@ -19,22 +20,18 @@ export const useToast = () => {
     const addToast = (toast: toast) => {
         setToasts([...toasts, toast])
     }
-    const removeToast = (toast: toast) => {
-        setToasts(toasts.filter(t => t == toast))
-    }
     useEffect(() => {
-        const autoRemoveToast = setTimeout(() => {
+        const removeToast = setTimeout(() => {
             setToasts([]);
         }, 5000);
         return () => {
-            clearTimeout(autoRemoveToast);
+            clearTimeout(removeToast);
         };
     }, [toasts]);
 
     return {
         toasts,
-        addToast,
-        removeToast
+        addToast
     }
 }
 
@@ -42,7 +39,7 @@ export const ToastContextProvider: FunctionComponent<PropsWithChildren> = ({ chi
     const [toasts, setToasts] = useState<toast[]>([])
     return (
         <ToastContext.Provider value={{ toasts, setToasts }}>
-
+            <Toast />
             {children}
         </ToastContext.Provider>
     )
