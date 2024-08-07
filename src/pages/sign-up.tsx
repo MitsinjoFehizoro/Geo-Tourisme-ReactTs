@@ -5,6 +5,7 @@ import electricite from '../assets/images/background/electricite.png'
 import StandardCard from "../components/card/standard-card";
 import CustomInput from "../components/form/custom-input";
 import CustomButton from "../components/custom-button";
+import { NavLink } from "react-router-dom";
 
 const SignUp: FunctionComponent = () => {
 
@@ -41,12 +42,18 @@ const SignUp: FunctionComponent = () => {
                 <div className="w-1/2 h-full flex items-center">
                     <div className="w-96">
                         <StandardCard>
-                            <div className="my-8 mx-4">
+                            <form className="mt-8 mx-4">
                                 <h1 className="text-xl font-bold text-center text-secondary mb-6" >S'inscrire: </h1>
                                 <CustomInput type="email" placeholder="Email@example.com" />
                                 <CustomInput type="text" placeholder="Nom et prénom(s)" />
                                 <CustomInput type="text" placeholder="Contact" />
                                 <CustomButton text="Valider" />
+                            </form>
+                            <NavLink to='/' className=' absolute top-6 left-8'><i className="fa fa-arrow-left text-primary text-sm hover:text-secondary cursor-pointer"></i></NavLink>
+                            <div className="w-full mb-4 mt-4 flex flex-row items-center justify-center">
+                                <div className="w-1/3 h-[1px] bg-background" />
+                                <NavLink to='/' className='mx-2 text-sm hover:text-primary'>Se connecter</NavLink>
+                                <div className="w-1/3 h-[1px] bg-background" />
                             </div>
                         </StandardCard>
                     </div>

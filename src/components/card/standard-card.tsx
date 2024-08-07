@@ -2,7 +2,7 @@ import { FunctionComponent, PropsWithChildren } from "react";
 
 const StandardCard: FunctionComponent<PropsWithChildren> = ({ children }) => {
     return (
-        <div className="w-full bg-white rounded-md shadow p-4 mb-4">
+        <div className="relative w-full bg-white rounded-md shadow p-4 mb-4">
             {children}
         </div>
     )
