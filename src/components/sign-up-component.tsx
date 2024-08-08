@@ -14,9 +14,11 @@ export const SignUpForm: FunctionComponent = () => {
     useEffect(() => {
         getCountry()
     }, [])
+
     return (
         <>
             <form className="mt-8 mx-4">
+             
                 <h1 className="text-xl font-bold text-center text-secondary mb-6" >S'inscrire: </h1>
                 <CustomInput
                     type="email"
@@ -34,9 +36,7 @@ export const SignUpForm: FunctionComponent = () => {
                     onChange={handleNameField}
                     errorMessage={nameField.errorMessage}
                 />
-                <CustomInputPhone />
-                {/*
-                <CustomInput type="text" placeholder="Contact" /> */}
+                <CustomInputPhone stateAxios={stateAxios} />
                 <CustomButton text="Valider" />
             </form>
             <div className="w-full mb-4 mt-4 flex flex-row items-center justify-center">
