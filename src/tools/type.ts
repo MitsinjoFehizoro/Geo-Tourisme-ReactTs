@@ -42,3 +42,9 @@ export type field = {
     errorMessage: string,
     isValid: boolean
 }
+
+export type stateAxios = {
+    data: [],
+    isLoading: boolean,
+    errorMessage: string
+}

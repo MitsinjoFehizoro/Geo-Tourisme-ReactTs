@@ -1,13 +1,19 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import CustomInput from "./form/custom-input";
 import CustomButton from "./custom-button";
 import { NavLink } from "react-router-dom";
 import { useEmailValidation } from "../hooks/useEmailValidation";
 import { useNameValidation } from "../hooks/useNameValidation";
+import { useAxiosCountry } from "../hooks/useAxiosCountry";
+import CustomInputPhone from "./form/custom-input-phone";
 
 export const SignUpForm: FunctionComponent = () => {
     const { emailField, handleEmailField } = useEmailValidation()
     const { nameField, handleNameField } = useNameValidation()
+    const { stateAxios, getCountry } = useAxiosCountry()
+    useEffect(() => {
+        getCountry()
+    }, [])
     return (
         <>
             <form className="mt-8 mx-4">
@@ -28,7 +34,8 @@ export const SignUpForm: FunctionComponent = () => {
                     onChange={handleNameField}
                     errorMessage={nameField.errorMessage}
                 />
-                {/*  
+                <CustomInputPhone />
+                {/*
                 <CustomInput type="text" placeholder="Contact" /> */}
                 <CustomButton text="Valider" />
             </form>
