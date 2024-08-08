@@ -1,4 +1,3 @@
-import { destination } from './type';
 export type stateSupabase = {
     isLoading: boolean
     error?: string | null
@@ -36,4 +35,10 @@ export type program = {
     galerie: string,
     created_at: Date,
     updated_at: Date
+}
+
+export type field = {
+    value: string,
+    errorMessage: string,
+    isValid: boolean
 }
