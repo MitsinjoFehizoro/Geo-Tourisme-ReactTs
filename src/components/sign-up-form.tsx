@@ -9,7 +9,7 @@ import CustomInputPhone from "./form/custom-input-phone";
 import { UsePhoneValidation } from "../hooks/usePhoneValidation";
 import { useSignUpUser } from "../supabase/users-supabase";
 
-export const SignUpForm: FunctionComponent = () => {
+const SignUpForm: FunctionComponent = () => {
     const { emailField, handleEmailField } = useEmailValidation()
     const { nameField, handleNameField } = useNameValidation()
     const { phoneField, handlePhoneField } = UsePhoneValidation()
@@ -33,7 +33,7 @@ export const SignUpForm: FunctionComponent = () => {
     return (
         <>
             <form className="mt-8 mx-4" onSubmit={handleSubmit}>
-                <h1 className="text-xl font-bold text-center text-secondary mb-6" >S'inscrire: </h1>
+                <h1 className="text-xl font-bold text-center text-secondary mb-6" >S'inscrire : </h1>
                 <CustomInput
                     type="email"
                     placeholder="Email@example.com"
@@ -64,14 +64,7 @@ export const SignUpForm: FunctionComponent = () => {
         </>
     )
 }
+export default SignUpForm
 
-export const SignUpGuid: FunctionComponent = () => {
-    return (
-        <>
-            <h1 className=" text-white text mb-1 uppercase ">créer un compte</h1>
-            <p className="text-white text-sm">Veuillez compléter le formulaire, appuyer sur valider et nous vous envoyons un email pour se connecter.</p>
-        </>
-    )
-}
 
 

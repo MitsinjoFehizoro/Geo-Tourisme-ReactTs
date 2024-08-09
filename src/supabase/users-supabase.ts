@@ -1,4 +1,4 @@
-import { handleErrorCatch, handleErrorSupabase } from './../tools/hangle-error';
+import { handleErrorCatch, handleErrorSupabase } from '../tools/handle-error';
 import { useState } from "react"
 import { field, stateSupabase } from "../tools/type"
 import { useToast } from "../hooks/useToast"
@@ -55,5 +55,23 @@ export const useSignUpUser = () => {
     return {
         stateSignUpUser,
         signUpUser
+    }
+}
+
+export const useLoginUser = () => {
+    const [stateLoginUser, setStateLoginUser] = useState<stateSupabase>({
+        isLoading: false,
+        error: null
+    })
+
+    const { addToast } = useToast()
+    const loginUser = (emailField: field) => {
+        if (!emailField.isValid) {
+
+        }
+    }
+    return {
+        stateLoginUser,
+        loginUser
     }
 }
