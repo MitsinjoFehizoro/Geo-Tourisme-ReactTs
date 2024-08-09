@@ -3,6 +3,7 @@ import { useState } from "react"
 import { field, stateSupabase } from "../tools/type"
 import { useToast } from "../hooks/useToast"
 import { supabase } from "./supabase-client"
+import { AuthRetryableFetchError } from '@supabase/supabase-js';
 
 export const useSignUpUser = () => {
     const [stateSignUpUser, setStateSignUpUser] = useState<stateSupabase>({
@@ -90,7 +91,12 @@ export const useLoginUser = () => {
                 email: emailField.value
             })
             if (errorAuth) {
-                handleErrorSupabase(errorAuth, addToast, setStateLoginUser)
+                if (errorAuth.status === 429) {
+                    addToast({ toast: 'Nous avons déjà envoyé un lien de connexion à votre email. Veuillez consulter et suivre les instructions.', isSucces: false })
+                    setStateLoginUser({ isLoading: false, error: errorAuth.message })
+                } else {
+                    handleErrorSupabase(errorAuth, addToast, setStateLoginUser)
+                }
             } else {
                 addToast({ toast: 'Un lien de connexion vous a été envoyé par email.', isSucces: true })
                 setStateLoginUser({ isLoading: false, error: null })
