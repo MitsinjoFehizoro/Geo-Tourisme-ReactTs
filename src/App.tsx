@@ -3,6 +3,7 @@ import Root from './pages/root'
 import Home from './pages/home'
 import DetailDestination from './pages/detail-destination'
 import SignUp from './pages/sign-up'
+import Login from './pages/login'
 
 
 const route = createBrowserRouter([
@@ -17,6 +18,10 @@ const route = createBrowserRouter([
       {
         path: 'signup',
         element: <SignUp />
+      },
+      {
+        path: 'login',
+        element: <Login />
       },
       {
         path: 'destinations/:id',

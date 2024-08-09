@@ -45,7 +45,7 @@ export const useSignUpUser = () => {
             if (errorAuth) {
                 handleErrorSupabase(errorAuth, addToast, setStateSignUpUser)
             } else {
-                addToast({ toast: "Email de confirmation envoyé.", isSucces: true })
+                addToast({ toast: "Un lien de connexion vous a été envoyé par email.", isSucces: true })
                 setStateSignUpUser({ isLoading: false, error: null })
             }
         } catch (error) {
@@ -65,9 +65,39 @@ export const useLoginUser = () => {
     })
 
     const { addToast } = useToast()
-    const loginUser = (emailField: field) => {
+    const loginUser = async (emailField: field) => {
         if (!emailField.isValid) {
+            addToast({ toast: 'Veuillez entrer une adresse email valide.', isSucces: false })
+            return
+        }
+        try {
+            setStateLoginUser({ isLoading: true, error: null })
+            const { data: dataEmail, error: errorEmail } = await supabase
+                .from('clients')
+                .select('email')
+                .eq('email', emailField.value)
 
+            if (errorEmail) {
+                handleErrorSupabase(errorEmail, addToast, setStateLoginUser)
+                return
+            }
+            if (dataEmail.length == 0) {
+                addToast({ toast: 'Aucun compte associé à cet email. Veuillez en créer un.', isSucces: false })
+                setStateLoginUser({ isLoading: false, error: null })
+                return
+            }
+            const { error: errorAuth } = await supabase.auth.signInWithOtp({
+                email: emailField.value
+            })
+            if (errorAuth) {
+                handleErrorSupabase(errorAuth, addToast, setStateLoginUser)
+            } else {
+                addToast({ toast: 'Un lien de connexion vous a été envoyé par email.', isSucces: true })
+                setStateLoginUser({ isLoading: false, error: null })
+            }
+
+        } catch (error) {
+            handleErrorCatch(error, addToast, setStateLoginUser)
         }
     }
     return {
