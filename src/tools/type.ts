@@ -2,6 +2,10 @@ export type stateSupabase = {
     isLoading: boolean
     error?: string | null
 }
+export type toast = {
+    toast: string,
+    isSucces: boolean
+}
 export type destination = {
     id: string,
     title: string,

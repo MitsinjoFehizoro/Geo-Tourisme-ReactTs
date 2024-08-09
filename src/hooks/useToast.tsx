@@ -1,10 +1,8 @@
 import { FunctionComponent, PropsWithChildren, createContext, useContext, useEffect, useState } from "react"
 import Toast from "../components/toast"
+import { toast } from "../tools/type"
 
-interface toast {
-    toast: string,
-    isSucces: boolean
-}
+
 interface toastContext {
     toasts: toast[],
     setToasts: (toasts: toast[]) => void
