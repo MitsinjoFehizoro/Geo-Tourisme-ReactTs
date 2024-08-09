@@ -37,6 +37,22 @@ export type program = {
     updated_at: Date
 }
 
+export type client = {
+    id: string,
+    email: string,
+    phone: string,
+    name: string,
+    created_at: Date,
+    updated_at: Date
+}
+
+export type user = {
+    id: string,
+    email: string,
+    created_at: Date,
+    updated_at: Date
+}
+
 export type field = {
     value: string,
     errorMessage: string,

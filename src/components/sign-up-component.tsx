@@ -1,12 +1,13 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import CustomInput from "./form/custom-input";
 import CustomButton from "./custom-button";
 import { NavLink } from "react-router-dom";
 import { useEmailValidation } from "../hooks/useEmailValidation";
 import { useNameValidation } from "../hooks/useNameValidation";
-import { useAxiosCountry } from "../hooks/useAxiosCountry";
+import { useAxiosCountry } from "../api/useAxiosCountry";
 import CustomInputPhone from "./form/custom-input-phone";
 import { UsePhoneValidation } from "../hooks/usePhoneValidation";
+import { useSignUpUser } from "../supabase/users-supabase";
 
 export const SignUpForm: FunctionComponent = () => {
     const { emailField, handleEmailField } = useEmailValidation()
@@ -22,9 +23,16 @@ export const SignUpForm: FunctionComponent = () => {
         setSelectedCountry(country)
     }
 
+    const { stateSignUpUser, signUpUser } = useSignUpUser()
+    const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        signUpUser(emailField, nameField, phoneField)
+    }
+
+
     return (
         <>
-            <form className="mt-8 mx-4">
+            <form className="mt-8 mx-4" onSubmit={handleSubmit}>
                 <h1 className="text-xl font-bold text-center text-secondary mb-6" >S'inscrire: </h1>
                 <CustomInput
                     type="email"
@@ -46,7 +54,7 @@ export const SignUpForm: FunctionComponent = () => {
                     onChange={(e) => handlePhoneField(selectedCountry, e)}
                     field={phoneField}
                 />
-                <CustomButton text="Valider" />
+                <CustomButton isLoading={stateSignUpUser.isLoading} text="Valider" />
             </form>
             <div className="w-full mb-4 mt-4 flex flex-row items-center justify-center">
                 <div className="w-1/3 h-[1px] bg-background" />

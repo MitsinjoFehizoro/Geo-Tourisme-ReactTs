@@ -14,14 +14,14 @@ export const UsePhoneValidation = () => {
                 setPhondeField({ value: e.target.value, isValid: true, errorMessage: '' })
             } else {
                 const errorMessage = 'Numéro de téléphone invalide.'
-                setPhondeField({ value: e.target.value, isValid: true, errorMessage: errorMessage })
+                setPhondeField({ value: e.target.value, isValid: false, errorMessage: errorMessage })
             }
         } else {
             if (regexPhone.test(e.target.value)) {
                 setPhondeField({ value: e.target.value, isValid: true, errorMessage: '' })
             } else {
                 const errorMessage = 'Numéro de téléphone invalide.'
-                setPhondeField({ value: e.target.value, isValid: true, errorMessage: errorMessage })
+                setPhondeField({ value: e.target.value, isValid: false, errorMessage: errorMessage })
             }
         }
     }

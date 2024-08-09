@@ -82,7 +82,7 @@ const CustomInputPhone: FunctionComponent<Props> = ({ stateAxios, handleSelected
             </div>
             {
                 stateAxios.data && (
-                    <div className="absolute w-full h-0 bottom-0">
+                    <div className="absolute w-full h-0 bottom-0 z-10">
                         <motion.div
                             variants={variantsCountry}
                             animate={stateCountry ? 'visible' : 'hidden'}
