@@ -1,14 +1,17 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { stateAxios } from "../../tools/type";
+import { field, stateAxios } from "../../tools/type";
 import { motion } from "framer-motion";
 import { variantsCountry, variantsDestinationChild } from "../../styles/animations/accueil-variants";
 
 type Props = {
-    stateAxios: stateAxios
+    stateAxios: stateAxios,
+    handleSelectedCountry: (country: object) => void,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    field: field
 }
-const CustomInputPhone: FunctionComponent<Props> = ({ stateAxios }) => {
+const CustomInputPhone: FunctionComponent<Props> = ({ stateAxios, handleSelectedCountry, field, onChange }) => {
     const [stateCountry, setStateCountry] = useState<boolean>(false)
-    const [selectedCountry, setSelectedCoundtry] = useState({})
+    const [selectedCountry, setSelectedCountry] = useState({})
 
     const [allCountry, setAllCountry] = useState([])
     const hanldeAllCountry = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,16 +21,20 @@ const CustomInputPhone: FunctionComponent<Props> = ({ stateAxios }) => {
     useEffect(() => {
         setAllCountry(stateAxios.data)
         const country = stateAxios.data.filter(country => ((country as { name: { common: string } }).name.common === 'Madagascar'))
-        if (country.length > 0) setSelectedCoundtry(country[0])
+        if (country.length > 0) setSelectedCountry(country[0])
     }, [stateAxios])
+
+    useEffect(() => {
+        handleSelectedCountry(selectedCountry)
+    }, [selectedCountry])
 
     return (
         <div className="relative flex flex-row pb-2">
-            <div className="w-28 px-4 py-2 mr-2 text-sm bg-background rounded flex flex-row items-center justify-center">
+            <div className="w-2/5 px-4 py-2 mr-2 text-sm bg-background rounded flex flex-row items-center justify-center">
                 {
                     stateAxios.isLoading && (
                         <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                         </svg>
                     )
@@ -35,11 +42,11 @@ const CustomInputPhone: FunctionComponent<Props> = ({ stateAxios }) => {
                 {
                     stateAxios.data && (
                         <div
-                            className="flex flex-row items-center cursor-pointer"
+                            className="w-full flex flex-row items-center justify-between cursor-pointer"
                             onClick={() => setStateCountry(!stateCountry)}>
-                            <p className="mr-6 flex flex-row items-center">
+                            <p className="flex flex-row items-center justify-between text-xs">
                                 <span className="mr-1" >{(selectedCountry as { flag: string }).flag}</span>
-                                <span className="text-xs">{(selectedCountry as { cioc: string }).cioc}</span>
+                                <span>{(selectedCountry as { cioc: string }).cioc}</span>
                             </p>
                             {
                                 stateCountry === true ? (
@@ -52,12 +59,26 @@ const CustomInputPhone: FunctionComponent<Props> = ({ stateAxios }) => {
                     )
                 }
             </div>
-            <div className="w-full">
+            <div className="w-3/5 flex flex-row relative">
+                <span
+                    className="border-none outline-none text-sm bg-background rounded-s pl-4 py-2"
+                >
+                    {(selectedCountry as { idd?: { root: string } }).idd?.root}
+                    {(selectedCountry as { idd?: { suffixes: string[] } }).idd?.suffixes?.[0]}
+                </span>
                 <input
                     type="text"
-                    className="border-none outline-none text-sm bg-background rounded w-full px-4 py-2"
-                    
+                    name="phone"
+                    placeholder=" xx xxx xx"
+                    value={field.value}
+                    onChange={onChange}
+                    className="border-none outline-none text-sm bg-background rounded w-full pr-4 py-2"
                 />
+                {
+                    field.errorMessage !== '' && (
+                        <p className="px-1 pt-[1px] text-xs text-red-500 absolute bottom-[-16px]">{field.errorMessage}</p>
+                    )
+                }
             </div>
             {
                 stateAxios.data && (
@@ -75,12 +96,13 @@ const CustomInputPhone: FunctionComponent<Props> = ({ stateAxios }) => {
                             />
                             <div className="h-40 px-4 overflow-y-auto overflow-x-hidden">
                                 {
-                                    allCountry.map(country => (
+                                    allCountry.map((country, index) => (
                                         <motion.div
+                                            key={index}
                                             variants={variantsDestinationChild}
                                             animate={stateCountry ? 'visible' : 'hidden'}
                                             className="flex flex-row py-1 items-center justify-center cursor-pointer"
-                                            onClick={() => { setSelectedCoundtry(country), setStateCountry(!stateCountry) }}
+                                            onClick={() => { setSelectedCountry(country), setStateCountry(!stateCountry) }}
                                         >
                                             <span>{(country as { flag: string }).flag}</span>
                                             <p className="text-sm w-full px-2">{((country as { name: object }).name as { common: string }).common}</p>

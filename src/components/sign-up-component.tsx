@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import CustomInput from "./form/custom-input";
 import CustomButton from "./custom-button";
 import { NavLink } from "react-router-dom";
@@ -6,37 +6,46 @@ import { useEmailValidation } from "../hooks/useEmailValidation";
 import { useNameValidation } from "../hooks/useNameValidation";
 import { useAxiosCountry } from "../hooks/useAxiosCountry";
 import CustomInputPhone from "./form/custom-input-phone";
+import { UsePhoneValidation } from "../hooks/usePhoneValidation";
 
 export const SignUpForm: FunctionComponent = () => {
     const { emailField, handleEmailField } = useEmailValidation()
     const { nameField, handleNameField } = useNameValidation()
+    const { phoneField, handlePhoneField } = UsePhoneValidation()
     const { stateAxios, getCountry } = useAxiosCountry()
     useEffect(() => {
         getCountry()
     }, [])
 
+    const [selectedCountry, setSelectedCountry] = useState({})
+    const handleSelectedCountry = (country: object) => {
+        setSelectedCountry(country)
+    }
+
     return (
         <>
             <form className="mt-8 mx-4">
-             
                 <h1 className="text-xl font-bold text-center text-secondary mb-6" >S'inscrire: </h1>
                 <CustomInput
                     type="email"
                     placeholder="Email@example.com"
                     name='email'
-                    value={emailField.value}
                     onChange={handleEmailField}
-                    errorMessage={emailField.errorMessage}
+                    field={emailField}
                 />
                 <CustomInput
                     type="text"
                     placeholder="Nom et prénom(s)"
                     name="name"
-                    value={nameField.value}
                     onChange={handleNameField}
-                    errorMessage={nameField.errorMessage}
+                    field={nameField}
                 />
-                <CustomInputPhone stateAxios={stateAxios} />
+                <CustomInputPhone
+                    stateAxios={stateAxios}
+                    handleSelectedCountry={handleSelectedCountry}
+                    onChange={(e) => handlePhoneField(selectedCountry, e)}
+                    field={phoneField}
+                />
                 <CustomButton text="Valider" />
             </form>
             <div className="w-full mb-4 mt-4 flex flex-row items-center justify-center">
