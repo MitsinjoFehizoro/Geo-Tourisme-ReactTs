@@ -10,6 +10,7 @@ import gesier from '../assets/images/Chute de la lylie et geyser/gesier2.jpg'
 import { useLink } from "../hooks/useLink";
 import { useHeightNav } from "../hooks/useHeightNav";
 import { variantsDestination, variantsDestinationChild } from "../styles/animations/accueil-variants";
+import { useAuth } from "../hooks/useAuth";
 
 const Accueil: FunctionComponent = () => {
     const [scrollY, setScrollY] = useState<number>(0)
@@ -58,7 +59,7 @@ const Accueil: FunctionComponent = () => {
     }, [heightSection, heightDiv, scrollY, heightNav])
 
     const { links, toggleLinkActif } = useLink()
-
+    
     return (
         <motion.section
             viewport={{ amount: .8 }}

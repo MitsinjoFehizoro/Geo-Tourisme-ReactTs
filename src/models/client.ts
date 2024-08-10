@@ -3,16 +3,16 @@ export class Client {
     email: string
     phone: string
     name: string
-    created_at: Date
-    updated_at: Date
+    created_at: string
+    updated_at: string
 
     constructor(
         id: string,
         email: string,
         phone: string,
         name: string,
-        created_at: Date,
-        updated_at: Date
+        created_at: string,
+        updated_at: string
     ) {
         this.id = id
         this.email = email

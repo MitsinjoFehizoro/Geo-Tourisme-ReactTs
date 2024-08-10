@@ -11,15 +11,15 @@ import { AuthContextProvider } from './hooks/useAuth.tsx'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AuthContextProvider>
-      <ToastContextProvider>
-        <LinkContextProvider>
-          <HeightNavContextProvider>
-            <OrganisationChoiceContextProvider>
+      <LinkContextProvider>
+        <HeightNavContextProvider>
+          <OrganisationChoiceContextProvider>
+            <ToastContextProvider>
               <App />
-            </OrganisationChoiceContextProvider>
-          </HeightNavContextProvider>
-        </LinkContextProvider>
-      </ToastContextProvider>
+            </ToastContextProvider>
+          </OrganisationChoiceContextProvider>
+        </HeightNavContextProvider>
+      </LinkContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,
 )

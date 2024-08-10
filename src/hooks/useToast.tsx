@@ -17,16 +17,10 @@ export const useToast = () => {
     const { toasts, setToasts } = useContext(ToastContext)
     const addToast = (toast: toast) => {
         setToasts([...toasts, toast])
-    }
-    useEffect(() => {
-        const removeToast = setTimeout(() => {
+        setTimeout(() => {
             setToasts([]);
         }, 5000);
-        return () => {
-            clearTimeout(removeToast);
-        };
-    }, [toasts]);
-
+    }
     return {
         toasts,
         addToast

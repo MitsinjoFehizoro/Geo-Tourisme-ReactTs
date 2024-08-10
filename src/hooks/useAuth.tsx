@@ -27,30 +27,33 @@ export const useAuth = () => {
     const { addToast } = useToast()
     const authentication = async () => {
         try {
+            
             setStateAuth({ isLoading: true, error: null })
-            const { data: dataUser, error: errorGetUser } = await supabase.auth.getUser()
-            if (errorGetUser) {
-                console.log(errorGetUser)
-                setIsAuth(false)
+            const { data: dataSession, error: errorSession } = await supabase.auth.getSession()
+            if (errorSession) {
+                console.log(errorSession);
                 return
             }
-            if (dataUser) {
-                const { data: client, error: errorClient } = await supabase
-                    .from('clients')
-                    .select('*')
-                    .eq('email', (dataUser as { email?: string }).email)
-                if (errorClient) {
-                    console.log(errorGetUser)
-                    setIsAuth(false)
-                    return
-                }
-                if (client instanceof Client) {
-                    setIsAuth(true)
-                    setClientAuth(client)
-                    addToast({ toast: `👋 Bonjour ${client.name[0]}, passez un bon moment sur notre site.`, isSucces: true })
-                } else {
-                    console.log('errorrrr');
-                }
+            if (dataSession.session === null) {
+                console.log(dataSession.session);
+                return
+            }
+            const { data: client, error: errorClient } = await supabase
+                .from('clients')
+                .select('*')
+                .eq('email', dataSession.session.user.email)
+            if (errorClient) {
+                console.log(errorClient)
+                setIsAuth(false)
+                setStateAuth({ isLoading: false, error: errorClient })
+                return
+            }
+            if (client && client.length > 0) {
+                setIsAuth(true)
+                setClientAuth(client[0])
+                addToast({ toast: `👋 Bonjour ${client[0].name}, passez un bon moment sur notre site.`, isSucces: true })
+            } else {
+                console.error("erreur type client[0]")
             }
         } catch (error) {
             if (error instanceof Error)
@@ -63,9 +66,7 @@ export const useAuth = () => {
     return {
         stateAuth,
         isAuth,
-        // loginUser,
-        // signUpUser,
-        // logoutUser
+        clientAuth
     }
 }
 

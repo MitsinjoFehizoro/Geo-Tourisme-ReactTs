@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { useLink } from "../hooks/useLink";
 import { useHeightNav } from "../hooks/useHeightNav";
+import { useAuth } from "../hooks/useAuth";
 
 const NavigationBar: FunctionComponent = () => {
     const refHeader = useRef<HTMLDivElement>(null)
@@ -29,7 +30,7 @@ const NavigationBar: FunctionComponent = () => {
     })
 
     const { links, linkActif, toggleLinkActif, toggleScrollActif } = useLink()
-
+    const { isAuth } = useAuth()
     return (
         <header className="flex flex-row justify-around" ref={refHeader}>
             <motion.div className="progress" style={{ scaleX: animateScaleX }}></motion.div>

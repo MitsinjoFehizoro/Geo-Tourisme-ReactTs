@@ -9,6 +9,7 @@ import { i_slide, p_indiceSlideActive, p_indiceSlideInactive } from "../styles/b
 import { variantsImage_1, variantsImage_2, variantsImage_3, variantsParentSlide, variantsSlide, variants_rond, variants_rond_creux } from "../styles/animations/tourisme-variants";
 
 const Tourisme: FunctionComponent = () => {
+
     const slideTourisme = [
         {
             title: 'TOURISME',
@@ -22,7 +23,6 @@ const Tourisme: FunctionComponent = () => {
 
     const porteRef = useRef<HTMLDivElement>(null);
     const [widthPorte, setWidthPorte] = useState<number>(0);
-
     const handleWidthPorte = () => {
         if (porteRef.current) {
             setWidthPorte(porteRef.current.offsetWidth);
