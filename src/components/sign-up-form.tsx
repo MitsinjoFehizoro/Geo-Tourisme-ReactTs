@@ -58,7 +58,7 @@ const SignUpForm: FunctionComponent = () => {
             </form>
             <div className="w-full mb-4 mt-4 flex flex-row items-center justify-center">
                 <div className="w-1/3 h-[1px] bg-background" />
-                <NavLink to='/' className='mx-2 text-sm hover:text-primary'>Se connecter</NavLink>
+                <NavLink to='/login' className='mx-2 text-sm hover:text-primary'>Se connecter</NavLink>
                 <div className="w-1/3 h-[1px] bg-background" />
             </div>
         </>

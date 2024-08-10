@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useGetDestinationById } from "../supabase/destinations-supabase";
 import DestinationPresentation from "../components/destination-presentation";
 import ProgramDestination from "../components/program-destination";
+import NavigationBar from "../components/navigation-bar";
 
 const DetailDestination: FunctionComponent = () => {
     const { id } = useParams<{ id: string }>()
@@ -14,6 +15,7 @@ const DetailDestination: FunctionComponent = () => {
     }, [])
     return (
         <>
+        <NavigationBar />
             <DestinationPresentation stateGetDestination={stateGetDestination} destination={destination} />
             {
                 destination && (

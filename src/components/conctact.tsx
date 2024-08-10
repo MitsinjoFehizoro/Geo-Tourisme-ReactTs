@@ -20,7 +20,7 @@ const Contact: FunctionComponent = () => {
             </div>
             <div className="absolute top-14 w-full h-96 flex flex-row justify-between px-14">
                 <InfoCard />
-                <ContactCard />
+                {/* <ContactCard /> */}
             </div>
             <footer className="w-full pt-7 pb-5 flex flex-row items-center justify-around text-background absolute bottom-0 bg-secondary/80">
                 <p className="text-sm"><i className="fa fa-copyright mr-2"></i>Powered by MitsinjoFehizoro - 2024</p>

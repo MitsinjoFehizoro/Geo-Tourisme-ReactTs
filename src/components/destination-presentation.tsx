@@ -1,15 +1,16 @@
 import { FunctionComponent, useState } from "react"
 import { useHeightNav } from "../hooks/useHeightNav"
-import { destination, stateSupabase } from "../tools/type"
+import { stateSupabase } from "../tools/type"
 import '../styles/components/_destination-presentation.scss'
 import DetailDestinationCard from "./card/detail-destination-card"
 import LoadingDetailDestinationCard from "./loading/loading-detail-destination-card"
 import OrganistaionDestinationCard from "./card/organisation-destination-card"
 import { i_slide } from "../styles/base/tailwind"
 import { AnimatePresence } from "framer-motion"
+import { Destination } from "../models/destination"
 
 type Props = {
-    destination: destination | undefined
+    destination: Destination | undefined
     stateGetDestination: stateSupabase
 }
 const DestinationPresentation: FunctionComponent<Props> = ({ destination, stateGetDestination }) => {

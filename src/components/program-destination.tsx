@@ -13,7 +13,7 @@ const ProgramDestination: FunctionComponent<Props> = ({ destination }) => {
         <section className="bg-white my-8 flex flex-row justify-around">
             <div className="w-96"><Program destination={destination} /></div>
             <div className="w-96"><Suggestion destination={destination} /></div>
-            <div className="w-96"><Reservation destination={destination}/></div>
+            {/* <div className="w-96"><Reservation destination={destination}/></div> */}
         </section>
     )
 }

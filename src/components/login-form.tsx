@@ -30,7 +30,7 @@ const LoginForm: FunctionComponent = () => {
             </form>
             <div className="w-full mb-4 mt-4 flex flex-row items-center justify-center">
                 <div className="w-1/3 h-[1px] bg-background" />
-                <NavLink to='/' className='mx-2 text-sm hover:text-primary'>Créer un compte</NavLink>
+                <NavLink to='/signup' className='mx-2 text-sm hover:text-primary'>Créer un compte</NavLink>
                 <div className="w-1/3 h-[1px] bg-background" />
             </div>
         </>

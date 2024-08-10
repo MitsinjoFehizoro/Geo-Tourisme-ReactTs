@@ -1,12 +1,12 @@
 import { FunctionComponent } from "react";
 import TitleProgramCard from "./card/title-program-card";
 import CustomTextarea from "./form/custom-textarea";
-import { destination } from "../tools/type";
 import CustomButton from "./custom-button";
 import StandardCard from "./card/standard-card";
+import { Destination } from "../models/destination";
 
 type Props = {
-    destination: destination
+    destination: Destination
 }
 const Suggestion: FunctionComponent<Props> = ({ destination }) => {
     // const { organisationChoice } = useChoiceOrganisation()
