@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { field, stateAxios } from "../../tools/type";
 import { motion } from "framer-motion";
 import { variantsCountry, variantsDestinationChild } from "../../styles/animations/accueil-variants";
+import LoadingSpin from "../loading/loading-spin";
 
 type Props = {
     stateAxios: stateAxios,
@@ -33,10 +34,7 @@ const CustomInputPhone: FunctionComponent<Props> = ({ stateAxios, handleSelected
             <div className="w-2/5 px-4 py-2 mr-2 text-sm bg-background rounded flex flex-row items-center justify-center">
                 {
                     stateAxios.isLoading && (
-                        <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-                        </svg>
+                        <LoadingSpin />
                     )
                 }
                 {

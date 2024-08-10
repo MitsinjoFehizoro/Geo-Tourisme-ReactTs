@@ -6,6 +6,7 @@ import { motion, useScroll, useSpring } from 'framer-motion'
 import { useLink } from "../hooks/useLink";
 import { useHeightNav } from "../hooks/useHeightNav";
 import { useAuth } from "../hooks/useAuth";
+import LoadingSpin from "./loading/loading-spin";
 
 const NavigationBar: FunctionComponent = () => {
     const refHeader = useRef<HTMLDivElement>(null)
@@ -31,7 +32,7 @@ const NavigationBar: FunctionComponent = () => {
 
     const { links, linkActif, toggleLinkActif, toggleScrollActif } = useLink()
 
-    const { isAuth,stateAuth ,clientAuth, logout } = useAuth()
+    const { isAuth, stateAuth, clientAuth, logout } = useAuth()
     const [stateProfil, setStateProfil] = useState(false)
     const { heightNav } = useHeightNav()
     return (
@@ -76,9 +77,22 @@ const NavigationBar: FunctionComponent = () => {
                                 <i className="fa-regular fa-address-card text-lg"></i>
                                 <span className='px-2 text-sm'>Mon Profil</span>
                             </NavLink>
-                            <p className="w-48 flex flex-row items-center py-2 px-4 rounded-md bg-white cursor-pointer border-2 border-white hover:shadow transition ease-in duration-100">
-                                <i className="fa fa-right-from-bracket text-lg"></i>
-                                <span className='px-2 text-sm'>Se deconnecter</span>
+                            <p
+                                onClick={logout}
+                                className="w-48 flex flex-row items-center py-2 px-4 rounded-md bg-white cursor-pointer border-2 border-white hover:shadow transition ease-in duration-100"
+                            >
+                                {
+                                    stateAuth.isLoading  ? (
+                                        <div className="w-full flex justify-center py-1">
+                                            <LoadingSpin />
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <i className="fa fa-right-from-bracket text-lg"></i>
+                                            <span className='px-2 text-sm'>Se deconnecter</span>
+                                        </>
+                                    )
+                                }
                             </p>
                         </div>
                     </div>
