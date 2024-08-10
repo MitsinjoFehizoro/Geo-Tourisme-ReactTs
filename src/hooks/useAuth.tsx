@@ -77,7 +77,7 @@ export const useAuth = () => {
                 setClientAuth(client[0])
                 setStateAuth({ isLoading: false, error: null })
                 console.log('tokony hisy toast')
-                addToast({ toast: `👋 Bonjour ${client[0].name.split(' ').at(-1)}, passez un bon moment sur notre site.`, isSucces: true })
+                addToast({ toast: `👋 Bienvenue ${client[0].name.split(' ').at(-1)}! Profitez-en bien.`, isSucces: true })
             } else {
                 console.error("erreur type client[0]")
             }
@@ -172,13 +172,32 @@ export const useAuth = () => {
                 handleErrorSupabase(error, addToast, setStateAuth)
         }
     }
+
+    const logout = async () => {
+        try {
+            setStateAuth({ isLoading: true, error: null })
+            const { error: errorLogout } = await supabase.auth.signOut()
+            if (errorLogout) {
+                handleErrorSupabase(errorLogout, addToast, setStateAuth)
+            } else {
+                setIsAuth(false)
+                setStateAuth({ isLoading: false, error: null })
+                setClientAuth(null)
+                addToast({ toast: '🌟 Merci beaucoup pour votre visite ! À la prochaine !', isSucces: true })
+            }
+        } catch (error) {
+            if (error instanceof Error)
+                handleErrorSupabase(error, addToast, setStateAuth)
+        }
+    }
     return {
         stateAuth,
         isAuth,
         clientAuth,
         authentication,
         loginUser,
-        signUpUser
+        signUpUser,
+        logout
     }
 }
 
