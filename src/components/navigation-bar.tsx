@@ -30,7 +30,6 @@ const NavigationBar: FunctionComponent = () => {
     })
 
     const { links, linkActif, toggleLinkActif, toggleScrollActif } = useLink()
-    const { isAuth } = useAuth()
     return (
         <header className="flex flex-row justify-around" ref={refHeader}>
             <motion.div className="progress" style={{ scaleX: animateScaleX }}></motion.div>

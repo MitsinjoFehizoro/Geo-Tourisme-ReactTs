@@ -4,6 +4,7 @@ import { supabase } from "../supabase/supabase-client"
 import { Client } from "../models/client"
 import { useToast } from "./useToast"
 import { handleErrorSupabase } from "../tools/handle-error"
+import { useLocation, useNavigate } from "react-router-dom"
 
 
 interface authContext {
@@ -12,7 +13,7 @@ interface authContext {
     isAuth: boolean,
     setIsAuth: (b: boolean) => void
     clientAuth: Client | null
-    setClientAuth: (c: Client) => void
+    setClientAuth: (c: Client | null) => void
 }
 const AuthContext = createContext<authContext>({
     stateAuth: { isLoading: false, error: null },
@@ -25,17 +26,35 @@ const AuthContext = createContext<authContext>({
 export const useAuth = () => {
     const { stateAuth, setStateAuth, isAuth, setIsAuth, clientAuth, setClientAuth } = useContext(AuthContext)
     const { addToast } = useToast()
+
+    const location = useLocation()
+    const navigate = useNavigate()
     const authentication = async () => {
         try {
-            
             setStateAuth({ isLoading: true, error: null })
+            const hash = location.hash
+            if (hash) {
+                const params = new URLSearchParams(hash.substring(1))
+                if (params.get('error_code') === '403') {
+                    navigate('/')
+                    addToast({ toast: '🔒Votre lien a expiré. Veuillez vous reconnecter pour obtenir un nouveau.', isSucces: false })
+                    setStateAuth({ isLoading: false, error: null })
+                    setIsAuth(false)
+                    setClientAuth(null)
+                }
+                return
+            }
+
             const { data: dataSession, error: errorSession } = await supabase.auth.getSession()
             if (errorSession) {
-                console.log(errorSession);
+                handleErrorSupabase(errorSession, addToast, setStateAuth)
+                setIsAuth(false)
+                setClientAuth(null)
                 return
             }
             if (dataSession.session === null) {
-                console.log(dataSession.session);
+                setIsAuth(false)
+                setClientAuth(null)
                 return
             }
             const { data: client, error: errorClient } = await supabase
@@ -43,15 +62,15 @@ export const useAuth = () => {
                 .select('*')
                 .eq('email', dataSession.session.user.email)
             if (errorClient) {
-                console.log(errorClient)
+                handleErrorSupabase(errorClient, addToast, setStateAuth)
                 setIsAuth(false)
-                setStateAuth({ isLoading: false, error: errorClient })
+                setClientAuth(null)
                 return
             }
             if (client && client.length > 0) {
                 setIsAuth(true)
                 setClientAuth(client[0])
-                addToast({ toast: `👋 Bonjour ${client[0].name}, passez un bon moment sur notre site.`, isSucces: true })
+                addToast({ toast: `👋 Bonjour ${client[0].name.split(' ').at(-1)}, passez un bon moment sur notre site.`, isSucces: true })
             } else {
                 console.error("erreur type client[0]")
             }
@@ -60,13 +79,11 @@ export const useAuth = () => {
                 handleErrorSupabase(error, addToast, setStateAuth)
         }
     }
-    useEffect(() => {
-        authentication()
-    }, [])
     return {
         stateAuth,
         isAuth,
-        clientAuth
+        clientAuth,
+        authentication
     }
 }
 
