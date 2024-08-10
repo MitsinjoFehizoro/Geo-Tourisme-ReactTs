@@ -1,6 +1,9 @@
-import { destination, stateSupabase } from './../tools/type';
+import {  stateSupabase } from './../tools/type';
 import { useState } from "react"
 import { supabase } from "./supabase-client"
+import { handleErrorSupabase } from '../tools/handle-error';
+import { useToast } from '../hooks/useToast';
+import { Destination } from '../models/destination';
 
 export const useGetDestinations = () => {
     const [stateGetDestination, setStateGetDestination] = useState<stateSupabase>(
@@ -9,26 +12,25 @@ export const useGetDestinations = () => {
             error: null
         }
     )
-    const [tourismes, setTourismes] = useState<destination[]>()
-    const [geo, setGeo] = useState<destination[]>()
+    const [tourismes, setTourismes] = useState<Destination[]>()
+    const [geo, setGeo] = useState<Destination[]>()
 
+    const { addToast } = useToast()
     const getDestinations = async () => {
         try {
             setStateGetDestination({ ...stateGetDestination, isLoading: true })
             const { data, error } = await supabase
                 .from('destinations')
                 .select('*')
-            if(error){
+            if (error) {
                 console.error(error)
             }
             setTourismes(data?.filter(destination => destination.type === 'tourisme'))
             setGeo(data?.filter(destination => destination.type === 'geo'))
             setStateGetDestination({ ...stateGetDestination, isLoading: false })
         } catch (error) {
-            let errorMessage = "Un erreur se produit !"
-            if (error instanceof Error) errorMessage = error.message
-            setStateGetDestination({ ...stateGetDestination, isLoading: false, error: errorMessage })
-
+            if (error instanceof Error)
+                handleErrorSupabase(error, addToast, setStateGetDestination)
         }
     }
 
@@ -47,7 +49,8 @@ export const useGetDestinationById = () => {
             error: null
         }
     )
-    const [destination, setDestination] = useState<destination>()
+    const { addToast } = useToast()
+    const [destination, setDestination] = useState<Destination>()
     const getDestination = async (id: string) => {
         try {
             setStateGetDestination({ ...stateGetDestination, isLoading: true })
@@ -59,9 +62,8 @@ export const useGetDestinationById = () => {
             setDestination(data)
             setStateGetDestination({ ...stateGetDestination, isLoading: false })
         } catch (error) {
-            let errorMessage = "Un erreur se produit !"
-            if (error instanceof Error) errorMessage = error.message
-            setStateGetDestination({ ...stateGetDestination, isLoading: false, error: errorMessage })
+            if (error instanceof Error)
+                handleErrorSupabase(error, addToast, setStateGetDestination)
         }
     }
 

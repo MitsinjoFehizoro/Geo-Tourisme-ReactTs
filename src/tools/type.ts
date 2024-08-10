@@ -1,60 +1,13 @@
+import { AuthError, PostgrestError } from "@supabase/supabase-js"
+
 export type stateSupabase = {
     isLoading: boolean
-    error?: string | null
+    error: Error | AuthError | PostgrestError | null
 }
+
 export type toast = {
     toast: string,
     isSucces: boolean
-}
-export type destination = {
-    id: string,
-    title: string,
-    description: string,
-    history: string,
-    galeries: string[],
-    localisation: string,
-    type: string,
-    organisations: organisation[],
-    created_at: Date,
-    updated_at: Date
-}
-
-export type organisation = {
-    id: string,
-    start: Date,
-    end: Date,
-    local_price: number,
-    stranger_price: number,
-    programs: program[],
-    destination: destination,
-    created_at: Date,
-    updated_at: Date
-}
-
-export type program = {
-    id: string,
-    date: Date,
-    title: string,
-    description: string,
-    galerie: string,
-    created_at: Date,
-    updated_at: Date
-}
-
-export type client = {
-    id: string,
-    email: string,
-    phone: string,
-    name: string,
-    created_at: Date,
-    updated_at: Date
-}
-
-export type user = {
-    id: string,
-    email: string,
-    created_at: Date,
-    updated_at: Date
 }
 
 export type field = {

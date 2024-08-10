@@ -1,9 +1,8 @@
-import { handleErrorCatch, handleErrorSupabase } from '../tools/handle-error';
+import { handleErrorSupabase } from '../tools/handle-error';
 import { useState } from "react"
 import { field, stateSupabase } from "../tools/type"
 import { useToast } from "../hooks/useToast"
 import { supabase } from "./supabase-client"
-import { AuthRetryableFetchError } from '@supabase/supabase-js';
 
 export const useSignUpUser = () => {
     const [stateSignUpUser, setStateSignUpUser] = useState<stateSupabase>({
@@ -50,7 +49,8 @@ export const useSignUpUser = () => {
                 setStateSignUpUser({ isLoading: false, error: null })
             }
         } catch (error) {
-            handleErrorCatch(error, addToast, setStateSignUpUser)
+            if (error instanceof Error)
+                handleErrorSupabase(error, addToast, setStateSignUpUser)
         }
     }
     return {
@@ -93,7 +93,7 @@ export const useLoginUser = () => {
             if (errorAuth) {
                 if (errorAuth.status === 429) {
                     addToast({ toast: 'Nous avons déjà envoyé un lien de connexion à votre email. Veuillez consulter et suivre les instructions.', isSucces: false })
-                    setStateLoginUser({ isLoading: false, error: errorAuth.message })
+                    setStateLoginUser({ isLoading: false, error: errorAuth })
                 } else {
                     handleErrorSupabase(errorAuth, addToast, setStateLoginUser)
                 }
@@ -103,7 +103,8 @@ export const useLoginUser = () => {
             }
 
         } catch (error) {
-            handleErrorCatch(error, addToast, setStateLoginUser)
+            if (error instanceof Error)
+                handleErrorSupabase(error, addToast, setStateLoginUser)
         }
     }
     return {
