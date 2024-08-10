@@ -9,10 +9,6 @@ import Separation from "../components/separation";
 import NavigationBar from "../components/navigation-bar";
 import { useAuth } from "../hooks/useAuth";
 const Home: FunctionComponent = () => {
-    const { authentication } = useAuth()
-    useEffect(() => {
-        authentication()
-    }, [])
     return (
         <>
             <NavigationBar />

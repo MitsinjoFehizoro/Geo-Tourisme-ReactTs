@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { useLink } from "../hooks/useLink";
 import { useHeightNav } from "../hooks/useHeightNav";
-import { useAuth } from "../hooks/useAuth";
 
 const NavigationBar: FunctionComponent = () => {
     const refHeader = useRef<HTMLDivElement>(null)
@@ -46,7 +45,8 @@ const NavigationBar: FunctionComponent = () => {
                 }
             </nav>
             <div className="flex items-center">
-                <NavLink to='/' className="login px-6 py-2">se connecter</NavLink>
+                <NavLink to='/login' className='text-sm rounded-md px-4 py-2  transition ease-in duration-200 hover:bg-secondary hover:text-background mr-1'>Se connecter</NavLink>
+                <NavLink to='/signup' className="text-sm text-background rounded-md bg-primary px-6 py-2 transition ease-in duration-200 hover:bg-secondary">S'inscrire</NavLink>
             </div>
         </header >
 

@@ -3,11 +3,11 @@ import { useEmailValidation } from "../hooks/useEmailValidation";
 import CustomButton from "./custom-button";
 import { NavLink } from "react-router-dom";
 import CustomInput from "./form/custom-input";
-import { useLoginUser } from "../supabase/users-supabase";
+import { useAuth } from "../hooks/useAuth";
 
 const LoginForm: FunctionComponent = () => {
     const { emailField, handleEmailField } = useEmailValidation()
-    const { stateLoginUser, loginUser } = useLoginUser()
+    const { stateAuth, loginUser } = useAuth()
     const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
         loginUser(emailField)
@@ -24,7 +24,7 @@ const LoginForm: FunctionComponent = () => {
                     field={emailField}
                 />
                 <div className="mt-[-8px]">
-                    <CustomButton isLoading={stateLoginUser.isLoading} text="Connexion" />
+                    <CustomButton isLoading={stateAuth.isLoading} text="Connexion" />
                 </div>
 
             </form>

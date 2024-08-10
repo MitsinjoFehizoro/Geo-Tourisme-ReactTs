@@ -7,7 +7,7 @@ import { useNameValidation } from "../hooks/useNameValidation";
 import { useAxiosCountry } from "../api/useAxiosCountry";
 import CustomInputPhone from "./form/custom-input-phone";
 import { UsePhoneValidation } from "../hooks/usePhoneValidation";
-import { useSignUpUser } from "../supabase/users-supabase";
+import { useAuth } from "../hooks/useAuth";
 
 const SignUpForm: FunctionComponent = () => {
     const { emailField, handleEmailField } = useEmailValidation()
@@ -23,7 +23,7 @@ const SignUpForm: FunctionComponent = () => {
         setSelectedCountry(country)
     }
 
-    const { stateSignUpUser, signUpUser } = useSignUpUser()
+    const { stateAuth, signUpUser } = useAuth()
     const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
         signUpUser(emailField, nameField, phoneField)
@@ -54,7 +54,7 @@ const SignUpForm: FunctionComponent = () => {
                     onChange={(e) => handlePhoneField(selectedCountry, e)}
                     field={phoneField}
                 />
-                <CustomButton isLoading={stateSignUpUser.isLoading} text="Valider" />
+                <CustomButton isLoading={stateAuth.isLoading} text="Valider" />
             </form>
             <div className="w-full mb-4 mt-4 flex flex-row items-center justify-center">
                 <div className="w-1/3 h-[1px] bg-background" />
