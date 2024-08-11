@@ -1,17 +1,18 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { destination, organisation } from "../../tools/type";
 import { useChoiceOrganisation } from "../../hooks/useChoiceOrganisation";
 import { formatDateMoyen } from "../../tools/format-date";
 import { variantsDestination, variantsDestinationChild } from "../../styles/animations/accueil-variants";
 import { motion } from "framer-motion";
+import { Organisation } from "../../models/organisation";
+import { Destination } from "../../models/destination";
 
 type Props = {
     title: string
-    destination: destination
+    destination: Destination
 }
 const TitleProgramCard: FunctionComponent<Props> = ({ title, destination }) => {
     const [stateDateDispo, setDateDispo] = useState<boolean>(false)
-    const handleStateDateDispo = (organisation: organisation) => {
+    const handleStateDateDispo = (organisation: Organisation) => {
         setDateDispo(prevState => !prevState)
         handleOrganisationChoice(organisation)
     }
@@ -21,9 +22,9 @@ const TitleProgramCard: FunctionComponent<Props> = ({ title, destination }) => {
     }, [])
     return (
         <div className="shadow-sm flex flex-col justify-center border-l-4 border-primary py-4 mb-2">
-            <h1 className="text-secondary text-lg uppercase px-4">{title}</h1>
+            <h1 className="text-secondary uppercase px-4">{title}</h1>
             <div className="relative">
-                <div className="flex flex-row items-center justify-between px-4 cursor-pointer" onClick={() => setDateDispo(prevState => !prevState)}>
+                <div className="flex flex-row items-center justify-between px-4 cursor-pointer text-sm mt-1" onClick={() => setDateDispo(prevState => !prevState)}>
                     {
                         organisationChoice && (
                             <p><span>{formatDateMoyen(organisationChoice.start)}</span>&nbsp;-&nbsp;<span>{formatDateMoyen(organisationChoice.end)}</span></p>
@@ -44,12 +45,12 @@ const TitleProgramCard: FunctionComponent<Props> = ({ title, destination }) => {
                         className="bg-white rounded-md py-4 px-2 mr-2 shadow-2xl"
                     >
                         {
-                            destination.organisations.map(organisation => (
+                            destination.organisations.map((organisation: Organisation) => (
                                 <motion.p
                                     key={organisation.id}
-                                    className="flex flex-row items-center justify-center px-4 w-full h-9 bg-background/50 rounded mb-1 cursor-pointer"
+                                    className="flex flex-row items-center justify-center px-4 w-full h-9 bg-background/50 rounded mb-1 cursor-pointer text-sm"
                                     variants={variantsDestinationChild}
-                                    whileHover={{ scale: 1.08 }}
+                                    whileHover={{ scale: 1.02 }}
                                     onClick={() => handleStateDateDispo(organisation)}
                                 >
                                     <span>{formatDateMoyen(organisation.start)}</span>&nbsp;-&nbsp;
