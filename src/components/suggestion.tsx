@@ -13,11 +13,11 @@ type Props = {
 }
 const Suggestion: FunctionComponent<Props> = ({ destination }) => {
     const { organisationChoice } = useChoiceOrganisation()
-    const { suggestionField, handleSuggestionField } = useSuggesionValidation()
+    const { suggestionField, handleSuggestionField, clearField } = useSuggesionValidation()
     const { stateCreateSuggestion, createSuggestion } = useCreateSuggestion()
     const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-        createSuggestion(suggestionField, organisationChoice)
+        createSuggestion(suggestionField, organisationChoice, clearField)
     }
     return (
         <div className="w-full">

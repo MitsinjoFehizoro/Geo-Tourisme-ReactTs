@@ -2,7 +2,7 @@ import { useState } from "react"
 import { field } from "../tools/type"
 
 export const useSuggesionValidation = () => {
-    const [suggestionField, setSuggestionField]  = useState<field>({
+    const [suggestionField, setSuggestionField] = useState<field>({
         value: '',
         isValid: false,
         errorMessage: ''
@@ -15,8 +15,16 @@ export const useSuggesionValidation = () => {
             setSuggestionField({ value: e.target.value, isValid: false, errorMessage: errorMessage })
         }
     }
+    const clearField = () => {
+        setSuggestionField({
+            value: '',
+            isValid: false,
+            errorMessage: ''
+        })
+    }
     return {
         suggestionField,
-        handleSuggestionField
+        handleSuggestionField,
+        clearField
     }
 }
