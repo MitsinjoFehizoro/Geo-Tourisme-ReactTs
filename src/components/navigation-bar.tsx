@@ -73,13 +73,13 @@ const NavigationBar: FunctionComponent = () => {
                             }
                         </div>
                         <div className={`${stateProfil ? 'block' : 'hidden'} absolute bg-background shadow rounded-b p-4`} style={{ top: heightNav - 5 }}>
-                            <NavLink to='' className="flex flex-row items-center mb-1 py-2 px-4 rounded bg-white border-2 border-white hover:shadow transition ease-in duration-100">
+                            <NavLink to='' className="flex flex-row items-center mb-1 py-1 px-4 rounded bg-white border-2 border-white hover:shadow transition ease-in duration-100">
                                 <i className="fa-regular fa-address-card text-lg"></i>
                                 <span className='px-2 text-sm'>Mon Profil</span>
                             </NavLink>
                             <p
                                 onClick={logout}
-                                className="w-48 flex flex-row items-center py-2 px-4 rounded-md bg-white cursor-pointer border-2 border-white hover:shadow transition ease-in duration-100"
+                                className="w-48 flex flex-row items-center py-1 px-4 rounded-md bg-white cursor-pointer border-2 border-white hover:shadow transition ease-in duration-100"
                             >
                                 {
                                     stateAuth.isLoading  ? (
@@ -89,7 +89,7 @@ const NavigationBar: FunctionComponent = () => {
                                     ) : (
                                         <>
                                             <i className="fa fa-right-from-bracket text-lg"></i>
-                                            <span className='px-2 text-sm'>Se deconnecter</span>
+                                            <span className='px-2 text-sm'>Se déconnecter</span>
                                         </>
                                     )
                                 }

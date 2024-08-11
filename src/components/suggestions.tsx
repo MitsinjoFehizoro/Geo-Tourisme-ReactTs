@@ -31,32 +31,37 @@ const Suggestions: FunctionComponent<Props> = ({ destination }) => {
         <div className="w-full">
             <TitleProgramCard title="Votre suggestion pour le :" destination={destination} />
             <StandardCard>
-                <form action="" onSubmit={handleSubmit}>
-                    <CustomTextarea
-                        field={suggestionField}
-                        onChange={handleSuggestionField}
-                        name="suggestion"
-                        placeholder="Votre suggestion..."
-                    />
-                    <CustomButton isLoading={stateCreateSuggestion.isLoading} text="Envoyer" />
-                </form>
+                {
+                    isAuth ? (
+                        <form action="" onSubmit={handleSubmit}>
+                            <CustomTextarea
+                                field={suggestionField}
+                                onChange={handleSuggestionField}
+                                name="suggestion"
+                                placeholder="Votre suggestion..."
+                            />
+                            <CustomButton isLoading={stateCreateSuggestion.isLoading} text="Envoyer" />
+                        </form>
+                    ) : (
+                        <p className="text-sm">🔓Veuillez vous connecter pour soumettre une suggestion.</p>
+                    )
+                }
             </StandardCard>
             <StandardCard>
                 {
-                    stateGetSuggestions.isLoading && (
+                    stateGetSuggestions.isLoading ? (
                         <>
                             <LoadingSuggesstionCard />
                             <LoadingSuggesstionCard />
                         </>
-                    )
-                }
-                {
-                    suggestions.length > 0 ? (
-                        suggestions.map((suggestion, index) =>
-                            <SuggesstionCard key={index} suggestion={suggestion} />
-                        )
                     ) : (
-                        <p className="text-sm text-center">💡Soyez le premier à partager votre idée.</p>
+                        suggestions.length > 0 ? (
+                            suggestions.map((suggestion, index) => (
+                                <SuggesstionCard key={index} suggestion={suggestion} />
+                            ))
+                        ) : (
+                            <p className="text-sm text-center">💡Soyez le premier à partager votre idée.</p>
+                        )
                     )
                 }
 

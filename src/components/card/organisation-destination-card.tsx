@@ -24,7 +24,7 @@ const OrganistaionDestinationCard: FunctionComponent<Props> = ({ organisations }
                 {
                     organisations.map(organisation => (
                         <motion.div
-                            whileHover={simpleMode ? {} : { scale: 1.02 }} key={organisation.id}
+                            whileHover={simpleMode ? {} : { scale: 1.05 }} key={organisation.id}
                             className="h-10 mb-2 flex flex-row items-center justify-center bg-background rounded cursor-pointer text-sm"
                             onClick={simpleMode ? () => { } : () => handleOrganisationChoice(organisation)}
                         >
