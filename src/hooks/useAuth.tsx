@@ -51,14 +51,12 @@ export const useAuth = () => {
                 handleErrorSupabase(errorSession, addToast, setStateAuth)
                 setIsAuth(false)
                 setClientAuth(null)
-                console.log('errorSession')
                 return
             }
             if (dataSession.session === null) {
                 setIsAuth(false)
                 setClientAuth(null)
                 setStateAuth({ isLoading: false, error: null })
-                console.log('dataSession')
                 return
             }
             const { data: client, error: errorClient } = await supabase
@@ -69,21 +67,18 @@ export const useAuth = () => {
                 handleErrorSupabase(errorClient, addToast, setStateAuth)
                 setIsAuth(false)
                 setClientAuth(null)
-                console.log('errorClient')
                 return
             }
             if (client && client.length > 0) {
                 setIsAuth(true)
                 setClientAuth(client[0])
                 setStateAuth({ isLoading: false, error: null })
-                console.log('tokony hisy toast')
                 addToast({ toast: `👋 Bienvenue ${client[0].name.split(' ').at(-1)}! Profitez-en bien.`, isSucces: true })
             } else {
                 console.error("erreur type client[0]")
             }
         } catch (error) {
-            if (error instanceof Error)
-                handleErrorSupabase(error, addToast, setStateAuth)
+                handleErrorSupabase(error as Error, addToast, setStateAuth)
         }
     }
 
@@ -124,8 +119,7 @@ export const useAuth = () => {
             }
 
         } catch (error) {
-            if (error instanceof Error)
-                handleErrorSupabase(error, addToast, setStateAuth)
+                handleErrorSupabase(error as Error, addToast, setStateAuth)
         }
     }
 
@@ -168,8 +162,7 @@ export const useAuth = () => {
                 setStateAuth({ isLoading: false, error: null })
             }
         } catch (error) {
-            if (error instanceof Error)
-                handleErrorSupabase(error, addToast, setStateAuth)
+                handleErrorSupabase(error as Error, addToast, setStateAuth)
         }
     }
 
@@ -186,8 +179,7 @@ export const useAuth = () => {
                 addToast({ toast: '🌟 Merci beaucoup pour votre visite ! À la prochaine !', isSucces: true })
             }
         } catch (error) {
-            if (error instanceof Error)
-                handleErrorSupabase(error, addToast, setStateAuth)
+                handleErrorSupabase(error as Error, addToast, setStateAuth)
         }
     }
     return {

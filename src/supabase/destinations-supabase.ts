@@ -31,8 +31,7 @@ export const useGetDestinations = () => {
             }
 
         } catch (error) {
-            if (error instanceof Error)
-                handleErrorSupabase(error, addToast, setStateGetDestination)
+                handleErrorSupabase(error as Error, addToast, setStateGetDestination)
         }
     }
 
@@ -69,8 +68,7 @@ export const useGetDestinationById = () => {
             }
 
         } catch (error) {
-            if (error instanceof Error)
-                handleErrorSupabase(error, addToast, setStateGetDestination)
+                handleErrorSupabase(error as Error, addToast, setStateGetDestination)
         }
     }
 

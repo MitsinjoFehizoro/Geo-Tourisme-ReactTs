@@ -3,8 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 const Root: FunctionComponent = () => {
-    const { authentication, clientAuth } = useAuth()
-    console.log(clientAuth);
+    const { authentication } = useAuth()
     useEffect(() => {
         authentication()
     }, [])

@@ -5,6 +5,7 @@ import { Organisation } from "../models/organisation"
 import { supabase } from "./supabase-client"
 import { handleErrorSupabase } from "../tools/handle-error"
 import { Suggestion } from "../models/suggestion"
+import { Client } from "../models/client"
 
 export const useCreateSuggestion = () => {
     const [stateCreateSuggestion, setStateCreateSuggestion] = useState<stateSupabase>(
@@ -15,9 +16,14 @@ export const useCreateSuggestion = () => {
     )
     const { addToast } = useToast()
 
-    const createSuggestion = async (field: field, organisation: Organisation | null, clearField: () => void) => {
+    const createSuggestion = async (field: field, organisation: Organisation | null, clientAuth: Client | null, clearField: () => void) => {
+        if (clientAuth === null) {
+            addToast({ toast: '🔓Veuillez vous connecter pour soumettre une suggestion.', isSucces: false })
+            setStateCreateSuggestion({ isLoading: false, error: null })
+            return
+        }
         if (!field.isValid) {
-            addToast({ toast: 'Veuillez soumettre une suggestion valide.', isSucces: false })
+            addToast({ toast: 'Veuillez entrer une suggestion valide.', isSucces: false })
             return
         }
         try {
@@ -27,11 +33,10 @@ export const useCreateSuggestion = () => {
                 setStateCreateSuggestion({ isLoading: false, error: null })
                 return
             }
-
             const { error } = await supabase
                 .from('suggestions')
                 .insert([
-                    { description: field.value, organisation_id: organisation.id }
+                    { description: field.value, organisation_id: organisation.id, client_id: clientAuth.id }
                 ])
             if (error) {
                 handleErrorSupabase(error, addToast, setStateCreateSuggestion)
@@ -41,8 +46,7 @@ export const useCreateSuggestion = () => {
                 addToast({ toast: "📨Merci pour votre suggestion! Nous l'examinerons et vous répondons bientôt.", isSucces: true })
             }
         } catch (error) {
-            if (error instanceof Error)
-                handleErrorSupabase(error, addToast, setStateCreateSuggestion)
+            handleErrorSupabase(error as Error, addToast, setStateCreateSuggestion)
         }
     }
 
@@ -53,37 +57,69 @@ export const useCreateSuggestion = () => {
 }
 
 export const useGetSuggestions = () => {
-    const [stateGetSuggestions, setStatGetSuggestions] = useState<stateSupabase>(
+    const [stateGetSuggestions, setStateGetSuggestions] = useState<stateSupabase>(
         {
             isLoading: false,
             error: null
         }
     )
 
-    const [suggestions, setSuggestions] = useState<Suggestion[]>()
+    const [suggestions, setSuggestions] = useState<Suggestion[]>([])
     const { addToast } = useToast()
 
     const getSuggestions = async (organisation: Organisation | null) => {
         try {
-            setStatGetSuggestions({ isLoading: true, error: null })
+            setStateGetSuggestions({ isLoading: true, error: null })
             if (organisation === null) {
                 addToast({ toast: 'Aucune organisation choisie.', isSucces: false })
-                setStatGetSuggestions({ isLoading: false, error: null })
+                setStateGetSuggestions({ isLoading: false, error: null })
                 return
             }
             const { data: dataSuggestions, error: errorSuggestions } = await supabase
                 .from('suggestions')
-                .select('*')
+                .select(`* , clients(*)`)
                 .eq('organisation_id', organisation.id)
             if (errorSuggestions) {
-                handleErrorSupabase(errorSuggestions, addToast, setStatGetSuggestions)
+                handleErrorSupabase(errorSuggestions, addToast, setStateGetSuggestions)
             } else {
                 setSuggestions(dataSuggestions)
-                setStatGetSuggestions({ isLoading: false, error: null })
+                setStateGetSuggestions({ isLoading: false, error: null })
             }
+
+
+            const realTimeSuggestions = supabase.channel('custom-insert-channel')
+                .on(
+                    'postgres_changes',
+                    { event: 'INSERT', schema: 'public', table: 'suggestions' },
+                    async (payload) => {
+                        console.log('Change received!', payload);
+                        const newSuggestion = payload.new as Suggestion;
+
+                        try {
+                            const { data: dataClients, error: errorClients } = await supabase
+                                .from('clients')
+                                .select('*')
+                                .eq('id', payload.new.client_id)
+                                .single();
+
+                            if (errorClients) {
+                                handleErrorSupabase(errorClients, addToast, setStateGetSuggestions);
+                            } else {
+                                newSuggestion.clients = dataClients
+                                setSuggestions((prevSuggestions) => [...prevSuggestions, newSuggestion]);
+                            }
+                        } catch (error) {
+                            handleErrorSupabase(error as Error, addToast, setStateGetSuggestions);
+                        }
+                    }
+                )
+                .subscribe();
+            return () => {
+                supabase.removeChannel(realTimeSuggestions)
+            }
+
         } catch (error) {
-            if (error instanceof Error)
-                handleErrorSupabase(error, addToast, setStatGetSuggestions)
+            handleErrorSupabase(error as Error, addToast, setStateGetSuggestions)
         }
     }
     return {
