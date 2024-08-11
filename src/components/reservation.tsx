@@ -5,15 +5,28 @@ import { Destination } from "../models/destination";
 import { useAuth } from "../hooks/useAuth";
 import CustomButton from "./custom-button";
 import { i_reservation } from "../styles/base/tailwind";
+import { useCreateReservation } from "../supabase/reservations-supabase";
+import { useChoiceOrganisation } from "../hooks/useChoiceOrganisation";
 
 type Props = {
     destination: Destination
 }
 const Reservation: FunctionComponent<Props> = ({ destination }) => {
-    const { isAuth } = useAuth()
+    const { isAuth, clientAuth } = useAuth()
     const [nbLocaux, setNbLocaux] = useState<number>(0)
     const [nbStranger, setNbStranger] = useState<number>(0)
-
+    const { organisationChoice } = useChoiceOrganisation()
+    const { stateCreateReservation, createReservation } = useCreateReservation()
+    const handleSubmit = () => {
+        createReservation(
+            nbLocaux,
+            nbStranger,
+            setNbLocaux,
+            setNbStranger,
+            organisationChoice,
+            clientAuth,
+        )
+    }
     return (
         <div className="w-full">
             <TitleProgramCard title="Reserver le :" destination={destination} />
@@ -60,7 +73,9 @@ const Reservation: FunctionComponent<Props> = ({ destination }) => {
                                 <p className="text-sm mt-1">{nbStranger} participants etrangers</p>
                                 <i onClick={() => setNbStranger(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
                             </div>
-                            <CustomButton text="Réserver" isLoading={false} />
+                            <div onClick={handleSubmit}>
+                                <CustomButton text="Réserver" isLoading={stateCreateReservation.isLoading} />
+                            </div>
                         </div>
                     </StandardCard>
                 )
