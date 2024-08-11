@@ -4,19 +4,33 @@ import CustomTextarea from "./form/custom-textarea";
 import CustomButton from "./custom-button";
 import StandardCard from "./card/standard-card";
 import { Destination } from "../models/destination";
+import { useSuggesionValidation } from "../hooks/useSuggestionValidation";
+import { useCreateSuggestion } from "../supabase/suggestions-supabase";
+import { useChoiceOrganisation } from "../hooks/useChoiceOrganisation";
 
 type Props = {
     destination: Destination
 }
 const Suggestion: FunctionComponent<Props> = ({ destination }) => {
-    // const { organisationChoice } = useChoiceOrganisation()
+    const { organisationChoice } = useChoiceOrganisation()
+    const { suggestionField, handleSuggestionField } = useSuggesionValidation()
+    const { stateCreateSuggestion, createSuggestion } = useCreateSuggestion()
+    const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        createSuggestion(suggestionField, organisationChoice)
+    }
     return (
         <div className="w-full">
             <TitleProgramCard title="Votre suggestion pour le :" destination={destination} />
             <StandardCard>
-                <form action="">
-                    <CustomTextarea />
-                    <CustomButton text="Envoyer" />
+                <form action="" onSubmit={handleSubmit}>
+                    <CustomTextarea
+                        field={suggestionField}
+                        onChange={handleSuggestionField}
+                        name="suggestion"
+                        placeholder="Votre suggestion..."
+                    />
+                    <CustomButton isLoading={stateCreateSuggestion.isLoading} text="Envoyer" />
                 </form>
             </StandardCard>
             <StandardCard>

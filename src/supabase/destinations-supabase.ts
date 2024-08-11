@@ -1,4 +1,4 @@
-import {  stateSupabase } from './../tools/type';
+import { stateSupabase } from './../tools/type';
 import { useState } from "react"
 import { supabase } from "./supabase-client"
 import { handleErrorSupabase } from '../tools/handle-error';
@@ -23,11 +23,13 @@ export const useGetDestinations = () => {
                 .from('destinations')
                 .select('*')
             if (error) {
-                console.error(error)
+                handleErrorSupabase(error, addToast, setStateGetDestination)
+            } else {
+                setTourismes(data.filter(destination => destination.type === 'tourisme'))
+                setGeo(data.filter(destination => destination.type === 'geo'))
+                setStateGetDestination({ ...stateGetDestination, isLoading: false })
             }
-            setTourismes(data?.filter(destination => destination.type === 'tourisme'))
-            setGeo(data?.filter(destination => destination.type === 'geo'))
-            setStateGetDestination({ ...stateGetDestination, isLoading: false })
+
         } catch (error) {
             if (error instanceof Error)
                 handleErrorSupabase(error, addToast, setStateGetDestination)
@@ -54,13 +56,18 @@ export const useGetDestinationById = () => {
     const getDestination = async (id: string) => {
         try {
             setStateGetDestination({ ...stateGetDestination, isLoading: true })
-            const { data } = await supabase
+            const { data, error } = await supabase
                 .from('destinations')
                 .select(`*, organisations (*, programs (*))`)
                 .eq('id', id)
                 .single()
-            setDestination(data)
-            setStateGetDestination({ ...stateGetDestination, isLoading: false })
+            if (error) {
+                handleErrorSupabase(error, addToast, setStateGetDestination)
+            } else {
+                setDestination(data)
+                setStateGetDestination({ error: null, isLoading: false })
+            }
+
         } catch (error) {
             if (error instanceof Error)
                 handleErrorSupabase(error, addToast, setStateGetDestination)

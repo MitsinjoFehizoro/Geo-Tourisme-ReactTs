@@ -1,11 +1,11 @@
 import { FunctionComponent } from "react";
-import { destination } from "../tools/type";
 import Program from "./program";
 import Suggestion from "./suggestion";
 import Reservation from "./reservation";
+import { Destination } from "../models/destination";
 
 type Props = {
-    destination: destination
+    destination: Destination
 }
 const ProgramDestination: FunctionComponent<Props> = ({ destination }) => {
 
