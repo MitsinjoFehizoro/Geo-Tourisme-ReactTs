@@ -18,20 +18,20 @@ export const useGetDestinations = () => {
     const { addToast } = useToast()
     const getDestinations = async () => {
         try {
-            setStateGetDestination({ ...stateGetDestination, isLoading: true })
-            const { data, error } = await supabase
+            setStateGetDestination({ isLoading: true, error: null })
+            const { data: dataDestinations, error: errorDestinations } = await supabase
                 .from('destinations')
                 .select('*')
-            if (error) {
-                handleErrorSupabase(error, addToast, setStateGetDestination)
+            if (errorDestinations) {
+                handleErrorSupabase(errorDestinations, addToast, setStateGetDestination)
             } else {
-                setTourismes(data.filter(destination => destination.type === 'tourisme'))
-                setGeo(data.filter(destination => destination.type === 'geo'))
-                setStateGetDestination({ ...stateGetDestination, isLoading: false })
+                setTourismes(dataDestinations.filter((destination: Destination) => destination.type === 'tourisme'))
+                setGeo(dataDestinations.filter((destination: Destination) => destination.type === 'geo'))
+                setStateGetDestination({ isLoading: false, error: null })
             }
 
         } catch (error) {
-                handleErrorSupabase(error as Error, addToast, setStateGetDestination)
+            handleErrorSupabase(error as Error, addToast, setStateGetDestination)
         }
     }
 
@@ -54,21 +54,21 @@ export const useGetDestinationById = () => {
     const [destination, setDestination] = useState<Destination>()
     const getDestination = async (id: string) => {
         try {
-            setStateGetDestination({ ...stateGetDestination, isLoading: true })
-            const { data, error } = await supabase
+            setStateGetDestination({ isLoading: true, error: null })
+            const { data: dataDestination, error: errorDestination } = await supabase
                 .from('destinations')
                 .select(`*, organisations (*, programs (*))`)
                 .eq('id', id)
                 .single()
-            if (error) {
-                handleErrorSupabase(error, addToast, setStateGetDestination)
+            if (errorDestination) {
+                handleErrorSupabase(errorDestination, addToast, setStateGetDestination)
             } else {
-                setDestination(data)
+                setDestination(dataDestination)
                 setStateGetDestination({ error: null, isLoading: false })
             }
 
         } catch (error) {
-                handleErrorSupabase(error as Error, addToast, setStateGetDestination)
+            handleErrorSupabase(error as Error, addToast, setStateGetDestination)
         }
     }
 

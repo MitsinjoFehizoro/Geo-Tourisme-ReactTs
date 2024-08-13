@@ -5,6 +5,8 @@ import { useToast } from "../hooks/useToast"
 import { Organisation } from "../models/organisation"
 import { Client } from "../models/client"
 import { supabase } from "./supabase-client"
+import { Reservation } from '../models/reservation';
+import { useAuth } from '../hooks/useAuth';
 
 export const useCreateReservation = () => {
     const [stateCreateReservation, setStateCreateReservation] = useState<stateSupabase>(
@@ -53,5 +55,45 @@ export const useCreateReservation = () => {
     return {
         stateCreateReservation,
         createReservation
+    }
+}
+
+export const useGetReservations = () => {
+    const [stateGetReservations, setStateGetReservations] = useState<stateSupabase>(
+        {
+            isLoading: false,
+            error: null
+        }
+    )
+
+    const [reservations, setReservations] = useState<Reservation[]>()
+    const { addToast } = useToast()
+    const { isAuth, clientAuth } = useAuth()
+
+    const getReservations = async () => {
+        if (!isAuth || clientAuth === null) {
+            addToast({ toast: "🔓Veuillez vous connecter pour accéder à vos réservations.", isSucces: false })
+            return
+        }
+        try {
+            setStateGetReservations({ isLoading: true, error: null })
+            const { data: dataReservations, error: errorReservations } = await supabase
+                .from('reservations')
+                .select('*')
+                .eq('client_id', clientAuth.id)
+            if (errorReservations) {
+                handleErrorSupabase(errorReservations, addToast, setStateGetReservations)
+            } else {
+                setReservations(dataReservations)
+                setStateGetReservations({ isLoading: false, error: null })
+            }
+        } catch (error) {
+            handleErrorSupabase(error as Error, addToast, setStateGetReservations)
+        }
+    }
+    return {
+        stateGetReservations,
+        reservations,
+        getReservations
     }
 }

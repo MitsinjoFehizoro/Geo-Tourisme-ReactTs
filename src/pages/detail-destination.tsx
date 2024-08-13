@@ -22,7 +22,7 @@ const DetailDestination: FunctionComponent = () => {
                     <ProgramDestination destination={destination} />
                 )
             }
-            <footer className="w-full pt-7 pb-5 flex flex-row items-center justify-around text-background bg-background">
+          <footer className="w-full pt-7 pb-5 flex flex-row items-center justify-around  bg-background">
                 <p className="text-sm text-secondary"><i className="fa fa-copyright mr-2"></i>Powered by MitsinjoFehizoro - 2024</p>
             </footer>
         </>
