@@ -1,9 +1,27 @@
 import { FunctionComponent } from "react";
-import ReservationNumber from "../reservation-number";
 import { reservation_card } from "../../styles/base/tailwind";
 import ReservationTable from "../reservation-table";
+import { stateSupabase } from "../../tools/type";
+import { Reservation } from "../../models/reservation";
+import { LoadingReservationNumber, ReservationNumber } from "../reservation-number";
 
-const LeftReservationCard: FunctionComponent = () => {
+type Props = {
+    stateGetReservations: stateSupabase,
+    reservations: Reservation[]
+}
+const LeftReservationCard: FunctionComponent<Props> = ({ stateGetReservations, reservations }) => {
+    const reservationEncours = () => {
+        return ({
+            state: 'encours',
+            number: reservations.filter(reservation => reservation.state === 'encours').length
+        })
+    }
+    const reservationConfirmed = () => {
+        return ({
+            state: 'confirmés',
+            number: reservations.filter(reservation => reservation.state === 'confirmé').length
+        })
+    }
     return (
         <div className="w-2/6">
             <div className="mb-6">
@@ -13,11 +31,26 @@ const LeftReservationCard: FunctionComponent = () => {
                 </p>
             </div>
             <div className={`py-4 mb-4 flex flex-row ${reservation_card}`}>
-                <ReservationNumber />
-                <ReservationNumber />
-                <ReservationNumber />
+                {
+                    stateGetReservations.isLoading && (
+                        <>
+                            <LoadingReservationNumber />
+                            <LoadingReservationNumber />
+                        </>
+                    )
+                }
+                {
+                    reservations && (
+                        <>
+                            <ReservationNumber reservationFunction={reservationEncours} />
+                            <ReservationNumber reservationFunction={reservationConfirmed} />
+                        </>
+
+                    )
+                }
+
             </div>
-            <ReservationTable />
+            <ReservationTable stateGetReservations={stateGetReservations} reservations={reservations} />
         </div>
     )
 }

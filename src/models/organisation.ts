@@ -10,7 +10,7 @@ export class Organisation {
     stranger_price: number
     programs: Program[]
     suggestions: Suggestion[]
-    destination: Destination
+    destinations: Destination
     created_at: Date
     updated_at: Date
     constructor(
@@ -21,7 +21,7 @@ export class Organisation {
         stranger_price: number,
         programs: Program[],
         suggestions: Suggestion[],
-        destination: Destination,
+        destinations: Destination,
         created_at: Date,
         updated_at: Date
     ) {
@@ -32,7 +32,7 @@ export class Organisation {
         this.stranger_price = stranger_price
         this.programs = programs
         this.suggestions = suggestions
-        this.destination = destination
+        this.destinations = destinations
         this.created_at = created_at
         this.updated_at = updated_at
     }

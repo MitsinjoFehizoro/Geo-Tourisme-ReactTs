@@ -61,7 +61,7 @@ export const useCreateReservation = () => {
 export const useGetReservations = () => {
     const [stateGetReservations, setStateGetReservations] = useState<stateSupabase>(
         {
-            isLoading: false,
+            isLoading: true,
             error: null
         }
     )
@@ -79,11 +79,12 @@ export const useGetReservations = () => {
             setStateGetReservations({ isLoading: true, error: null })
             const { data: dataReservations, error: errorReservations } = await supabase
                 .from('reservations')
-                .select('*')
+                .select(`*, organisations(*, destinations(*))`)
                 .eq('client_id', clientAuth.id)
             if (errorReservations) {
                 handleErrorSupabase(errorReservations, addToast, setStateGetReservations)
             } else {
+                console.log(dataReservations);
                 setReservations(dataReservations)
                 setStateGetReservations({ isLoading: false, error: null })
             }
@@ -94,6 +95,6 @@ export const useGetReservations = () => {
     return {
         stateGetReservations,
         reservations,
-        getReservations
+        getReservations,
     }
 }

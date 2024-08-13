@@ -2,8 +2,15 @@ import { FunctionComponent } from "react";
 import { NavLink } from "react-router-dom";
 import '../styles/components/_reservation-table.scss'
 import { reservation_card } from "../styles/base/tailwind";
+import { Reservation } from "../models/reservation";
+import { stateSupabase } from "../tools/type";
+import { formatDateSimple } from "../tools/format-date";
 
-const ReservationTable: FunctionComponent = () => {
+type Props = {
+    stateGetReservations: stateSupabase,
+    reservations: Reservation[]
+}
+const ReservationTable: FunctionComponent<Props> = ({ stateGetReservations, reservations }) => {
     return (
         <div className={`reservationTable ${reservation_card}`}>
             <div className="p-4 pl-6 flex flex-row justify-between items-center">
@@ -20,47 +27,49 @@ const ReservationTable: FunctionComponent = () => {
                         <th>Etat</th>
                     </tr>
                 </thead>
-                <tbody >
-                    <tr>
-                        <td>
-                            15/08/2024 - 22/08/2024
-                        </td>
-                        <td>Andrigitra nord-est</td>
-                        <td>
-                            <span className="px-1 rounded-md bg-yellow-400 text-xs text-white">encours</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            15/08/2024 - 22/08/2024
-                        </td>
-                        <td>Andrigitra nord-est</td>
-                        <td>
-                            <span className="px-1 rounded-md bg-green-400 text-xs text-white">confirmé</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            15/08/2024 - 22/08/2024
-                        </td>
-                        <td>Andrigitra nord-est</td>
-                        <td>
-                            <span className="px-1 rounded-md bg-yellow-400 text-xs text-white">encours</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            15/08/2024 - 22/08/2024
-                        </td>
-                        <td>Andrigitra nord-est</td>
-                        <td>
-                            <span className="px-1 rounded-md bg-green-400 text-xs text-white">confirmé</span>
-                        </td>
-                    </tr>
-                </tbody>
+                {
+                    stateGetReservations.isLoading && (
+                        <LoadingTbody />
+                    )
+                }
+                {
+                    reservations && (
+                        <tbody >
+                            {
+                                reservations.map((reservation, index) =>
+                                    <tr key={index}>
+                                        <td>
+                                            <span>{formatDateSimple(reservation.organisations.start)}</span> -  <span>{formatDateSimple(reservation.organisations.end)}</span>
+                                        </td>
+                                        <td className="capitalize">{reservation.organisations.destinations.title}</td>
+                                        <td>
+                                            <span className="px-1 rounded-md bg-yellow-400 text-xs text-white">{reservation.state}</span>
+                                        </td>
+                                    </tr>)
+                            }
+
+                        </tbody>
+                    )
+                }
             </table>
         </div>
     )
 }
 
 export default ReservationTable
+
+const LoadingTbody = () => {
+    return (
+        <tbody className="animate-pulse">
+            {
+                Array.from({ length: 4 }).map((_, index) =>
+                    <tr key={index}>
+                        <td><p className="w-full h-2 bg-background my-2" /></td>
+                        <td><p className="w-full h-2 bg-background my-2" /></td>
+                        <td><p className="w-full h-2 bg-background my-2" /></td>
+                    </tr>
+                )
+            }
+        </tbody>
+    )
+}
