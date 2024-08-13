@@ -1,0 +1,14 @@
+@import "../../base/mixins";
+@import "../../base/color";
+
+.rightTable{
+    th,td{
+        &:not(:first-child){
+            text-align: right;
+        }
+    }
+    th{
+        padding-bottom: 1em;
+    }
+
+}
