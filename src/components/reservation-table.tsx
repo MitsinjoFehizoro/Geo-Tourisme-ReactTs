@@ -13,7 +13,7 @@ const ReservationTable: FunctionComponent = () => {
                 </NavLink>
             </div>
             <table className="w-full text-left text-sm">
-                <thead >
+                <thead>
                     <tr>
                         <th>Date</th>
                         <th>Destination</th>

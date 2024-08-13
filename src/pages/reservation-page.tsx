@@ -6,7 +6,7 @@ import RightReservationCard from "../components/card/right-reservation-card";
 const ReservationPage: FunctionComponent = () => {
     return (
         <>
-            < NavigationBar />
+            <NavigationBar />
             <section className="w-full min-h-[100vh] py-32 bg-background flex flex-row justify-evenly">
                 <LeftReservationCard />
                 <RightReservationCard />
