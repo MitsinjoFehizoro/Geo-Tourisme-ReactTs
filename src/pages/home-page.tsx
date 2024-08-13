@@ -8,7 +8,7 @@ import Contact from "../components/conctact";
 import Separation from "../components/separation";
 import NavigationBar from "../components/navigation-bar";
 import { useAuth } from "../hooks/useAuth";
-const Home: FunctionComponent = () => {
+const HomePage: FunctionComponent = () => {
     return (
         <>
             <NavigationBar />
@@ -23,4 +23,4 @@ const Home: FunctionComponent = () => {
     )
 }
 
-export default Home
+export default HomePage

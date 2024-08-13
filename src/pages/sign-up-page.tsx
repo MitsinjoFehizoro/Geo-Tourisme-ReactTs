@@ -3,7 +3,7 @@ import BaseConnexion from "../components/base-connexion";
 import SignUpForm from "../components/sign-up-form";
 import GuidUserCard from "../components/card/guid-user-card";
 
-const SignUp: FunctionComponent = () => {
+const SignUpPage: FunctionComponent = () => {
     
     const title = 'créer un compte'
     const description = 'Veuillez compléter le formulaire, appuyer sur valider et nous vous envoyons un email pour se connecter.'
@@ -12,4 +12,4 @@ const SignUp: FunctionComponent = () => {
     )
 }
 
-export default SignUp
+export default SignUpPage

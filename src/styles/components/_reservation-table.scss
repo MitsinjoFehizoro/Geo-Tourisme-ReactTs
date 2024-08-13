@@ -1,0 +1,22 @@
+@import "../base/mixins";
+@import "../base/color";
+
+.reservationTable {
+    table {
+
+        th,
+        td {
+            padding: .75em 1.5em;
+        }
+
+        thead {
+            background-color: $background-color;
+        }
+        tbody {
+            tr{
+                border-bottom: 1px solid $background-color;
+            }
+        }
+
+    }
+}
