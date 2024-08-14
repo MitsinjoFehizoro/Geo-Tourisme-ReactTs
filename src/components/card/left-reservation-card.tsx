@@ -40,7 +40,7 @@ const LeftReservationCard: FunctionComponent<Props> = ({ stateGetReservations, r
                     )
                 }
                 {
-                    reservations && (
+                    reservations.length > 0 && (
                         <>
                             <ReservationNumber reservationFunction={reservationEncours} />
                             <ReservationNumber reservationFunction={reservationConfirmed} />

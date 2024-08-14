@@ -66,7 +66,7 @@ export const useGetReservations = () => {
         }
     )
 
-    const [reservations, setReservations] = useState<Reservation[]>()
+    const [reservations, setReservations] = useState<Reservation[]>([])
     const { addToast } = useToast()
     const { isAuth, clientAuth } = useAuth()
 

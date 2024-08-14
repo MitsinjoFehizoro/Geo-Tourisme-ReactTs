@@ -1,10 +1,10 @@
 import { FunctionComponent, useState } from "react"
-import { organisation } from "../../tools/type"
 import { motion } from 'framer-motion'
 import { formatDateLong, formatDateSimple } from "../../tools/format-date"
 import { useChoiceOrganisation } from "../../hooks/useChoiceOrganisation"
+import { Organisation } from "../../models/organisation"
 type Props = {
-    organisations: organisation[]
+    organisations: Organisation[]
 }
 const OrganistaionDestinationCard: FunctionComponent<Props> = ({ organisations }) => {
     const [simpleMode, setSimpleMode] = useState(true)

@@ -64,9 +64,9 @@ const LoadingTbody = () => {
             {
                 Array.from({ length: 4 }).map((_, index) =>
                     <tr key={index}>
-                        <td><p className="w-full h-2 bg-background my-2" /></td>
-                        <td><p className="w-full h-2 bg-background my-2" /></td>
-                        <td><p className="w-full h-2 bg-background my-2" /></td>
+                        <td><p className="w-full h-2 bg-background my-1" /></td>
+                        <td><p className="w-full h-2 bg-background my-1" /></td>
+                        <td><p className="w-full h-2 bg-background my-1" /></td>
                     </tr>
                 )
             }
