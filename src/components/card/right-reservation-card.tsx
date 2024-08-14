@@ -19,11 +19,14 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
         if (!reservationChoice && reservations.length > 0) {
             handleReservationChoice(reservations[0])
         }
+    }, [reservations])
+    useEffect(() => {
         if (reservationChoice) {
             setNbLocaux(reservationChoice.local)
             setNbStranger(reservationChoice.stranger)
         }
-    }, [reservations])
+    }, [reservationChoice])
+
     return (
         <section className="w-3/6">
             <div className="w-full p-12 bg-white shadow rounded">
@@ -84,25 +87,24 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
-                                                <i onClick={() => setNbLocaux(prev => (prev > 0 ? prev - 1 : 0))} className={`fa fa-minus ${i_reservation}`}></i>
-                                                <p className="text-center mt-1 pb-1">{nbLocaux} locaux</p>
-                                                <i onClick={() => setNbLocaux(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
+                                            <div className="flex flex-row items-center mb-2 justify-between rounded border-[1px] border-background">
+                                                <p className="mt-1 mx-4 pb-1">{nbLocaux} participants locaux</p>
+                                                <i className={`fa fa-edit ${i_reservation}`}></i>
                                             </div>
                                         </td>
                                         <td>{formatPrice(reservationChoice.organisations.local_price)}</td>
-                                        <td></td>
+                                        <td>{formatPrice(reservationChoice.organisations.local_price * nbLocaux)}</td>
                                     </tr>
+
                                     <tr>
                                         <td>
                                             <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
-                                                <i onClick={() => setNbStranger(prev => (prev > 0 ? prev - 1 : 0))} className={`fa fa-minus ${i_reservation}`}></i>
-                                                <p className="text-center mt-1 pb-1">{nbStranger} étrangers</p>
-                                                <i onClick={() => setNbStranger(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
+                                                <p className="mt-1 mx-4 pb-1">{nbStranger} participants étrangers</p>
+                                                <i className={`fa fa-edit ${i_reservation}`}></i>
                                             </div>
                                         </td>
                                         <td>{formatPrice(reservationChoice.organisations.stranger_price)}</td>
-                                        <td>1 000 000 Ariary</td>
+                                        <td>{formatPrice(reservationChoice.organisations.stranger_price * nbStranger)}</td>
                                     </tr>
                                 </tbody>
                             )
@@ -113,17 +115,45 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
                 <Separation />
                 <div className="flex items-center justify-between">
                     <h1 className="text-primary">Montant à payer</h1>
-                    <p className="text-secondary text-sm">1 800 000 Ariary</p>
+                    {
+                        stateGetReservations.isLoading ? (
+                            <p className="w-1/3 bg-background h-2 animate-pulse" />
+                        ) : (
+                            reservationChoice && (
+                                <p className="text-secondary text-sm">1 800 000 Ariary</p>
+                            )
+                        )
+                    }
+
                 </div>
                 <Separation />
                 <div className="flex items-center justify-between">
                     <h1 className="text-primary">Paiement effectué</h1>
-                    <p className="text-secondary text-sm">0 Ariary <span className="ml-1">(0%)</span></p>
+                    {
+                        stateGetReservations.isLoading ? (
+                            <p className="w-1/3 bg-background h-2 animate-pulse" />
+                        ) : (
+                            reservationChoice && (
+                                <p className="text-secondary text-sm">{formatPrice(reservationChoice.paid)} <span className="ml-1">({reservationChoice.state_paiement}%)</span></p>
+                            )
+                        )
+                    }
+
                 </div>
                 <Separation />
                 <div className="flex items-center justify-between">
                     <h1 className="text-primary">Status de la réservation</h1>
-                    <p className="text-white text-sm px-4 pb-[1px] rounded-lg bg-yellow-400">encours</p>
+                    {
+                        stateGetReservations.isLoading ? (
+                            <p className="w-28 bg-background h-3 animate-pulse" />
+                        ) : (
+                            reservationChoice && (
+                                <p className={`${reservationChoice.state === 'encours' ? 'bg-yellow-400' : 'bg-green-400'} text-white text-sm px-4 pb-[1px] rounded-lg`}>
+                                    {reservationChoice.state}
+                                </p>
+                            )
+                        )
+                    }
                 </div>
             </div>
             <div className={`p-4 my-4 flex justify-end  ${reservation_card}`}>

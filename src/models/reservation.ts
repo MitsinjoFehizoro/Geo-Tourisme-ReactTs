@@ -6,8 +6,9 @@ export class Reservation {
     local: number
     stranger: number
     state: string
-    state_payement: number
+    state_paiement: number
     total: number
+    paid: number
     clients: Client
     organisations: Organisation
     created_at: Date
@@ -17,8 +18,9 @@ export class Reservation {
         local: number,
         stranger: number,
         state: string,
-        state_payement: number,
+        state_paiement: number,
         total: number,
+        paid: number,
         clients: Client,
         organisations: Organisation,
         created_at: Date,
@@ -28,8 +30,9 @@ export class Reservation {
         this.local = local
         this.stranger = stranger
         this.state = state
-        this.state_payement = state_payement
+        this.state_paiement = state_paiement
         this.total = total
+        this.paid = paid
         this.clients = clients
         this.organisations = organisations
         this.updated_at = updated_at

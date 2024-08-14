@@ -43,7 +43,7 @@ const ReservationTable: FunctionComponent<Props> = ({ stateGetReservations, rese
                                         </td>
                                         <td className="capitalize">{reservation.organisations.destinations.title}</td>
                                         <td>
-                                            <span className="px-1 rounded-md bg-yellow-400 text-xs text-white">{reservation.state}</span>
+                                            <span className={`${reservation.state === 'encours' ? 'bg-yellow-400' : 'bg-green-400'} px-1 rounded-md text-xs text-white`}>{reservation.state}</span>
                                         </td>
                                     </tr>)
                             }
