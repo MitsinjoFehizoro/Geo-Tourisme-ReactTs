@@ -1,31 +1,66 @@
-import { FunctionComponent, useState } from "react"
+import { FunctionComponent, useEffect, useState } from "react"
 import { i_reservation, reservation_card } from "../../styles/base/tailwind"
 import '../../styles/components/card/_right-reservation-card.scss'
-const RightReservationCard: FunctionComponent = () => {
+import { useChoicieReservation } from "../../hooks/useChoiceReservation"
+import { stateSupabase } from "../../tools/type"
+import { Reservation } from "../../models/reservation"
+import { formatDateMoyen } from "../../tools/format-date"
+
+type Props = {
+    stateGetReservations: stateSupabase,
+    reservations: Reservation[]
+}
+const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, reservations }) => {
     const [nbLocaux, setNbLocaux] = useState<number>(0)
     const [nbStranger, setNbStranger] = useState<number>(0)
+    const { reservationChoice, handleReservationChoice } = useChoicieReservation()
+    useEffect(() => {
+        if (!reservationChoice && reservations.length > 0) {
+            handleReservationChoice(reservations[0])
+        }
+    }, [reservations])
     return (
         <section className="w-3/6">
             <div className="w-full p-12 bg-white shadow rounded">
                 <div className="flex flex-row justify-between">
-                    <div className="pr-4">
+                    <div className="w-1/2 pr-4">
                         <p className="text-sm">Nous allons à</p>
-                        <h1 className="text-xl text-secondary capitalize">Andringitra Nord-est</h1>
+                        {
+                            stateGetReservations.isLoading ? (
+                                <h1 className="w-2/3 h-3 bg-background animate-pulse my-2" />
+                            ) : (
+                                <h1 className="text-xl text-secondary capitalize">{reservationChoice?.organisations.destinations.title}</h1>
+                            )
+                        }
                     </div>
-                    <div className="text-right">
+                    <div className="w-1/2 text-right">
                         <p className="text-sm">Pendant 5 jours, le :</p>
-                        <h1 className="text-sm text-secondary capitalize">
-                            18 septembre 2024 - 28 septembre 2024
-                        </h1>
+                        {
+                            stateGetReservations.isLoading ? (
+                                <h1 className="w-full h-3 bg-background animate-pulse my-2" />
+                            ) : (
+                                reservationChoice && (
+                                    <h1 className="text-sm text-secondary capitalize">
+                                        <span>{formatDateMoyen(reservationChoice.organisations.start)}</span> -
+                                        <span>{formatDateMoyen(reservationChoice.organisations.end)}</span>
+                                    </h1>
+                                )
+                            )
+                        }
                     </div>
                 </div>
                 <Separation />
                 <div>
                     <h1 className="text-primary mb-2">Concernant notre destination</h1>
-                    <p className="text-sm">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio harum, fugit exercitationem temporibus optio nulla quae eum repudiandae, quidem qui magni rem praesentium similique, blanditiis vel! Quos officia repellat numquam.
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus earum maxime aliquid voluptates debitis, quia reprehenderit maiores consequuntur labore corporis saepe tempora neque aliquam voluptatibus cumque veniam. Reiciendis, dolores ex!
-                    </p>
+                    {
+                        stateGetReservations.isLoading ? (
+                            Array.from({ length: 4 }).map((_, index) =>
+                                <p key={index} className="w-full h-2 my-4 bg-background animate-pulse" />
+                            )
+                        ) : (
+                            <p className="text-sm">{reservationChoice?.organisations.destinations.description}</p>
+                        )
+                    }
                 </div>
                 <Separation />
                 <table className="rightTable w-full text-left text-sm">
@@ -36,30 +71,37 @@ const RightReservationCard: FunctionComponent = () => {
                             <th className="text-sm text-secondary">Total</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
-                                    <i onClick={() => setNbLocaux(prev => (prev > 0 ? prev - 1 : 0))} className={`fa fa-minus ${i_reservation}`}></i>
-                                    <p className="text-center mt-1 pb-1">{nbLocaux} locaux</p>
-                                    <i onClick={() => setNbLocaux(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
-                                </div>
-                            </td>
-                            <td>500 000 Ariary</td>
-                            <td>1 000 000 Ariary</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
-                                    <i onClick={() => setNbStranger(prev => (prev > 0 ? prev - 1 : 0))} className={`fa fa-minus ${i_reservation}`}></i>
-                                    <p className="text-center mt-1 pb-1">{nbStranger} étrangers</p>
-                                    <i onClick={() => setNbStranger(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
-                                </div>
-                            </td>
-                            <td>500 000 Ariary</td>
-                            <td>1 000 000 Ariary</td>
-                        </tr>
-                    </tbody>
+                    {
+                        stateGetReservations.isLoading ? (
+                            <LoadingTbody />
+                        ) : (
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
+                                            <i onClick={() => setNbLocaux(prev => (prev > 0 ? prev - 1 : 0))} className={`fa fa-minus ${i_reservation}`}></i>
+                                            <p className="text-center mt-1 pb-1">{nbLocaux} locaux</p>
+                                            <i onClick={() => setNbLocaux(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
+                                        </div>
+                                    </td>
+                                    <td>500 000 Ariary</td>
+                                    <td>1 000 000 Ariary</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
+                                            <i onClick={() => setNbStranger(prev => (prev > 0 ? prev - 1 : 0))} className={`fa fa-minus ${i_reservation}`}></i>
+                                            <p className="text-center mt-1 pb-1">{nbStranger} étrangers</p>
+                                            <i onClick={() => setNbStranger(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
+                                        </div>
+                                    </td>
+                                    <td>500 000 Ariary</td>
+                                    <td>1 000 000 Ariary</td>
+                                </tr>
+                            </tbody>
+                        )
+                    }
+
                 </table>
                 <Separation />
                 <div className="flex items-center justify-between">
@@ -112,5 +154,30 @@ const Encours: FunctionComponent = () => {
 const Confirme: FunctionComponent = () => {
     return (
         <span className="px-1 mx-1 rounded-md bg-green-400 text-xs text-white">confirmé</span>
+    )
+}
+const LoadingTbody: FunctionComponent = () => {
+    return (
+        <tbody className="animate-pulse">
+            {
+                Array.from({ length: 2 }).map((_, index) =>
+                    <tr key={index}>
+                        <td className="py-1">
+                            <div className="bg-background w-full h-8" />
+                        </td>
+                        <td>
+                            <div className="w-full flex justify-end">
+                                <p className="bg-background w-2/3 h-2" />
+                            </div>
+                        </td>
+                        <td>
+                            <div className="w-full flex justify-end">
+                                <p className="bg-background w-2/3 h-2" />
+                            </div>
+                        </td>
+                    </tr>
+                )
+            }
+        </tbody>
     )
 }

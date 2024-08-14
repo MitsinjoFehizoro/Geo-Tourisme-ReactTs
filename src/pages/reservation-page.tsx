@@ -13,12 +13,14 @@ const ReservationPage: FunctionComponent = () => {
             getReservations()
         }
     }, [isAuth])
+    
+
     return (
         <>
             <NavigationBar />
             <section className="w-full min-h-[100vh] pt-32 pb-16 bg-background flex flex-row justify-evenly">
                 <LeftReservationCard stateGetReservations={stateGetReservations} reservations={reservations} />
-                <RightReservationCard />
+                <RightReservationCard stateGetReservations={stateGetReservations} reservations={reservations} />
             </section>
             <footer className="w-full pt-7 pb-5 flex flex-row items-center justify-around  bg-white shadow">
                 <p className="text-sm text-secondary"><i className="fa fa-copyright mr-2"></i>Powered by MitsinjoFehizoro - 2024</p>
