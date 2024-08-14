@@ -5,6 +5,7 @@ import { useChoicieReservation } from "../../hooks/useChoiceReservation"
 import { stateSupabase } from "../../tools/type"
 import { Reservation } from "../../models/reservation"
 import { formatDateMoyen } from "../../tools/format-date"
+import { formatPrice } from "../../tools/format-price"
 
 type Props = {
     stateGetReservations: stateSupabase,
@@ -17,6 +18,10 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
     useEffect(() => {
         if (!reservationChoice && reservations.length > 0) {
             handleReservationChoice(reservations[0])
+        }
+        if (reservationChoice) {
+            setNbLocaux(reservationChoice.local)
+            setNbStranger(reservationChoice.stranger)
         }
     }, [reservations])
     return (
@@ -75,30 +80,32 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
                         stateGetReservations.isLoading ? (
                             <LoadingTbody />
                         ) : (
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
-                                            <i onClick={() => setNbLocaux(prev => (prev > 0 ? prev - 1 : 0))} className={`fa fa-minus ${i_reservation}`}></i>
-                                            <p className="text-center mt-1 pb-1">{nbLocaux} locaux</p>
-                                            <i onClick={() => setNbLocaux(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
-                                        </div>
-                                    </td>
-                                    <td>500 000 Ariary</td>
-                                    <td>1 000 000 Ariary</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
-                                            <i onClick={() => setNbStranger(prev => (prev > 0 ? prev - 1 : 0))} className={`fa fa-minus ${i_reservation}`}></i>
-                                            <p className="text-center mt-1 pb-1">{nbStranger} étrangers</p>
-                                            <i onClick={() => setNbStranger(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
-                                        </div>
-                                    </td>
-                                    <td>500 000 Ariary</td>
-                                    <td>1 000 000 Ariary</td>
-                                </tr>
-                            </tbody>
+                            reservationChoice && (
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
+                                                <i onClick={() => setNbLocaux(prev => (prev > 0 ? prev - 1 : 0))} className={`fa fa-minus ${i_reservation}`}></i>
+                                                <p className="text-center mt-1 pb-1">{nbLocaux} locaux</p>
+                                                <i onClick={() => setNbLocaux(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
+                                            </div>
+                                        </td>
+                                        <td>{formatPrice(reservationChoice.organisations.local_price)}</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
+                                                <i onClick={() => setNbStranger(prev => (prev > 0 ? prev - 1 : 0))} className={`fa fa-minus ${i_reservation}`}></i>
+                                                <p className="text-center mt-1 pb-1">{nbStranger} étrangers</p>
+                                                <i onClick={() => setNbStranger(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
+                                            </div>
+                                        </td>
+                                        <td>{formatPrice(reservationChoice.organisations.stranger_price)}</td>
+                                        <td>1 000 000 Ariary</td>
+                                    </tr>
+                                </tbody>
+                            )
                         )
                     }
 
