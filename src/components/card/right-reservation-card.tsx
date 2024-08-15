@@ -6,13 +6,14 @@ import { stateSupabase } from "../../tools/type"
 import { Reservation } from "../../models/reservation"
 import { formatDateMoyen } from "../../tools/format-date"
 import { formatPrice } from "../../tools/format-price"
-import EditParticipantModal from "../modal/edit-participant-modal"
+import { useModal } from "../../hooks/useModal"
 
 type Props = {
     stateGetReservations: stateSupabase,
     reservations: Reservation[]
 }
 const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, reservations }) => {
+    const { toogleStateShowModal } = useModal()
     const [nbLocaux, setNbLocaux] = useState<number>(0)
     const [nbStranger, setNbStranger] = useState<number>(0)
     const { reservationChoice, handleReservationChoice } = useChoicieReservation()
@@ -90,7 +91,7 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
                                         <td>
                                             <div className="flex flex-row items-center mb-2 justify-between rounded border-[1px] border-background">
                                                 <p className="mt-1 mx-4 pb-1">{nbLocaux} participants locaux</p>
-                                                <i className={`fa fa-edit ${i_reservation}`}></i>
+                                                <i onClick={toogleStateShowModal} className={`fa fa-edit ${i_reservation}`}></i>
                                             </div>
                                         </td>
                                         <td>{formatPrice(reservationChoice.organisations.local_price)}</td>
@@ -101,7 +102,7 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
                                         <td>
                                             <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
                                                 <p className="mt-1 mx-4 pb-1">{nbStranger} participants étrangers</p>
-                                                <i className={`fa fa-edit ${i_reservation}`}></i>
+                                                <i onClick={toogleStateShowModal} className={`fa fa-edit ${i_reservation}`}></i>
                                             </div>
                                         </td>
                                         <td>{formatPrice(reservationChoice.organisations.stranger_price)}</td>

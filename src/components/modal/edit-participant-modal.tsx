@@ -3,8 +3,10 @@ import ReservationForm from "../form/reservation-form";
 import { useAuth } from "../../hooks/useAuth";
 import { useChoiceOrganisation } from "../../hooks/useChoiceOrganisation";
 import { useCreateReservation } from "../../supabase/reservations-supabase";
+import { useModal } from "../../hooks/useModal";
 
 const EditParticipantModal: FunctionComponent = () => {
+    const { isShowModal, toogleStateShowModal } = useModal()
     const { clientAuth } = useAuth()
     const { organisationChoice } = useChoiceOrganisation()
     const { stateCreateReservation, createReservation } = useCreateReservation()
@@ -21,9 +23,9 @@ const EditParticipantModal: FunctionComponent = () => {
         )
     }
     return (
-        <section className="w-full h-full fixed top-0 left-0 z-30 bg-secondary/50 flex justify-center items-center">
+        <section className={`${isShowModal ? 'block' : 'hidden'} w-full h-full fixed top-0 left-0 z-30 bg-secondary/50 flex justify-center items-center`}>
             <div className="relative w-96 bg-white px-8 pt-12 pb-10 rounded-md">
-                <i className="fa fa-circle-xmark text-sm absolute top-4 right-8 cursor-pointer hover:text-red-400"></i>
+                <i onClick={toogleStateShowModal} className="fa fa-circle-xmark text-sm absolute top-4 right-8 cursor-pointer hover:text-primary"></i>
                 <ReservationForm
                     nbLocaux={nbLocaux}
                     setNbLocaux={setNbLocaux}
