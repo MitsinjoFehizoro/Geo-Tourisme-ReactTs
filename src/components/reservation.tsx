@@ -11,8 +11,7 @@ type Props = {
     destination: Destination
 }
 const Reservation: FunctionComponent<Props> = ({ destination }) => {
-    const { isAuth, clientAuth } = useAuth()
-    const { organisationChoice } = useChoiceOrganisation()
+    const { isAuth } = useAuth()
     const { stateCreateReservation, createReservation } = useCreateReservation()
     const [nbLocaux, setNbLocaux] = useState<number>(0)
     const [nbStranger, setNbStranger] = useState<number>(0)
@@ -21,9 +20,7 @@ const Reservation: FunctionComponent<Props> = ({ destination }) => {
             nbLocaux,
             nbStranger,
             setNbLocaux,
-            setNbStranger,
-            organisationChoice,
-            clientAuth,
+            setNbStranger
         )
     }
 

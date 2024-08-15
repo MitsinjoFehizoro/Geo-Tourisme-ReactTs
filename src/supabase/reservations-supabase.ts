@@ -2,13 +2,12 @@ import { handleErrorSupabase } from './../tools/handle-error';
 import { useState } from "react"
 import { stateSupabase } from "../tools/type"
 import { useToast } from "../hooks/useToast"
-import { Organisation } from "../models/organisation"
-import { Client } from "../models/client"
 import { supabase } from "./supabase-client"
 import { Reservation } from '../models/reservation';
 import { useAuth } from '../hooks/useAuth';
 import { useChoicieReservation } from '../hooks/useChoiceReservation';
 import { useNavigate } from 'react-router-dom';
+import { useChoiceOrganisation } from '../hooks/useChoiceOrganisation';
 
 export const useCreateReservation = () => {
     const [stateCreateReservation, setStateCreateReservation] = useState<stateSupabase>(
@@ -19,11 +18,12 @@ export const useCreateReservation = () => {
     )
     const navigate = useNavigate()
     const { addToast } = useToast()
+    const { isAuth, clientAuth } = useAuth()
     const { handleReservationChoice } = useChoicieReservation()
-
-    const createReservation = async (nbLocaux: number, nbStranger: number, setNbLocaux: (n: number) => void, setNbStranger: (n: number) => void, organisation: Organisation | null, clientAuth: Client | null,) => {
-        if (clientAuth === null) {
-            addToast({ toast: '🔓Veuillez vous connecter pour faire une réservation.', isSucces: false })
+    const { organisationChoice } = useChoiceOrganisation()
+    const createReservation = async (nbLocaux: number, nbStranger: number, setNbLocaux: (n: number) => void, setNbStranger: (n: number) => void) => {
+        if (!isAuth) {
+            addToast({ toast: '🔓 Veuillez vous connecter pour faire une réservation.', isSucces: false })
             setStateCreateReservation({ isLoading: false, error: null })
             return
         }
@@ -33,16 +33,16 @@ export const useCreateReservation = () => {
         }
         try {
             setStateCreateReservation({ isLoading: true, error: null })
-            if (organisation === null) {
+            if (organisationChoice === null) {
                 addToast({ toast: 'Aucune organisation choisie.', isSucces: false })
                 setStateCreateReservation({ isLoading: false, error: null })
                 return
             }
-            const total = nbLocaux * organisation.local_price + nbStranger * organisation.stranger_price
+            const total = nbLocaux * organisationChoice.local_price + nbStranger * organisationChoice.stranger_price
             const { data, error } = await supabase
                 .from('reservations')
                 .insert([
-                    { local: nbLocaux, stranger: nbStranger, total: total, client_id: clientAuth.id, organisation_id: organisation.id }
+                    { local: nbLocaux, stranger: nbStranger, total: total, client_id: clientAuth?.id, organisation_id: organisationChoice.id }
                 ])
                 .select(`*, organisations(*, destinations(*))`)
             if (error) {
@@ -103,5 +103,57 @@ export const useGetReservations = () => {
         stateGetReservations,
         reservations,
         getReservations,
+    }
+}
+
+export const useUpdateReservation = () => {
+    const [stateUpdateReservation, setStateUpdateReservation] = useState<stateSupabase>(
+        {
+            isLoading: false,
+            error: null
+        }
+    )
+    const { addToast } = useToast()
+    const { isAuth } = useAuth()
+    const { reservationChoice } = useChoicieReservation()
+    const { organisationChoice } = useChoiceOrganisation()
+
+    const updateReservation = async (nbLocaux: number, nbStranger: number) => {
+        if (!isAuth) {
+            addToast({ toast: '🔓Veuillez vous connecter', isSucces: false })
+            setStateUpdateReservation({ isLoading: false, error: null })
+            return
+        }
+        if (nbLocaux <= 0 && nbStranger <= 0) {
+            addToast({ toast: 'Veuillez préciser le nombre des participants.', isSucces: false })
+            return
+        }
+        try {
+            setStateUpdateReservation({ isLoading: true, error: null })
+            if (organisationChoice === null) {
+                addToast({ toast: 'Aucune organisation choisie.', isSucces: false })
+                setStateUpdateReservation({ isLoading: false, error: null })
+                return
+            }
+            const total = nbLocaux * organisationChoice.local_price + nbStranger * organisationChoice.stranger_price
+            const { error: errorReservation } = await supabase
+                .from('reservations')
+                .update({ 'local': nbLocaux, 'stranger': nbStranger, 'total': total })
+                .eq('id', reservationChoice?.id)
+
+            if (errorReservation) {
+                handleErrorSupabase(errorReservation, addToast, setStateUpdateReservation)
+            } else {
+                setStateUpdateReservation({ isLoading: false, error: null })
+                addToast({ toast: "👍 Le nombre de participants a été modifié avec succès", isSucces: true })
+            }
+        } catch (error) {
+            handleErrorSupabase(error as Error, addToast, setStateUpdateReservation)
+        }
+    }
+
+    return {
+        stateUpdateReservation,
+        updateReservation
     }
 }
