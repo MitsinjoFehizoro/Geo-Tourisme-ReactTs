@@ -38,10 +38,6 @@ const Program: FunctionComponent<Props> = ({ destination }) => {
                     }
                 </div>
             </div>
-            <div className="w-full h-full">
-                <TitleProgramCard title="Localisation :" destination={destination} />
-                <LocalisationCard coordinates={destination.coordinates} />
-            </div>
         </div>
 
     )

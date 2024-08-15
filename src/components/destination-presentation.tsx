@@ -8,6 +8,7 @@ import OrganistaionDestinationCard from "./card/organisation-destination-card"
 import { i_slide } from "../styles/base/tailwind"
 import { AnimatePresence } from "framer-motion"
 import { Destination } from "../models/destination"
+import LocalisationDestinationCard from "./card/localisation-destination-card"
 
 type Props = {
     destination: Destination | undefined
@@ -50,7 +51,7 @@ const DestinationPresentation: FunctionComponent<Props> = ({ destination, stateG
                                         <DetailDestinationCard title="Histoire" description={destination.history} />
                                     )
                                 }
-                                <DetailDestinationCard title='localisation' description={destination.localisation} />
+                                <LocalisationDestinationCard destination={destination}  />
                                 <OrganistaionDestinationCard organisations={destination.organisations} />
                                 {
                                     !destination.history && (
