@@ -6,8 +6,7 @@ header {
   @include dimension(100vw, auto);
   background-color: $white-color;
   padding-top: 4px;
-  box-shadow: 0em 0em .5em $background-color;
-  .progress {
+.progress {
     position: fixed;
     top: 0;
     left: 0;

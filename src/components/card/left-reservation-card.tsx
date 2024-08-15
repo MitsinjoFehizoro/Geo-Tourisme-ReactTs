@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { reservation_card } from "../../styles/base/tailwind";
 import ReservationTable from "../reservation-table";
 import { stateSupabase } from "../../tools/type";
@@ -10,6 +10,7 @@ type Props = {
     reservations: Reservation[]
 }
 const LeftReservationCard: FunctionComponent<Props> = ({ stateGetReservations, reservations }) => {
+
     const reservationEncours = () => {
         return ({
             state: 'encours',

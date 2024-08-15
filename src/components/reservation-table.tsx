@@ -1,16 +1,24 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import '../styles/components/_reservation-table.scss'
 import { reservation_card } from "../styles/base/tailwind";
 import { Reservation } from "../models/reservation";
 import { stateSupabase } from "../tools/type";
 import { formatDateSimple } from "../tools/format-date";
+import { useChoicieReservation } from "../hooks/useChoiceReservation";
 
 type Props = {
     stateGetReservations: stateSupabase,
     reservations: Reservation[]
 }
 const ReservationTable: FunctionComponent<Props> = ({ stateGetReservations, reservations }) => {
+    const { reservationChoice, handleReservationChoice } = useChoicieReservation()
+    useEffect(() => {
+        if (!reservationChoice && reservations.length > 0) {
+            handleReservationChoice(reservations[0])
+        }
+    }, [reservations])
+
     return (
         <div className={`reservationTable ${reservation_card}`}>
             <div className="p-4 pl-6 flex flex-row justify-between items-center">
@@ -37,7 +45,7 @@ const ReservationTable: FunctionComponent<Props> = ({ stateGetReservations, rese
                         <tbody >
                             {
                                 reservations.map((reservation, index) =>
-                                    <tr key={index}>
+                                    <tr key={index} onClick={() => handleReservationChoice(reservation)} className={`${reservation.id === reservationChoice?.id ? 'active' : ''}`}>
                                         <td>
                                             <span>{formatDateSimple(reservation.organisations.start)}</span> -  <span>{formatDateSimple(reservation.organisations.end)}</span>
                                         </td>

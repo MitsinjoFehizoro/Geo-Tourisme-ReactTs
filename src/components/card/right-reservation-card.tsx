@@ -6,6 +6,7 @@ import { stateSupabase } from "../../tools/type"
 import { Reservation } from "../../models/reservation"
 import { formatDateMoyen } from "../../tools/format-date"
 import { formatPrice } from "../../tools/format-price"
+import EditParticipantModal from "../modal/edit-participant-modal"
 
 type Props = {
     stateGetReservations: stateSupabase,
@@ -176,7 +177,6 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
             }
 
         </section>
-
     )
 }
 

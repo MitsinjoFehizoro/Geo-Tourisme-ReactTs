@@ -16,7 +16,7 @@ export const ReservationNumber: FunctionComponent<Props> = ({ reservationFunctio
 export const LoadingReservationNumber = () => {
     return (
         <div className="animate-pulse w-1/2 relative border-x-[.5px] border-background flex flex-col justify-center items-center">
-            < h1 className="w-3 h-6 bg-background" />
+            <h1 className="w-3 h-6 bg-background" />
             <p className="w-2/6 h-2 bg-background mb-2 mt-2" />
             <p className="w-1/6 h-2 bg-background mb-1" />
         </div>

@@ -3,20 +3,19 @@ import TitleProgramCard from "./card/title-program-card";
 import StandardCard from "./card/standard-card";
 import { Destination } from "../models/destination";
 import { useAuth } from "../hooks/useAuth";
-import CustomButton from "./custom-button";
-import { i_reservation } from "../styles/base/tailwind";
 import { useCreateReservation } from "../supabase/reservations-supabase";
 import { useChoiceOrganisation } from "../hooks/useChoiceOrganisation";
+import ReservationForm from "./form/reservation-form";
 
 type Props = {
     destination: Destination
 }
 const Reservation: FunctionComponent<Props> = ({ destination }) => {
     const { isAuth, clientAuth } = useAuth()
-    const [nbLocaux, setNbLocaux] = useState<number>(0)
-    const [nbStranger, setNbStranger] = useState<number>(0)
     const { organisationChoice } = useChoiceOrganisation()
     const { stateCreateReservation, createReservation } = useCreateReservation()
+    const [nbLocaux, setNbLocaux] = useState<number>(0)
+    const [nbStranger, setNbStranger] = useState<number>(0)
     const handleSubmit = () => {
         createReservation(
             nbLocaux,
@@ -27,6 +26,7 @@ const Reservation: FunctionComponent<Props> = ({ destination }) => {
             clientAuth,
         )
     }
+
     return (
         <div className="w-full">
             <TitleProgramCard title="Reserver le :" destination={destination} />
@@ -62,22 +62,17 @@ const Reservation: FunctionComponent<Props> = ({ destination }) => {
             {
                 isAuth && (
                     <StandardCard>
-                        <div className="my-2">
-                            <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
-                                <i onClick={() => setNbLocaux(prev => (prev > 0 ? prev - 1 : 0))} className={`fa fa-minus ${i_reservation}`}></i>
-                                <p className="text-sm mt-1 pb-[1px]">{nbLocaux} participants locaux</p>
-                                <i onClick={() => setNbLocaux(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
-                            </div>
-                            <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
-                                <i onClick={() => setNbStranger(prev => (prev > 0 ? prev - 1 : 0))} className={`fa fa-minus ${i_reservation}`}></i>
-                                <p className="text-sm mt-1  pb-[1px]">{nbStranger} participants etrangers</p>
-                                <i onClick={() => setNbStranger(prev => prev + 1)} className={`fa fa-plus ${i_reservation}`}></i>
-                            </div>
-                            <div onClick={handleSubmit}>
-                                <CustomButton text="Réserver" isLoading={stateCreateReservation.isLoading} />
-                            </div>
-                        </div>
+                        <ReservationForm
+                            nbLocaux={nbLocaux}
+                            setNbLocaux={setNbLocaux}
+                            nbStranger={nbStranger}
+                            setNbStranger={setNbStranger}
+                            handleSubmit={handleSubmit}
+                            stateSupabase={stateCreateReservation}
+                            buttonText="Réserver"
+                        />
                     </StandardCard>
+
                 )
             }
 

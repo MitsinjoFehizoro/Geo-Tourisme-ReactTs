@@ -36,7 +36,7 @@ const NavigationBar: FunctionComponent = () => {
     const [stateProfil, setStateProfil] = useState(false)
     const { heightNav } = useHeightNav()
     return (
-        <header className="flex flex-row justify-around" ref={refHeader}>
+        <header className="flex flex-row justify-around shadow" ref={refHeader}>
             <motion.div className="progress" style={{ scaleX: animateScaleX }}></motion.div>
             <img src={logo} className="w-48 h-auto" alt="" />
             <nav className="flex flex-row justify-evenly w-1/3 ">
