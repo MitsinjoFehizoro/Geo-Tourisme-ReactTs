@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { formatDateLong, formatDateSimple } from "../../tools/format-date"
 import { useChoiceOrganisation } from "../../hooks/useChoiceOrganisation"
 import { Organisation } from "../../models/organisation"
+import ContainerDestinationCard from "./container-destination-card"
 type Props = {
     organisations: Organisation[]
 }
@@ -10,16 +11,7 @@ const OrganistaionDestinationCard: FunctionComponent<Props> = ({ organisations }
     const [simpleMode, setSimpleMode] = useState(true)
     const { handleOrganisationChoice } = useChoiceOrganisation()
     return (
-        <motion.div
-            layout
-            onClick={() => { setSimpleMode(!simpleMode) }}
-            transition={{ type: 'spring', bounce: 0.4, duration: .5 }}
-            className={simpleMode ? 'simple cursor-pointer ' : 'modal cursor-pointer'}
-        >
-            <div className="flex flex-row justify-between text-xl mb-2 uppercase">
-                <p className="text-primary">date disponible</p>
-                <i className={`fa-solid fa-circle-xmark hover:text-red-500 cursor-pointer ${simpleMode ? 'hidden' : 'block'}`} onClick={() => { setSimpleMode(!simpleMode) }}></i>
-            </div>
+        <ContainerDestinationCard title="data disponible" simpleMode={simpleMode} setSimpleMode={setSimpleMode} >
             <div className="organisations">
                 {
                     organisations.map(organisation => (
@@ -34,7 +26,7 @@ const OrganistaionDestinationCard: FunctionComponent<Props> = ({ organisations }
                     ))
                 }
             </div >
-        </motion.div >
+        </ContainerDestinationCard>
     )
 
 }

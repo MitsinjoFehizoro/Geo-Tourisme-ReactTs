@@ -7,6 +7,8 @@ import { Client } from "../models/client"
 import { supabase } from "./supabase-client"
 import { Reservation } from '../models/reservation';
 import { useAuth } from '../hooks/useAuth';
+import { useChoicieReservation } from '../hooks/useChoiceReservation';
+import { useNavigate } from 'react-router-dom';
 
 export const useCreateReservation = () => {
     const [stateCreateReservation, setStateCreateReservation] = useState<stateSupabase>(
@@ -15,7 +17,10 @@ export const useCreateReservation = () => {
             error: null
         }
     )
+    const navigate = useNavigate()
     const { addToast } = useToast()
+    const { handleReservationChoice } = useChoicieReservation()
+
     const createReservation = async (nbLocaux: number, nbStranger: number, setNbLocaux: (n: number) => void, setNbStranger: (n: number) => void, organisation: Organisation | null, clientAuth: Client | null,) => {
         if (clientAuth === null) {
             addToast({ toast: '🔓Veuillez vous connecter pour faire une réservation.', isSucces: false })
@@ -34,15 +39,17 @@ export const useCreateReservation = () => {
                 return
             }
             const total = nbLocaux * organisation.local_price + nbStranger * organisation.stranger_price
-            const { error } = await supabase
+            const { data, error } = await supabase
                 .from('reservations')
                 .insert([
                     { local: nbLocaux, stranger: nbStranger, total: total, client_id: clientAuth.id, organisation_id: organisation.id }
                 ])
+                .select(`*, organisations(*, destinations(*))`)
             if (error) {
                 handleErrorSupabase(error, addToast, setStateCreateReservation)
             } else {
-                //Mbola ampina redirection vers paiement
+                handleReservationChoice(data[0] as Reservation)
+                navigate('/reservations')
                 setStateCreateReservation({ isLoading: false, error: null })
                 setNbLocaux(0)
                 setNbStranger(0)

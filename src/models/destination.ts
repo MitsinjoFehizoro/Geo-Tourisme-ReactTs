@@ -7,6 +7,7 @@ export class Destination {
     history: string
     galeries: string[]
     localisation: string
+    coordinates: number[]
     type: string
     organisations: Organisation[]
     created_at: Date
@@ -19,6 +20,7 @@ export class Destination {
         history: string,
         galeries: string[],
         localisation: string,
+        coordinates: number[],
         type: string,
         organisations: Organisation[],
         created_at: Date,
@@ -30,6 +32,7 @@ export class Destination {
         this.history = history
         this.galeries = galeries
         this.localisation = localisation
+        this.coordinates = coordinates
         this.type = type
         this.organisations = organisations
         this.created_at = created_at

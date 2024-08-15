@@ -3,14 +3,15 @@ import { motion, useScroll } from "framer-motion";
 import '../styles/components/_program.scss'
 import { useChoiceOrganisation } from "../hooks/useChoiceOrganisation";
 import TitleProgramCard from "./card/title-program-card";
-import { destination } from "../tools/type";
 import DetailProgamCard from "./card/detail-program-card";
+import { Destination } from "../models/destination";
+import LocalisationCard from "./card/localisation-card";
 
 
 type Props = {
-    destination: destination
+    destination: Destination
 }
-const Program : FunctionComponent<Props> = ({ destination }) => {
+const Program: FunctionComponent<Props> = ({ destination }) => {
     const { organisationChoice } = useChoiceOrganisation()
     const refScroll = useRef<HTMLDivElement>(null)
     const { scrollYProgress } = useScroll({ container: refScroll })
@@ -36,6 +37,10 @@ const Program : FunctionComponent<Props> = ({ destination }) => {
                         )
                     }
                 </div>
+            </div>
+            <div className="w-full h-full">
+                <TitleProgramCard title="Localisation :" destination={destination} />
+                <LocalisationCard coordinates={destination.coordinates} />
             </div>
         </div>
 

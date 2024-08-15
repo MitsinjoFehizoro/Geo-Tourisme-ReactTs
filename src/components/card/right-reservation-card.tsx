@@ -120,7 +120,7 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
                             <p className="w-1/3 bg-background h-2 animate-pulse" />
                         ) : (
                             reservationChoice && (
-                                <p className="text-secondary text-sm">1 800 000 Ariary</p>
+                                <p className="text-secondary text-sm">{formatPrice(reservationChoice.total)}</p>
                             )
                         )
                     }
@@ -167,9 +167,13 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
                     <p>Confirmer</p>
                 </button>
             </div>
-            <div className="py-4 px-12 text-sm bg-red-100 border-[1px] border-red-500 rounded">
-                Votre réservation est encore <Encours />. Veuillez la <Confirme /> et effectuer un paiement de 50%, soit 800 000 Ariary, avant le jeudi 17 août 2024.
-            </div>
+            {
+                reservationChoice && (
+                    <div className="py-4 px-12 text-sm bg-red-100 border-[1px] border-red-500 rounded">
+                        Votre réservation est encore <Encours />. Veuillez la <Confirme /> et effectuer un paiement de 50%, soit <span>{formatPrice(reservationChoice.total / 2)}</span>, avant le jeudi 17 août 2024.
+                    </div>
+                )
+            }
 
         </section>
 
