@@ -8,6 +8,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useChoicieReservation } from '../hooks/useChoiceReservation';
 import { useNavigate } from 'react-router-dom';
 import { useChoiceOrganisation } from '../hooks/useChoiceOrganisation';
+import { useModal } from '../hooks/useModal';
 
 export const useCreateReservation = () => {
     const [stateCreateReservation, setStateCreateReservation] = useState<stateSupabase>(
@@ -114,9 +115,9 @@ export const useUpdateReservation = () => {
         }
     )
     const { addToast } = useToast()
+    const { toogleStateShowModal } = useModal()
     const { isAuth } = useAuth()
     const { reservationChoice } = useChoicieReservation()
-    const { organisationChoice } = useChoiceOrganisation()
 
     const updateReservation = async (nbLocaux: number, nbStranger: number) => {
         if (!isAuth) {
@@ -130,12 +131,12 @@ export const useUpdateReservation = () => {
         }
         try {
             setStateUpdateReservation({ isLoading: true, error: null })
-            if (organisationChoice === null) {
-                addToast({ toast: 'Aucune organisation choisie.', isSucces: false })
+            if (reservationChoice === null) {
+                addToast({ toast: 'Aucune réservqtion choisie.', isSucces: false })
                 setStateUpdateReservation({ isLoading: false, error: null })
                 return
             }
-            const total = nbLocaux * organisationChoice.local_price + nbStranger * organisationChoice.stranger_price
+            const total = nbLocaux * reservationChoice.organisations.local_price + nbStranger * reservationChoice.organisations.stranger_price
             const { error: errorReservation } = await supabase
                 .from('reservations')
                 .update({ 'local': nbLocaux, 'stranger': nbStranger, 'total': total })
@@ -146,6 +147,7 @@ export const useUpdateReservation = () => {
             } else {
                 setStateUpdateReservation({ isLoading: false, error: null })
                 addToast({ toast: "👍 Le nombre de participants a été modifié avec succès", isSucces: true })
+                toogleStateShowModal()
             }
         } catch (error) {
             handleErrorSupabase(error as Error, addToast, setStateUpdateReservation)

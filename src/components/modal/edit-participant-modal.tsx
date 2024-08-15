@@ -1,27 +1,24 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import ReservationForm from "../form/reservation-form";
-import { useAuth } from "../../hooks/useAuth";
-import { useChoiceOrganisation } from "../../hooks/useChoiceOrganisation";
-import { useCreateReservation } from "../../supabase/reservations-supabase";
 import { useModal } from "../../hooks/useModal";
+import { useUpdateReservation } from "../../supabase/reservations-supabase";
+import { useChoicieReservation } from "../../hooks/useChoiceReservation";
 
 const EditParticipantModal: FunctionComponent = () => {
     const { isShowModal, toogleStateShowModal } = useModal()
-    const { clientAuth } = useAuth()
-    const { organisationChoice } = useChoiceOrganisation()
-    const { stateCreateReservation, createReservation } = useCreateReservation()
     const [nbLocaux, setNbLocaux] = useState<number>(0)
     const [nbStranger, setNbStranger] = useState<number>(0)
+    const { stateUpdateReservation, updateReservation } = useUpdateReservation()
+    const { reservationChoice } = useChoicieReservation()
     const handleSubmit = () => {
-        createReservation(
-            nbLocaux,
-            nbStranger,
-            setNbLocaux,
-            setNbStranger,
-            organisationChoice,
-            clientAuth,
-        )
+        updateReservation(nbLocaux, nbStranger)
     }
+    useEffect(() => {
+        if (reservationChoice) {
+            setNbLocaux(reservationChoice.local)
+            setNbStranger(reservationChoice.stranger)
+        }
+    }, [reservationChoice])
     return (
         <section className={`${isShowModal ? 'block' : 'hidden'} w-full h-full fixed top-0 left-0 z-30 bg-secondary/50 flex justify-center items-center`}>
             <div className="relative w-96 bg-white px-8 pt-12 pb-10 rounded-md">
@@ -32,7 +29,7 @@ const EditParticipantModal: FunctionComponent = () => {
                     nbStranger={nbStranger}
                     setNbStranger={setNbStranger}
                     handleSubmit={handleSubmit}
-                    stateSupabase={stateCreateReservation}
+                    stateSupabase={stateUpdateReservation}
                     buttonText="Réserver"
                 />
             </div>
