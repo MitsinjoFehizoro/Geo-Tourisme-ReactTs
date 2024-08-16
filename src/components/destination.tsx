@@ -61,7 +61,7 @@ const Destination: FunctionComponent = () => {
                     exit='exit'
                     transition={{ duration: 0.2 }}
                     variants={variantsSlideDestination}
-                    className="w-full h-full mt-4 grid grid-cols-3 place-items-center place-content-center"
+                    className="w-full min-h-80 mt-4 grid grid-cols-3 place-items-center place-content-center"
                 >
                     {
                         stateGetDestination.isLoading && (

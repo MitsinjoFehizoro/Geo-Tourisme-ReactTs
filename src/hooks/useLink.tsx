@@ -9,29 +9,38 @@ type links = { [key: string]: link }
 interface linkContext {
     links: links,
     linkActif: link | null,
-    setLinkActif: (link: link) => void
+    setLinkActif: (link: link) => void,
+    keyActif: string,
+    setKeyActif: (s: string) => void
 }
 
 const LinkContext = createContext<linkContext>({
     links: {},
     linkActif: null,
-    setLinkActif: () => { }
+    setLinkActif: () => { },
+    keyActif: '',
+    setKeyActif: () => { }
 })
 
 export const useLink = () => {
-    const { links, linkActif, setLinkActif } = useContext(LinkContext)
+    const { links, linkActif, setLinkActif, keyActif, setKeyActif } = useContext(LinkContext)
     const toggleLinkActif = (key: string) => {
         setLinkActif(links[key])
     }
     const toggleScrollActif = (key: string) => {
         links[key].refDestination?.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
+    const toggleKeyActif = (key: string) => {
+        setKeyActif(key)
+    }
 
     return {
         links,
         linkActif,
         toggleLinkActif,
-        toggleScrollActif
+        toggleScrollActif,
+        keyActif,
+        toggleKeyActif
     }
 }
 
@@ -49,11 +58,13 @@ export const LinkContextProvider: FunctionComponent<PropsWithChildren> = ({ chil
             'destination': { title: 'Destination', refDestination: refDestination },
             'apropos': { title: 'À propos', refDestination: refApropos },
             'contact': { title: 'Contact', refDestination: refContact },
+            'reservation': { title: 'Réservation', refDestination: null },
         }
     )
     const [linkActif, setLinkActif] = useState<link>(links['accueil'])
+    const [keyActif, setKeyActif] = useState<string>('')
     return (
-        <LinkContext.Provider value={{ links, linkActif, setLinkActif }}>
+        <LinkContext.Provider value={{ links, linkActif, setLinkActif, keyActif, setKeyActif }}>
             {children}
         </LinkContext.Provider>
     )

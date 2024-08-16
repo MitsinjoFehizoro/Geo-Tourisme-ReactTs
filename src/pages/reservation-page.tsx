@@ -6,15 +6,16 @@ import { useGetReservations } from "../supabase/reservations-supabase";
 import { useAuth } from "../hooks/useAuth";
 import EditParticipantModal from "../components/modal/edit-participant-modal";
 import { ModalContextProvider, useModal } from "../hooks/useModal";
+import { useLink } from "../hooks/useLink";
 
 const ReservationPage: FunctionComponent = () => {
+    const { toggleLinkActif } = useLink()
     const { isShowModal } = useModal()
     const { isAuth } = useAuth()
     const { stateGetReservations, reservations, getReservations } = useGetReservations()
     useEffect(() => {
-        if (isAuth) {
-            getReservations()
-        }
+        toggleLinkActif('reservation')
+        getReservations()
     }, [isAuth])
 
 

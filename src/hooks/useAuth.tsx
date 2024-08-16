@@ -78,7 +78,7 @@ export const useAuth = () => {
                 console.error("erreur type client[0]")
             }
         } catch (error) {
-                handleErrorSupabase(error as Error, addToast, setStateAuth)
+            handleErrorSupabase(error as Error, addToast, setStateAuth)
         }
     }
 
@@ -119,7 +119,7 @@ export const useAuth = () => {
             }
 
         } catch (error) {
-                handleErrorSupabase(error as Error, addToast, setStateAuth)
+            handleErrorSupabase(error as Error, addToast, setStateAuth)
         }
     }
 
@@ -162,7 +162,7 @@ export const useAuth = () => {
                 setStateAuth({ isLoading: false, error: null })
             }
         } catch (error) {
-                handleErrorSupabase(error as Error, addToast, setStateAuth)
+            handleErrorSupabase(error as Error, addToast, setStateAuth)
         }
     }
 
@@ -177,9 +177,10 @@ export const useAuth = () => {
                 setStateAuth({ isLoading: false, error: null })
                 setClientAuth(null)
                 addToast({ toast: '🌟 Merci beaucoup pour votre visite ! À la prochaine !', isSucces: true })
+                navigate('/')
             }
         } catch (error) {
-                handleErrorSupabase(error as Error, addToast, setStateAuth)
+            handleErrorSupabase(error as Error, addToast, setStateAuth)
         }
     }
     return {

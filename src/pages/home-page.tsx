@@ -5,10 +5,17 @@ import Destination from "../components/destination";
 import WhyUs from "../components/why-us";
 import Temoin from "../components/Temoin";
 import Contact from "../components/conctact";
-import Separation from "../components/separation";
+import Separation from "../components/separation"
+import { useLink } from "../hooks/useLink";
 import NavigationBar from "../components/navigation-bar";
-import { useAuth } from "../hooks/useAuth";
 const HomePage: FunctionComponent = () => {
+    const { keyActif, toggleScrollActif } = useLink()
+    useEffect(() => {
+        if (keyActif) {
+            console.log(keyActif);
+            toggleScrollActif(keyActif)
+        }
+    }, [keyActif])
     return (
         <>
             <NavigationBar />

@@ -81,6 +81,7 @@ export const useGetReservations = () => {
     const getReservations = async () => {
         if (!isAuth || clientAuth === null) {
             addToast({ toast: "🔓Veuillez vous connecter pour accéder à vos réservations.", isSucces: false })
+            setStateGetReservations({ isLoading: false, error: null })
             return
         }
         try {

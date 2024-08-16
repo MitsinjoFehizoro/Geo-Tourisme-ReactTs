@@ -15,17 +15,14 @@ header {
     background-color: $primary-color;
   }
   nav {
-    margin-top: 0.3em;
-
     .navLink {
       @include dimension(auto, 100%);
       display: flex;
       align-items: center;
-      padding: 0 .5em;
+      padding: 0 .75em;
       border-bottom: 4px solid $white-color;
       cursor: pointer;
       transition: ease-in 0.2s;
-      cursor: pointer;
       &:hover {
         color: $primary-color;
       }
@@ -35,10 +32,5 @@ header {
         cursor: text;
       }
     }
-  }
-  .login {
-    background-color: $primary-color;
-    color: $white-color;
-    border-radius: 4em;
   }
 }
