@@ -6,7 +6,7 @@ import ProgramDestination from "../components/program-destination";
 import NavigationBar from "../components/navigation-bar";
 import { useLink } from "../hooks/useLink";
 
-const DetailDestination: FunctionComponent = () => {
+const DestinationPage: FunctionComponent = () => {
     const { id } = useParams<{ id: string }>()
     const { toggleLinkActif } = useLink()
     const { stateGetDestination, getDestination, destination } = useGetDestinationById()
@@ -31,5 +31,5 @@ const DetailDestination: FunctionComponent = () => {
         </>
     )
 }
-export default DetailDestination
+export default DestinationPage
 

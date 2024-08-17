@@ -4,6 +4,7 @@ import { supabase } from "./supabase-client"
 import { handleErrorSupabase } from '../tools/handle-error';
 import { useToast } from '../hooks/useToast';
 import { Destination } from '../models/destination';
+import { useNavigate } from 'react-router-dom';
 
 export const useGetDestinations = () => {
     const [stateGetDestination, setStateGetDestination] = useState<stateSupabase>(
@@ -50,6 +51,7 @@ export const useGetDestinationById = () => {
             error: null
         }
     )
+    const navigate = useNavigate()
     const { addToast } = useToast()
     const [destination, setDestination] = useState<Destination>()
     const getDestination = async (id: string) => {
@@ -60,8 +62,11 @@ export const useGetDestinationById = () => {
                 .select(`*, organisations (*, programs (*))`)
                 .eq('id', id)
                 .single()
+
+            console.log(dataDestination);
+
             if (errorDestination) {
-                handleErrorSupabase(errorDestination, addToast, setStateGetDestination)
+                navigate('/page-not-found')
             } else {
                 setDestination(dataDestination)
                 setStateGetDestination({ error: null, isLoading: false })

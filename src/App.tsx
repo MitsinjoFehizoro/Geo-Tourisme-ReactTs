@@ -1,16 +1,18 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Root from './pages/root'
-import DetailDestination from './pages/detail-destination'
 import SignUpPage from './pages/sign-up-page'
 import LoginPage from './pages/login-page'
 import HomePage from './pages/home-page'
 import ReservationPage from './pages/reservation-page'
 import MyMap from './pages/teste'
+import DestinationPage from './pages/destination-page'
+import PageNotFound from './pages/page-not-found'
 
 const route = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    errorElement: <PageNotFound />,
     children: [
       {
         path: '',
@@ -34,7 +36,7 @@ const route = createBrowserRouter([
       },
       {
         path: 'destinations/:id',
-        element: <DetailDestination />
+        element: <DestinationPage />
       }
     ]
   }
