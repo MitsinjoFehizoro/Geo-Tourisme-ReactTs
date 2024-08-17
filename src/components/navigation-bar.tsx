@@ -1,12 +1,12 @@
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef } from "react";
 import '../styles/components/_navigation-bar.scss';
 import logo from '../assets/logo/logo-color.png';
-import { NavLink } from "react-router-dom";
 import { motion, useScroll, useSpring } from 'framer-motion'
-import { useLink } from "../hooks/useLink";
 import { useHeightNav } from "../hooks/useHeightNav";
-import { useAuth } from "../hooks/useAuth";
-import LoadingSpin from "./loading/loading-spin";
+import CenterNav from "./navigation/center-nav";
+import ConnexionLink from "./navigation/connexion-link";
+import ProfilNav from "./navigation/profil-nav";
+import LeftNav from "./navigation/left-nav";
 
 const NavigationBar: FunctionComponent = () => {
     const refHeader = useRef<HTMLDivElement>(null)
@@ -30,87 +30,19 @@ const NavigationBar: FunctionComponent = () => {
         restDelta: 0.01
     })
 
-    const { links, linkActif, toggleLinkActif, toggleScrollActif, toggleKeyActif } = useLink()
 
-    const { isAuth, stateAuth, clientAuth, logout } = useAuth()
-    const [stateProfil, setStateProfil] = useState(false)
-    const { heightNav } = useHeightNav()
+
     return (
-        <header className="flex flex-row justify-around shadow" ref={refHeader}>
-            <motion.div className="progress" style={{ scaleX: animateScaleX }}></motion.div>
-            <img src={logo} className="w-48 h-auto" alt="" />
-            <nav className="flex flex-row justify-evenly mt-[.3em]">
-                {
-                    Object.entries(links).map(([key, link]) =>
-                        link == links['reservation'] ? (
-                            isAuth ? (
-                                <NavLink
-                                    to='/reservations'
-                                    className={`${link == linkActif ? 'actif' : ''} navLink`}
-                                    onClick={() => { toggleLinkActif(key), toggleScrollActif(key), toggleKeyActif(key) }}
-                                >{link.title}</NavLink>
-                            ) : (undefined)
-                        ) : (
-                            <NavLink
-                                to={'/'}
-                                key={key}
-                                className={`${link == linkActif ? 'actif' : ''} navLink`}
-                                onClick={() => { toggleLinkActif(key), toggleScrollActif(key), toggleKeyActif(key) }}
-                            >{link.title}</NavLink>
-                        )
-                    )
-                }
-            </nav>
-            {
-                !isAuth && (
-                    <div className="flex items-center">
-                        <NavLink to='/login' className='text-sm rounded-md px-4 py-2  transition ease-in duration-200 hover:bg-secondary hover:text-background mr-1'>Se connecter</NavLink>
-                        <NavLink to='/signup' className="text-sm text-background rounded-md bg-primary px-6 py-2 transition ease-in duration-200 hover:bg-secondary">S'inscrire</NavLink>
-                    </div>
-                )
-            }
-            {
-                isAuth && (
-                    <div className="flex items-center relative" onMouseEnter={() => setStateProfil(true)} onMouseLeave={() => setStateProfil(false)}>
-                        <div className="z-10 py-1 px-4 flex flex-row items-center cursor-pointer">
-                            <p className="w-9 h-9 text-sm flex items-center justify-center bg-secondary border-2 border-primary rounded-full text-background capitalize">{clientAuth?.name.split(' ').at(-1)?.substring(0, 2)}</p>
-                            <p className="max-w-24 mx-2 text-sm text-ellipsis overflow-hidden capitalize">{clientAuth?.name.split(' ').at(-1)}</p>
-                            {
-                                stateProfil ? (
-                                    <i className="w-2 text-xs fa fa-caret-down mr-1"></i>
-                                ) : (
-                                    <i className="w-2 text-xs fa fa-caret-right mr-1"></i>
-                                )
-                            }
-                        </div>
-                        <div className={`${stateProfil ? 'block' : 'hidden'} absolute bg-background shadow rounded-b p-4`} style={{ top: heightNav - 5 }}>
-                            <NavLink to='' className="flex flex-row items-center mb-1 py-1 px-4 rounded bg-white border-2 border-white hover:shadow transition ease-in duration-100">
-                                <i className="fa-regular fa-address-card text-lg"></i>
-                                <span className='px-2 text-sm'>Mon Profil</span>
-                            </NavLink>
-                            <p
-                                onClick={logout}
-                                className="w-48 flex flex-row items-center py-1 px-4 rounded-md bg-white cursor-pointer border-2 border-white hover:shadow transition ease-in duration-100"
-                            >
-                                {
-                                    stateAuth.isLoading ? (
-                                        <div className="w-full flex justify-center py-1">
-                                            <LoadingSpin />
-                                        </div>
-                                    ) : (
-                                        <>
-                                            <i className="fa fa-right-from-bracket text-lg"></i>
-                                            <span className='px-2 text-sm'>Se déconnecter</span>
-                                        </>
-                                    )
-                                }
-                            </p>
-                        </div>
-                    </div>
-
-                )
-            }
-
+        <header className="fixed top-0 left-0 z-20 bg-white pt-[4px] w-full flex flex-row justify-between md:justify-around shadow px-8 md:px-0" ref={refHeader}>
+            <motion.div className="fixed top-0 left-0 w-full h-[4px] bg-primary origin-left" style={{ scaleX: animateScaleX }}></motion.div>
+            <img src={logo} className="w-40 lg:w-48 h-auto" alt="" />
+            <CenterNav />
+            <ConnexionLink />
+            <ProfilNav />
+            <div className="md:hidden flex items-center">
+                <i className="fa fa-bars text-primary "></i>
+            </div>
+            <LeftNav />
         </header >
 
 

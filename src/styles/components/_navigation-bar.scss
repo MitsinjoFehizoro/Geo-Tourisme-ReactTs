@@ -2,19 +2,7 @@
 @import "../base/color";
 
 header {
-  @include fixed(0, 0, 20);
-  @include dimension(100vw, auto);
-  background-color: $white-color;
-  padding-top: 4px;
-.progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    @include dimension(100%, 4px);
-    transform-origin: 0%;
-    background-color: $primary-color;
-  }
-  nav {
+  .centerNav {
     .navLink {
       @include dimension(auto, 100%);
       display: flex;
@@ -23,9 +11,11 @@ header {
       border-bottom: 4px solid $white-color;
       cursor: pointer;
       transition: ease-in 0.2s;
+
       &:hover {
         color: $primary-color;
       }
+
       &.actif {
         border-color: $primary-color;
         color: $primary-color;

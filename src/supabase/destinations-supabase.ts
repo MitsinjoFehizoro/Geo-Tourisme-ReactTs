@@ -62,9 +62,6 @@ export const useGetDestinationById = () => {
                 .select(`*, organisations (*, programs (*))`)
                 .eq('id', id)
                 .single()
-
-            console.log(dataDestination);
-
             if (errorDestination) {
                 navigate('/page-not-found')
             } else {
