@@ -120,6 +120,7 @@ export const useUpdateReservation = () => {
     const { isAuth } = useAuth()
     const { reservationChoice } = useChoicieReservation()
 
+
     const updateReservation = async (nbLocaux: number, nbStranger: number) => {
         if (!isAuth) {
             addToast({ toast: '🔓Veuillez vous connecter', isSucces: false })
@@ -149,6 +150,8 @@ export const useUpdateReservation = () => {
                 setStateUpdateReservation({ isLoading: false, error: null })
                 addToast({ toast: "👍 Le nombre de participants a été modifié avec succès", isSucces: true })
                 toogleStateShowModal()
+
+                    
             }
         } catch (error) {
             handleErrorSupabase(error as Error, addToast, setStateUpdateReservation)

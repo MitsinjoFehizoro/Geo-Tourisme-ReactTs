@@ -20,13 +20,14 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
     useEffect(() => {
         if (!reservationChoice && reservations.length > 0) {
             handleReservationChoice(reservations[0])
-        }
+        } 
     }, [reservations])
     useEffect(() => {
         if (reservationChoice) {
             setNbLocaux(reservationChoice.local)
             setNbStranger(reservationChoice.stranger)
         }
+        console.log('testeee');
     }, [reservationChoice])
 
     return (

@@ -87,14 +87,12 @@ export const useGetSuggestions = () => {
             }
 
 
-            const realTimeSuggestions = supabase.channel('custom-insert-channel')
+            const realTimeSuggestions =  supabase.channel('custom-insert-channel')
                 .on(
                     'postgres_changes',
                     { event: 'INSERT', schema: 'public', table: 'suggestions' },
                     async (payload) => {
-                        console.log('Change received!', payload);
                         const newSuggestion = payload.new as Suggestion;
-
                         try {
                             const { data: dataClients, error: errorClients } = await supabase
                                 .from('clients')
