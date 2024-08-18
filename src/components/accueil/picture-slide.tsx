@@ -11,8 +11,6 @@ const PictureSlide: FunctionComponent = () => {
     useEffect(() => {
         const changeIndex = setInterval(() => {
             setIndexShow(prevIndex => (prevIndex + 1) % pictures.length)
-            console.log(indexShow);
-
         }, 5000)
         return () => clearInterval(changeIndex)
     }, [indexShow, pictures.length])
@@ -25,7 +23,7 @@ const PictureSlide: FunctionComponent = () => {
                         <motion.img
                             key={index}
                             src={src}
-                            className="w-full h-auto"
+                            className="h-full w-full lg:h-auto"
                         />
                     )
                 )

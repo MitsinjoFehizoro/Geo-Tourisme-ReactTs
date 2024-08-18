@@ -5,3 +5,4 @@ export const i_reservation = 'text-xs flex justify-center items-center bg-backgr
 export const p_indiceSlideActive = 'w-3 h-3 rounded-full bg-primary mx-1'
 export const p_indiceSlideInactive = 'w-8 h-2 rounded-full bg-white mx-1'
 export const reservation_card = 'bg-white shadow rounded'
+

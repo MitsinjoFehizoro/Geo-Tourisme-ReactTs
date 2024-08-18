@@ -7,7 +7,7 @@ import Temoin from "../components/Temoin";
 import Contact from "../components/conctact";
 import Separation from "../components/separation"
 import { useLink } from "../hooks/useLink";
-import NavigationBar from "../components/navigation-bar";
+import NavigationBar from "../components/navigation/navigation-bar";
 const HomePage: FunctionComponent = () => {
     const { keyActif, toggleScrollActif } = useLink()
     useEffect(() => {

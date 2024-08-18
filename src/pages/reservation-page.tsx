@@ -1,5 +1,5 @@
 import { FunctionComponent, PropsWithChildren, useEffect } from "react";
-import NavigationBar from "../components/navigation-bar";
+import NavigationBar from "../components/navigation/navigation-bar";
 import LeftReservationCard from "../components/card/left-reservation-card";
 import RightReservationCard from "../components/card/right-reservation-card";
 import { useGetReservations } from "../supabase/reservations-supabase";

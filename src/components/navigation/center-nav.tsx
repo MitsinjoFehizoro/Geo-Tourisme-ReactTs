@@ -10,7 +10,7 @@ const CenterNav: FunctionComponent = () => {
         toggleLinkActif(key), toggleScrollActif(key), toggleKeyActif(key)
     }
     return (
-        <nav className="centerNav hidden md:flex flex-row justify-evenly mt-[.3em]">
+        <nav className="centerNav hidden lg:flex flex-row justify-evenly mt-[.3em]">
             {
                 Object.entries(links).map(([key, link], index) =>
                     link == links['reservation'] ? (

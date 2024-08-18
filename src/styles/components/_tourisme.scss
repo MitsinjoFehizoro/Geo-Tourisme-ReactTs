@@ -1,22 +1,5 @@
-@import "../base/mixins";
-@import "../base/color";
-
-section {
-  position: relative;
-  background-color: $background-color;
-  .tsingy {
-    bottom: -2em;
-  }
-
-  .pneu {
-    border: 0.6em solid $primary-color;
-    border-radius: 50%;
-  }
-
-  .slide {
-    p {
-      padding: 0 0.2em;
-      transition: ease-in .3s;
-    }
+.slide {
+  p {
+    transition: ease-in .3s;
   }
 }

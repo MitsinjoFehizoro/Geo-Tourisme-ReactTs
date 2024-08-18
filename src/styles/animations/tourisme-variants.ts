@@ -50,7 +50,7 @@ export const variantsImage_3: Variants = {
     }
 }
 
-export const variants_rond: Variants = {
+export const variantsRond: Variants = {
     offscreen: { opacity: 0 },
     onscreen: {
         opacity: 1,
@@ -61,7 +61,7 @@ export const variants_rond: Variants = {
     }
 }
 
-export const variants_rond_creux: Variants = {
+export const variantsRondPrimary: Variants = {
     offscreen: { opacity: 0 },
     onscreen: {
         opacity: 1,

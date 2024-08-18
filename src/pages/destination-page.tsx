@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useGetDestinationById } from "../supabase/destinations-supabase";
 import DestinationPresentation from "../components/destination-presentation";
 import ProgramDestination from "../components/program-destination";
-import NavigationBar from "../components/navigation-bar";
+import NavigationBar from "../components/navigation/navigation-bar";
 import { useLink } from "../hooks/useLink";
 
 const DestinationPage: FunctionComponent = () => {

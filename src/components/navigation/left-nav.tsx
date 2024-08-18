@@ -19,7 +19,7 @@ const LeftNav: FunctionComponent<Props> = ({ isOpen, setIsOpen }) => {
         <motion.nav
             variants={variantsLeftNav}
             animate={isOpen ? 'open' : 'close'}
-            className="block md:hidden absolute top-0 left-0 h-[95vh] p-4 m-2 rounded bg-secondary/95"
+            className="block lg:hidden absolute top-0 left-0 h-[100vh] p-4 m-2 rounded bg-secondary/95"
         >
             {
                 isAuth && (
