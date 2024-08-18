@@ -10,7 +10,7 @@ const LoadingDestinationCard: FunctionComponent = () => {
             whileInView='onscreen'
             viewport={{ once: true, amount: .5 }}
             transition={{ staggerChildren: .2 }}
-            className="containt animate-pulse flex justify-center items-center flex-col w-80 mb-14"
+            className="containt animate-pulse flex justify-center items-center flex-col w-80 mb-14 mx-1"
         >
             <motion.div variants={variantsStandard} className="w-full h-80 bg-white" />
             <motion.div variants={variantsStandard} className="mt-12 w-full flex flex-col items-center">

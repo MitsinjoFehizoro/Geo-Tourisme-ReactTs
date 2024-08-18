@@ -42,8 +42,8 @@ const Destination: FunctionComponent = () => {
             viewport={{ once: true, amount: .4 }}
             transition={{ staggerChildren: .2 }}
             onViewportEnter={() => toggleLinkActif('destination')}
-            className="bg-background pb-10 pt-14">
-            <motion.h1 variants={variantsStandard} className="text-secondary text-center text-3xl">Où allez-vous miantenant?</motion.h1>
+            className="relative bg-background pt-8 pb-0 lg:pb-10 lg:pt-14">
+            <motion.h1 variants={variantsStandard} className="text-secondary text-center text-2xl lg:text-3xl">Où allez-vous miantenant?</motion.h1>
             <motion.ul variants={variantsStandard} className="flex flex-row justify-center items-center h-10 mt-4">
                 {
                     slides.map(slide =>
@@ -61,7 +61,7 @@ const Destination: FunctionComponent = () => {
                     exit='exit'
                     transition={{ duration: 0.2 }}
                     variants={variantsSlideDestination}
-                    className="w-full min-h-80 mt-4 grid grid-cols-3 place-items-center place-content-center"
+                    className="w-full min-h-80 mt-4 flex flex-wrap justify-around"
                 >
                     {
                         stateGetDestination.isLoading && (

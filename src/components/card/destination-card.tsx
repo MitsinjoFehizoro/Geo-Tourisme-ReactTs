@@ -1,12 +1,12 @@
 import { FunctionComponent } from "react";
 import '../../styles/components/card/_destination-card.scss'
 import { motion } from 'framer-motion'
-import { destination } from "../../tools/type";
 import { NavLink } from "react-router-dom";
 import { variantsStandard } from "../../styles/animations/standard-variants";
+import { Destination } from "../../models/destination";
 
 type Props = {
-    destination: destination
+    destination: Destination
 }
 
 const DestinationCard: FunctionComponent<Props> = ({ destination }) => {
@@ -16,7 +16,7 @@ const DestinationCard: FunctionComponent<Props> = ({ destination }) => {
             whileInView='onscreen'
             viewport={{ once: true, amount: .5 }}
             transition={{ staggerChildren: .2 }}
-            className="containt flex justify-center items-center flex-col w-80 mb-14"
+            className="containt flex justify-center items-center flex-col w-80 mb-14 mx-1"
         >
             <div className="relative w-full h-80 flex justify-center">
                 <motion.img variants={variantsStandard} src={destination.galeries[0]} alt="" className="w-full h-full" />

@@ -4,7 +4,7 @@ import { useToast } from "../hooks/useToast";
 const Toast: FunctionComponent = () => {
     const { toasts } = useToast()
     return (
-        <ul className="fixed top-4 right-2 z-50 ">
+        <ul className="fixed top-2 right-1 lg:top-4 lg:right-2 z-50 ">
             {
                 toasts && toasts.map((toast, index) => (
                     <li

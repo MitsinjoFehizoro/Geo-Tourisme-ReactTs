@@ -52,13 +52,13 @@ const SlideTourisme: FunctionComponent = () => {
                     animate={showPrevSlide ? 'next' : 'prev'}
                     transition={{ type: 'spring', bounce: 0.4, duration: 1 }}
                     className="absolute flex flex-row pb-8"
-                    style={{ width: widthDiv * 2 + 'px' }}>
+                    style={{ width: widthDiv * 2 }}>
                     {slideTourisme.map((slide, index) => (
                         <div
                             key={index}
                             className="w-1/2 px-2"
                         >
-                            <h1 className="text-3xl text-primary mb-2">{slide.title}</h1>
+                            <h1 className="text-2xl lg:text-3xl text-primary mb-2">{slide.title}</h1>
                             <p>{slide.description}</p>
                         </div>
                     ))}
