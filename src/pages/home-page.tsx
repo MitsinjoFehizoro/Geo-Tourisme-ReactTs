@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect } from "react";
-import Accueil from "../components/accueil";
+import Accueil from "../components/accueil/accueil";
 import Tourisme from "../components/tourisme";
 import Destination from "../components/destination";
 import WhyUs from "../components/why-us";

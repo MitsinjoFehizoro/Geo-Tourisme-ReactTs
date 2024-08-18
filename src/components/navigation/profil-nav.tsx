@@ -13,7 +13,7 @@ const ProfilNav: FunctionComponent = () => {
             {
                 isAuth && (
                     <div className="hidden md:flex items-center" onClick={() => setStateProfil(!stateProfil)} >
-                        <div className="z-10 py-1 px-4 flex flex-row items-center cursor-pointer">
+                        <div className="z-10 py-1 px-4 md:px-0 lg:px-4 flex flex-row items-center cursor-pointer">
                             <p className="w-9 h-9 text-sm flex items-center justify-center bg-secondary border-2 border-primary rounded-full text-background capitalize">{clientAuth?.name.split(' ').at(-1)?.substring(0, 2)}</p>
                             <div className="flex items-center">
                                 <p className="max-w-24 mx-2 text-sm text-ellipsis overflow-hidden capitalize">{clientAuth?.name.split(' ').at(-1)}</p>

@@ -1,15 +1,12 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import '../styles/components/_accueil.scss'
-import { i_accueil } from "../styles/base/tailwind";
-import CustomButton from "./custom-button";
-import { AnimatePresence, Variants, motion } from 'framer-motion'
-import tetezana from '../assets/images/Bemaraha/tetezana.jpg'
-import tsingy from '../assets/images/Bemaraha/tsingy.jpg'
-import chute from '../assets/images/Chute de la lylie et geyser/chute2.jpg'
-import gesier from '../assets/images/Chute de la lylie et geyser/gesier2.jpg'
-import { useLink } from "../hooks/useLink";
-import { useHeightNav } from "../hooks/useHeightNav";
-import { variantsDestination, variantsDestinationChild } from "../styles/animations/accueil-variants";
+import '../../styles/components/_accueil.scss'
+import { i_accueil } from "../../styles/base/tailwind";
+import CustomButton from "../custom-button";
+import { motion } from 'framer-motion'
+import { useLink } from "../../hooks/useLink";
+import { useHeightNav } from "../../hooks/useHeightNav";
+import { variantsDestination, variantsDestinationChild } from "../../styles/animations/accueil-variants";
+import PictureSlide from "./picture-slide";
 
 const Accueil: FunctionComponent = () => {
     const [scrollY, setScrollY] = useState<number>(0)
@@ -57,66 +54,21 @@ const Accueil: FunctionComponent = () => {
     }, [heightSection, heightDiv, scrollY, heightNav])
 
     const { links, toggleLinkActif } = useLink()
-
     return (
         <motion.section
             viewport={{ amount: .8 }}
             onViewportEnter={() => toggleLinkActif('accueil')}
             ref={links['accueil'].refDestination}
+            className="relative w-full h-[35em] "
         >
-            <div className="porteur" ref={porteurRef} >
-                <SlideImage />
-                <div className="animation flex flex-row justify-evenly absolute z-10 left-0" ref={divRef} style={{ top: topDiv + 'px' }} >
-                    <Introduction />
-                    <Formulaire />
-                </div>
-            </div>
+            <PictureSlide />
         </motion.section>
 
     )
 }
 
-const SlideImage: FunctionComponent = () => {
 
-    const images = [tetezana, chute, tsingy, gesier]
-    const [indexImageVisible, setIndexImageVisible] = useState<number>(0)
-    const variantsImage: Variants = {
-        hidden: { opacity: 0.5 },
-        visible: { opacity: 1 },
-        exit: { opacity: 0.5 }
-    }
 
-    useEffect(() => {
-        const changeInterval = setInterval(() => {
-            setIndexImageVisible(prevIndex => (prevIndex + 1) % images.length)
-        }, 5000)
-        return () => clearInterval(changeInterval)
-    }, [images.length, indexImageVisible])
-
-    return (
-        <div className="slide">
-            <div className="fond"></div>
-            <AnimatePresence>
-                {
-                    images.map((src, index) =>
-                        index === indexImageVisible && (
-                            <motion.img
-                                key={index}
-                                src={src}
-                                className="w-full h-auto"
-                                alt="Image en slide"
-                                variants={variantsImage}
-                                initial='hidden'
-                                animate='visible'
-                                exit='exit'
-                            />
-                        )
-                    )
-                }
-            </AnimatePresence>
-        </div>
-    )
-}
 const Introduction: FunctionComponent = () => {
     return (
         <div className="flex flex-col justify-center  w-1/3">

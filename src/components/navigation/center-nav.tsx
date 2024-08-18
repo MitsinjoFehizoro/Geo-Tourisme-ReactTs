@@ -7,7 +7,7 @@ const CenterNav: FunctionComponent = () => {
     const { isAuth } = useAuth()
     const { links, linkActif, toggleLinkActif, toggleScrollActif, toggleKeyActif } = useLink()
     const handleClickLink = (key: string) => {
-        toggleLinkActif(key), toggleScrollActif(key), toggleKeyActif(key), setIsOpen(false)
+        toggleLinkActif(key), toggleScrollActif(key), toggleKeyActif(key)
     }
     return (
         <nav className="centerNav hidden md:flex flex-row justify-evenly mt-[.3em]">
@@ -27,7 +27,7 @@ const CenterNav: FunctionComponent = () => {
                             key={index}
                             to='/'
                             className={`${link == linkActif ? 'actif' : ''} navLink md:text-sm lg:text-base`}
-                            onClick={() => handleClickLink(key  )}
+                            onClick={() => handleClickLink(key)}
                         >{link.title}</NavLink>
                     )
                 )
