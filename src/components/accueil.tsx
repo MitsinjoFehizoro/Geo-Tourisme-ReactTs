@@ -168,7 +168,6 @@ const Formulaire: FunctionComponent = () => {
                         </motion.div>
                     </div>
 
-
                 </div>
                 <input className="div input" type="date" name="" id="" />
                 <div className="div flex flex-row justify-between items-center px-4">

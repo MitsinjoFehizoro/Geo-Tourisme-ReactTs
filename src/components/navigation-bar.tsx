@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useRef } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import '../styles/components/_navigation-bar.scss';
 import logo from '../assets/logo/logo-color.png';
 import { motion, useScroll, useSpring } from 'framer-motion'
@@ -30,6 +30,7 @@ const NavigationBar: FunctionComponent = () => {
         restDelta: 0.01
     })
 
+    const [isOpen, setIsOpen] = useState(false)
 
 
     return (
@@ -39,10 +40,16 @@ const NavigationBar: FunctionComponent = () => {
             <CenterNav />
             <ConnexionLink />
             <ProfilNav />
-            <div className="md:hidden flex items-center">
-                <i className="fa fa-bars text-primary "></i>
+            <div onClick={() => setIsOpen(!isOpen)} className="md:hidden flex items-center cursor-pointer">
+                {
+                    isOpen ? (
+                        <i className="fa fa-xmark text-primary text-lg"></i>
+                    ) : (
+                        <i className="fa fa-bars text-primary "></i>
+                    )
+                }
             </div>
-            <LeftNav />
+            <LeftNav isOpen={isOpen} setIsOpen={setIsOpen} />
         </header >
 
 
