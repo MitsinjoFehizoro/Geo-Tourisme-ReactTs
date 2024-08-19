@@ -9,7 +9,7 @@ const TemoinCard: FunctionComponent = () => {
             <p className="text-center my-4">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae optio, provident iste commodi doloribus porro, atque assumenda reprehenderit consequuntur nemo eum ad ab fugiat mollitia nisi, fugit sunt ut impedit. Lorem ipsum dolor sit amet consectetur adipisicing elit.
             </p>
-            <p className="text-secondary font-extrabold">ANDRY AUGUST</p>
+            <p className="text-secondary font-extrabold mb-12 md:mb-0">ANDRY AUGUST</p>
         </div>
     )
 }

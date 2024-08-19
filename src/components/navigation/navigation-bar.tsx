@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import '../../styles/components/navigation/_navigation-bar.scss';
+import '../../styles/components/_navigation-bar.scss';
 import logo from '../../assets/logo/logo-color.png';
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { useHeightNav } from "../../hooks/useHeightNav";

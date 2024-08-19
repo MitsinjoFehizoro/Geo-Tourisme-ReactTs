@@ -11,8 +11,8 @@ const InfoCard: FunctionComponent = () => {
             whileInView='onscreen'
             viewport={{ once: true, amount : .5}}
             variants={variantsInfoCard}
-            className="w-6/12 p-8 h-full bg-white rounded">
-            <h1 className="text-3xl text-primary">Information de contact</h1>
+            className="w-full lg:w-6/12 p-4 md:p-8 bg-white rounded">
+            <h1 className="text-2xl lg:text-3xl text-primary">Information de contact</h1>
             <div className="mt-4">
                 <p className="text-sm">Vous pouvez nous trouver à :</p>
                 <p>Bloc 13/Porte 444, Cur Vontovorona, Antananarivo 104</p>
@@ -29,7 +29,7 @@ const InfoCard: FunctionComponent = () => {
                 <p className="text-sm">Email : </p>
                 <p>mitsinjofehizoro@gmail.com</p>
             </div>
-            <div className="mt-4 w-72 flex flex-row justify-between">
+            <div className="mt-4 w-64 flex flex-row justify-between">
                 <i className={`fa-brands fa-linkedin-in ${i_contact}`}></i>
                 <i className={`fa-brands fa-facebook-f ${i_contact}`}></i>
                 <i className={`fa-brands fa-twitter ${i_contact}`}></i>

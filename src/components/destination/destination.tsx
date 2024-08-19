@@ -1,12 +1,12 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import '../styles/components/_destination.scss';
+import '../../styles/components/_destination.scss';
 import { AnimatePresence, motion } from 'framer-motion'
-import { useLink } from "../hooks/useLink";
-import { useGetDestinations } from "../supabase/destinations-supabase";
-import DestinationCard from "./card/destination-card";
-import LoadingDestinationCard from "./loading/loading-destination-card";
-import { variantsSlideDestination } from "../styles/animations/destination-variants";
-import { variantsStandard } from "../styles/animations/standard-variants";
+import { useLink } from "../../hooks/useLink";
+import { useGetDestinations } from "../../supabase/destinations-supabase";
+import DestinationCard from "./destination-card";
+import LoadingDestinationCard from "./loading-destination-card";
+import { variantsSlideDestination } from "../../styles/animations/destination-variants";
+import { variantsStandard } from "../../styles/animations/standard-variants";
 
 const Destination: FunctionComponent = () => {
 

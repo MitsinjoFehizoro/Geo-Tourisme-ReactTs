@@ -1,10 +1,9 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import '../styles/components/_why-us.scss'
-import soleil from '../assets/images/Isalo/soleil.jpg'
-import GarantiCard from "./card/garanti-card";
+import soleil from '../../assets/images/Isalo/soleil.jpg'
+import GarantiCard from "./garanti-card";
 import { motion } from 'framer-motion'
-import { useLink } from "../hooks/useLink";
-import { variantsStandard } from "../styles/animations/standard-variants";
+import { useLink } from "../../hooks/useLink";
+import { variantsStandard } from "../../styles/animations/standard-variants";
 
 const WhyUs: FunctionComponent = () => {
     const { links, toggleLinkActif } = useLink()
@@ -35,8 +34,8 @@ const WhyUs: FunctionComponent = () => {
                 viewport={{ once: true, amount: .4 }}
                 transition={{ staggerChildren: .2 }}
                 className="absolute top-0 left-0 w-full py-14  px-8 md:px-14">
-                <motion.h1 variants={variantsStandard} className="text-right text-white  mb-8 md:mb-16 text-2xl lg:text-3xl">Pourquoi vous devez nous choisir ?</motion.h1>
-                <motion.div variants={variantsStandard} className="flex flex-wrap justify-between w-full">
+                <motion.h1 variants={variantsStandard} className="text-center md:text-right text-white  mb-8 md:mb-16 text-2xl lg:text-3xl">Pourquoi vous devez nous choisir ?</motion.h1>
+                <motion.div variants={variantsStandard} className="flex flex-wrap justify-around w-full">
                     <GarantiCard />
                     <GarantiCard />
                     <GarantiCard />
