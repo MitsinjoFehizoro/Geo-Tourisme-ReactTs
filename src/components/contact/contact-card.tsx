@@ -25,7 +25,7 @@ const ContactCard: FunctionComponent = () => {
             whileInView='onscreen'
             viewport={{ once: true, amount: .5 }}
             variants={variantsContactCard}
-            className="w-full md:w-5/12 h-96 p-8 bg-white rounded">
+            className="w-full lg:w-5/12 h-auto lg:h-full p-6 md:p-8 bg-white rounded">
             <h1 className="text-2xl lg:text-3xl text-primary mb-4">Contactez-nous</h1>
             {
                 !isAuth && (
