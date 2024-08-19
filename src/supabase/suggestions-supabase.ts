@@ -43,7 +43,7 @@ export const useCreateSuggestion = () => {
             } else {
                 setStateCreateSuggestion({ isLoading: false, error: null })
                 clearField()
-                addToast({ toast: "📨Merci pour votre suggestion! Nous l'examinerons et vous répondons bientôt.", isSucces: true })
+                addToast({ toast: "📨 Merci pour votre suggestion! Nous l'examinerons et vous répondons bientôt.", isSucces: true })
             }
         } catch (error) {
             handleErrorSupabase(error as Error, addToast, setStateCreateSuggestion)

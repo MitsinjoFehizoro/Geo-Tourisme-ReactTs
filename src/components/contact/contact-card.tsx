@@ -1,26 +1,50 @@
-import { FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import CustomInput from "../form/custom-input";
 import CustomTextarea from "../form/custom-textarea";
 import CustomButton from "../custom-button";
 import { motion } from 'framer-motion'
 import { variantsContactCard } from "../../styles/animations/contact-variants";
+import { useAuth } from "../../hooks/useAuth";
+import { useEmailValidation } from "../../hooks/useEmailValidation";
+import { useSuggesionValidation } from "../../hooks/useSuggestionValidation";
+import { useCreateContact } from "../../supabase/contacts-supabase";
 
 const ContactCard: FunctionComponent = () => {
+    const { isAuth } = useAuth()
+    const { emailField, handleEmailField } = useEmailValidation()
+    const { suggestionField, handleSuggestionField, clearField } = useSuggesionValidation()
+    const { stateCreateContact, createContact } = useCreateContact()
+    const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        createContact(suggestionField, clearField, emailField)
+    }
     return (
         <motion.form
+            onSubmit={handleSubmit}
             initial='offscreen'
             whileInView='onscreen'
             viewport={{ once: true, amount: .5 }}
             variants={variantsContactCard}
-            className="w-5/12 h-full p-8 bg-white rounded">
-            <h1 className="text-3xl text-primary">Contactez-nous</h1>
-            <div className="flex flex-row py-2">
-                <p className="w-1/2"><CustomInput type="text" placeholder="Votre nom" /></p>
-                <span className="w-4"></span>
-                <p className="w-1/2"><CustomInput type="email" placeholder="Votre@email.com" /></p>
-            </div>
-            <CustomTextarea />
-            <CustomButton text="Envoyer" />
+            className="w-full md:w-5/12 h-96 p-8 bg-white rounded">
+            <h1 className="text-2xl lg:text-3xl text-primary mb-4">Contactez-nous</h1>
+            {
+                !isAuth && (
+                    <CustomInput
+                        type="email"
+                        name="email"
+                        placeholder="example@gmail.com"
+                        onChange={handleEmailField}
+                        field={emailField}
+                    />
+                )
+            }
+            <CustomTextarea
+                field={suggestionField}
+                onChange={handleSuggestionField}
+                name="description"
+                placeholder="Votre message ..."
+            />
+            <CustomButton text="Envoyer" isLoading={stateCreateContact.isLoading} />
         </motion.form>
     )
 }

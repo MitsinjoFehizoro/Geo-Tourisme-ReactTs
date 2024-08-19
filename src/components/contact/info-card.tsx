@@ -1,17 +1,17 @@
 import { FunctionComponent } from "react";
 import { i_contact } from "../../styles/base/tailwind";
-import {  motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { variantsInfoCard } from "../../styles/animations/contact-variants";
 
 const InfoCard: FunctionComponent = () => {
-   
+
     return (
         <motion.div
             initial='offscreen'
             whileInView='onscreen'
-            viewport={{ once: true, amount : .5}}
+            viewport={{ once: true, amount: .5 }}
             variants={variantsInfoCard}
-            className="w-full lg:w-6/12 p-4 md:p-8 bg-white rounded">
+            className="w-full md:w-6/12 h-96 p-4 md:p-8 bg-white rounded">
             <h1 className="text-2xl lg:text-3xl text-primary">Information de contact</h1>
             <div className="mt-4">
                 <p className="text-sm">Vous pouvez nous trouver à :</p>
