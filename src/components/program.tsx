@@ -5,7 +5,7 @@ import { useChoiceOrganisation } from "../hooks/useChoiceOrganisation";
 import TitleProgramCard from "./card/title-program-card";
 import DetailProgamCard from "./card/detail-program-card";
 import { Destination } from "../models/destination";
-import LocalisationCard from "./card/localisation-card";
+import LocalisationCard from "./destination-page/localisation-card";
 
 
 type Props = {

@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import '../../styles/components/card/_garanti-card.scss'
+import '../../../styles/components/card/_garanti-card.scss'
 
 const GarantiCard: FunctionComponent = () => {
 
