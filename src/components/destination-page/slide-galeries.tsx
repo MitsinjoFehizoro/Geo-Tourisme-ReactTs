@@ -14,12 +14,12 @@ const SlideGaleries: FunctionComponent<Props> = ({ galeries }) => {
         setSelectedIndex(prevIndex => (prevIndex + 1) % galeries.length)
     }
     return (
-        <div className="w-full h-full absolute top-4 left-4 overflow-hidden">
+        <div className="w-full h-full absolute top-2 md:top-4 left-0 md:left-4 overflow-hidden">
             <AnimatePresence>
                 {
                     galeries.map((src, index) =>
                         selectedIndex === index && (
-                            <img src={src} className="w-full h-full bg-secondary/20 rounded-xl" alt="" key={index} />
+                            <img src={src} className="w-full min-h-96 bg-secondary/20 rounded-xl" alt="" key={index} />
                         )
                     )
                 }

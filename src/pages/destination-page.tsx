@@ -23,7 +23,7 @@ const DestinationPage: FunctionComponent = () => {
     return (
         <>
             <NavigationBar />
-            <section className="w-full bg-background pb-14 " style={{ paddingTop: 80 + heightNav }}>
+            <section className="w-full bg-background pb-14" style={{ paddingTop: 40 + heightNav }}>
                 <SectionPresentation destination={destination} stateSupabase={stateGetDestination} />
                 <SectionLocalisation destination={destination} stateSupabase={stateGetDestination} />
                 <SectionDispo destination={destination} stateSupabase={stateGetDestination} />
