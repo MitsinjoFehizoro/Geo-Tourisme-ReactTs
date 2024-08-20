@@ -18,3 +18,6 @@ export const formatDateComplet = (date: Date) => {
     const formattedDate = format(date, "EEEE, dd MMMM yyyy à HH:ii", { locale: fr });
     return formattedDate
 }
+
+
+

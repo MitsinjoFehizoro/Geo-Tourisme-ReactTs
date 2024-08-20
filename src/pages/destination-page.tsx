@@ -1,11 +1,14 @@
 import { FunctionComponent, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGetDestinationById } from "../supabase/destinations-supabase";
-import ProgramDestination from "../components/program-destination";
 import NavigationBar from "../components/navigation/navigation-bar";
 import { useLink } from "../hooks/useLink";
-import DestinationPresentation from "../components/destination-page/destination-presentation";
-
+import Footer from "../components/footer";
+import SectionPresentation from "../components/destination-page/section-presentation";
+import SectionLocalisation from "../components/destination-page/section-localisation";
+import SectionDispo from "../components/destination-page/section-dispo";
+import { useHeightNav } from "../hooks/useHeightNav";
+import '../styles/components/_destination-page.scss'
 const DestinationPage: FunctionComponent = () => {
     const { id } = useParams<{ id: string }>()
     const { toggleLinkActif } = useLink()
@@ -16,18 +19,16 @@ const DestinationPage: FunctionComponent = () => {
             getDestination(id)
         }
     }, [])
+    const { heightNav } = useHeightNav()
     return (
         <>
             <NavigationBar />
-            <DestinationPresentation stateGetDestination={stateGetDestination} destination={destination} />
-            {/* {
-                destination && (
-                    <ProgramDestination destination={destination} />
-                )
-            }
-            <footer className="w-full pt-7 pb-5 flex flex-row items-center justify-around  bg-background">
-                <p className="text-sm text-secondary"><i className="fa fa-copyright mr-2"></i>Powered by MitsinjoFehizoro - 2024</p>
-            </footer> */}
+            <section className="w-full bg-background pb-14 " style={{ paddingTop: 80 + heightNav }}>
+                <SectionPresentation destination={destination} stateSupabase={stateGetDestination} />
+                <SectionLocalisation destination={destination} stateSupabase={stateGetDestination} />
+                <SectionDispo destination={destination} stateSupabase={stateGetDestination} />
+            </section>
+            <Footer />
         </>
     )
 }
