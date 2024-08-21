@@ -1,5 +1,10 @@
 import { Variants } from "framer-motion"
 
+export const variantsParents: Variants = {
+    hidden: { opacity: 0, scale: 0, transition: { when: 'afterChildren' } },
+    visible: { opacity: 1, scale: 1, transition: { when: 'beforeChildren' } }
+}
+
 export const variantsDestination: Variants = {
     hidden: { opacity: 0, scale: 0, height: 0, transition: { when: 'afterChildren', staggerChildren: .05 } },
     visible: { opacity: 1, scale: 1, height: 'auto', transition: { when: 'beforeChildren', staggerChildren: .05 } }

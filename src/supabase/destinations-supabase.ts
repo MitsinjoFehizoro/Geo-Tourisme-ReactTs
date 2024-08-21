@@ -13,6 +13,7 @@ export const useGetDestinations = () => {
             error: null
         }
     )
+    const [destinations, setDestinations] = useState<Destination[]>()
     const [tourismes, setTourismes] = useState<Destination[]>()
     const [geo, setGeo] = useState<Destination[]>()
 
@@ -26,6 +27,7 @@ export const useGetDestinations = () => {
             if (errorDestinations) {
                 handleErrorSupabase(errorDestinations, addToast, setStateGetDestination)
             } else {
+                setDestinations(dataDestinations as Destination[])
                 setTourismes(dataDestinations.filter((destination: Destination) => destination.type === 'tourisme'))
                 setGeo(dataDestinations.filter((destination: Destination) => destination.type === 'geo'))
                 setStateGetDestination({ isLoading: false, error: null })
@@ -38,6 +40,7 @@ export const useGetDestinations = () => {
 
     return {
         stateGetDestination,
+        destinations,
         tourismes,
         geo,
         getDestinations

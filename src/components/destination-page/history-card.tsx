@@ -22,7 +22,7 @@ const HistoryCard: FunctionComponent<Props> = ({ destination, stateSupabase }) =
                             <p className="w-full h-3 bg-white animate-pulse" />
                         ) : (
                             destination && (
-                                <p>HISTOIRE</p>
+                                <p>Historique</p>
                             )
                         )
                     }

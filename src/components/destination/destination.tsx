@@ -39,7 +39,7 @@ const Destination: FunctionComponent = () => {
             ref={links['destination'].refDestination}
             initial='offscreen'
             whileInView='onscreen'
-            viewport={{ once: true, amount: .4 }}
+            viewport={{ once: true, amount: .2 }}
             transition={{ staggerChildren: .2 }}
             onViewportEnter={() => toggleLinkActif('destination')}
             className="relative bg-background pt-8 pb-0 lg:pb-10 lg:pt-14">
@@ -61,7 +61,7 @@ const Destination: FunctionComponent = () => {
                     exit='exit'
                     transition={{ duration: 0.2 }}
                     variants={variantsSlideDestination}
-                    className="w-full min-h-80 mt-4 flex flex-wrap justify-around"
+                    className="w-full min-h-80 mt-4 px-2 md:px-8 flex flex-wrap justify-around overflow-hidden"
                 >
                     {
                         stateGetDestination.isLoading && (

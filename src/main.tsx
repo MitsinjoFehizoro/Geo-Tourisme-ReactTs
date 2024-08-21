@@ -13,15 +13,15 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AuthContextProvider>
       <LinkContextProvider>
-        <ReservationContextProvider>
-          <HeightNavContextProvider>
-            <OrganisationChoiceContextProvider>
+        <HeightNavContextProvider>
+          <OrganisationChoiceContextProvider>
+            <ReservationContextProvider>
               <ToastContextProvider>
                 <App />
               </ToastContextProvider>
-            </OrganisationChoiceContextProvider>
-          </HeightNavContextProvider>
-        </ReservationContextProvider>
+            </ReservationContextProvider>
+          </OrganisationChoiceContextProvider>
+        </HeightNavContextProvider>
       </LinkContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,
