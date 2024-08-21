@@ -8,19 +8,22 @@ import { OrganisationChoiceContextProvider } from './hooks/useChoiceOrganisation
 import { ToastContextProvider } from './hooks/useToast.tsx'
 import { AuthContextProvider } from './hooks/useAuth.tsx'
 import { ReservationContextProvider } from './hooks/useChoiceReservation.tsx'
+import { DestinationChoiceContextProvider } from './hooks/useChoiceDestination.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AuthContextProvider>
       <LinkContextProvider>
         <HeightNavContextProvider>
-          <OrganisationChoiceContextProvider>
-            <ReservationContextProvider>
-              <ToastContextProvider>
-                <App />
-              </ToastContextProvider>
-            </ReservationContextProvider>
-          </OrganisationChoiceContextProvider>
+          <DestinationChoiceContextProvider>
+            <OrganisationChoiceContextProvider>
+              <ReservationContextProvider>
+                <ToastContextProvider>
+                  <App />
+                </ToastContextProvider>
+              </ReservationContextProvider>
+            </OrganisationChoiceContextProvider>
+          </DestinationChoiceContextProvider>
         </HeightNavContextProvider>
       </LinkContextProvider>
     </AuthContextProvider>
