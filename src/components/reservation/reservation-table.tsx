@@ -9,15 +9,21 @@ import { useChoicieReservation } from "../../hooks/useChoiceReservation";
 
 type Props = {
     stateGetReservations: stateSupabase,
-    reservations: Reservation[]
+    reservations: Reservation[],
+    scrollReservation: () => void
 }
-const ReservationTable: FunctionComponent<Props> = ({ stateGetReservations, reservations }) => {
+const ReservationTable: FunctionComponent<Props> = ({ stateGetReservations, reservations, scrollReservation }) => {
     const { reservationChoice, handleReservationChoice } = useChoicieReservation()
     useEffect(() => {
         if (!reservationChoice && reservations.length > 0) {
             handleReservationChoice(reservations[0])
         }
     }, [reservations])
+
+    const handleClick = (reservation: Reservation) => {
+        handleReservationChoice(reservation)
+        scrollReservation()
+    }
 
     return (
         <div className={`reservationTable ${reservation_card}`}>
@@ -45,7 +51,7 @@ const ReservationTable: FunctionComponent<Props> = ({ stateGetReservations, rese
                         <tbody>
                             {
                                 reservations.map((reservation, index) =>
-                                    <tr key={index} onClick={() => handleReservationChoice(reservation)} className={`${reservation.id === reservationChoice?.id ? 'active' : ''}`}>
+                                    <tr key={index} onClick={() => handleClick(reservation)} className={`${reservation.id === reservationChoice?.id ? 'active' : ''}`}>
                                         <td>
                                             <span>{formatDateSimple(reservation.organisations.start)}</span> -  <span>{formatDateSimple(reservation.organisations.end)}</span>
                                         </td>

@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react"
+import { FunctionComponent, RefObject, useEffect, useState } from "react"
 import { i_reservation, reservation_card } from "../../styles/base/tailwind"
 import '../../styles/components/card/_right-reservation-card.scss'
 import { useChoicieReservation } from "../../hooks/useChoiceReservation"
@@ -20,7 +20,7 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
     useEffect(() => {
         if (!reservationChoice && reservations.length > 0) {
             handleReservationChoice(reservations[0])
-        } 
+        }
     }, [reservations])
     useEffect(() => {
         if (reservationChoice) {
@@ -30,7 +30,7 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
     }, [reservationChoice])
 
     return (
-        <section className="w-full sm:w-10/12 lg:w-6/12">
+        <section className="w-full">
             <div className="w-full py-12 px-4 md:px-8 xl:px-12 bg-white shadow rounded">
                 <div className="flex flex-wrap flex-row justify-between">
                     <div className="w-full md:w-1/2 pr-0 md:pr-4 pb-4 md:pb-0">
@@ -163,7 +163,7 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
                     <i className="fa fa-circle-xmark mr-1 pb-[1.5px]"></i>
                     <p>Annuler</p>
                 </button>
-                <p className="mx-1"/>
+                <p className="mx-1" />
                 <button className="py-2 px-6 bg-green-400 text-white rounded-md flex items-center text-sm hover:-rotate-2 transition ease-in">
                     <i className="fa fa-circle-check mr-1 pb-[1.5px]"></i>
                     <p>Confirmer</p>

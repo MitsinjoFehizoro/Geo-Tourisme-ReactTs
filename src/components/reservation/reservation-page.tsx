@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithChildren, useEffect } from "react";
+import { FunctionComponent, PropsWithChildren, useEffect, useRef } from "react";
 import NavigationBar from "../navigation/navigation-bar";
 import { useGetReservations } from "../../supabase/reservations-supabase";
 import { useAuth } from "../../hooks/useAuth";
@@ -18,6 +18,10 @@ const ReservationPage: FunctionComponent = () => {
         getReservations()
     }, [isAuth])
 
+    const refRight = useRef<HTMLDivElement>(null)
+    const scrollReservation = () => {
+        refRight.current?.scrollIntoView({ behavior: "smooth" })
+    }
 
     return (
         <ModalContextProvider>
@@ -25,8 +29,10 @@ const ReservationPage: FunctionComponent = () => {
             <ContainerReservationPage>
                 <NavigationBar />
                 <section className="w-full min-h-[100vh] pt-32 pb-16 px-4 bg-background flex flex-wrap flex-row justify-evenly relative">
-                    <LeftReservationCard stateGetReservations={stateGetReservations} reservations={reservations} />
-                    <RightReservationCard stateGetReservations={stateGetReservations} reservations={reservations} />
+                    <LeftReservationCard scrollReservation={scrollReservation} stateGetReservations={stateGetReservations} reservations={reservations} />
+                    <div className="w-full sm:w-10/12 lg:w-6/12" ref={refRight}>
+                        <RightReservationCard stateGetReservations={stateGetReservations} reservations={reservations} />
+                    </div>
                 </section>
                 <Footer color="white" />
             </ContainerReservationPage>

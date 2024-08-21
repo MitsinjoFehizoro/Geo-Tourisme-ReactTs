@@ -21,7 +21,7 @@ const EditParticipantModal: FunctionComponent = () => {
     }, [reservationChoice])
     return (
         <section className={`${isShowModal ? 'block' : 'hidden'} w-full h-full fixed top-0 left-0 z-30 bg-secondary/50 flex justify-center items-center`}>
-            <div className="relative w-96 bg-white px-8 pt-12 pb-10 rounded-md">
+            <div className="relative mx-2 w-96 bg-white px-8 pt-12 pb-10 rounded-md">
                 <i onClick={toogleStateShowModal} className="fa fa-circle-xmark text-sm absolute top-4 right-8 cursor-pointer hover:text-primary"></i>
                 <ReservationForm
                     nbLocaux={nbLocaux}

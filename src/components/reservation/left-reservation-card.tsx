@@ -7,9 +7,10 @@ import { LoadingReservationNumber, ReservationNumber } from "./reservation-numbe
 
 type Props = {
     stateGetReservations: stateSupabase,
-    reservations: Reservation[]
+    reservations: Reservation[],
+    scrollReservation : ()=>void
 }
-const LeftReservationCard: FunctionComponent<Props> = ({ stateGetReservations, reservations }) => {
+const LeftReservationCard: FunctionComponent<Props> = ({ stateGetReservations, reservations, scrollReservation }) => {
 
     const reservationEncours = () => {
         return ({
@@ -23,6 +24,7 @@ const LeftReservationCard: FunctionComponent<Props> = ({ stateGetReservations, r
             number: reservations.filter(reservation => reservation.state === 'confirmé').length
         })
     }
+
     return (
         <div className="w-full sm:w-10/12 lg:w-5/12 mb-14">
             <div className="mb-6">
@@ -51,7 +53,7 @@ const LeftReservationCard: FunctionComponent<Props> = ({ stateGetReservations, r
                 }
 
             </div>
-            <ReservationTable stateGetReservations={stateGetReservations} reservations={reservations} />
+            <ReservationTable scrollReservation={scrollReservation} stateGetReservations={stateGetReservations} reservations={reservations} />
         </div>
     )
 }
