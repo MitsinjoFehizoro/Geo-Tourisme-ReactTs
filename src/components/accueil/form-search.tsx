@@ -10,7 +10,7 @@ const FormSearch: FunctionComponent = () => {
         getDestinations()
     }, [])
     return (
-        <form className="w-10/12 lg:w-72 px-4 py-8 bg-background rounded">
+        <form className="w-full md:w-72 px-4 py-8 bg-background rounded">
             <DropDownDestination destinations={destinations} stateSupabase={stateGetDestination} />
             <DropDownMonths stateSupabase={stateGetDestination} />
             <CustomButton text="Rechercher" />

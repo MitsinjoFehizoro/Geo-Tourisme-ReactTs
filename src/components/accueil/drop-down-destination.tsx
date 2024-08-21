@@ -4,6 +4,7 @@ import LoadingSpin from "../loading/loading-spin";
 import { stateSupabase } from "../../tools/type";
 import { Destination } from "../../models/destination";
 import { variantsDestination, variantsDestinationChild, variantsParents } from "../../styles/animations/accueil-variants";
+import { useChoiceDestination } from "../../hooks/useChoiceDestination";
 
 type Props = {
     destinations: Destination[] | undefined
@@ -11,8 +12,10 @@ type Props = {
 }
 const DropDownDestination: FunctionComponent<Props> = ({ destinations, stateSupabase }) => {
     const [isDown, setIsDown] = useState<boolean>(false)
-    const handleClick = () => {
+    const { destinationChoice, handleDestinationChoice } = useChoiceDestination()
+    const handleClick = (destination: Destination) => {
         setIsDown(!isDown)
+        handleDestinationChoice(destination)
     }
     return (
         <div className="relative w-full mb-4">
@@ -20,7 +23,15 @@ const DropDownDestination: FunctionComponent<Props> = ({ destinations, stateSupa
                 className="flex flex-row justify-between items-center w-full h-10 px-4 mb-2 bg-white rounded-md cursor-pointer"
                 onClick={() => setIsDown(!isDown)}
             >
-                <p className="text-sm">Où allez-vous?</p>
+                <p className="text-sm">
+                    {
+                        destinationChoice ? (
+                            <span>{destinationChoice.title}</span>
+                        ) : (
+                            <span>Où allez-vous?</span>
+                        )
+                    }
+                </p>
                 {
                     isDown ? (
                         <i className="fa fa-caret-down text-sm mr-2"></i>
@@ -51,7 +62,7 @@ const DropDownDestination: FunctionComponent<Props> = ({ destinations, stateSupa
                                                 key={index}
                                                 className="flex items-center px-4 w-full h-9 bg-background rounded mb-1 text-sm cursor-pointer"
                                                 variants={variantsDestinationChild}
-                                                onClick={() => handleClick()}
+                                                onClick={() => handleClick(destination)}
                                             >
                                                 {destination.title}
                                             </motion.p>
