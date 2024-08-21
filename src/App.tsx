@@ -30,7 +30,7 @@ const route = createBrowserRouter([
         element: <ReservationPage />
       },
       {
-        path: 'destinations/:id',
+        path: 'destinations',
         element: <DestinationPage />
       }
     ]

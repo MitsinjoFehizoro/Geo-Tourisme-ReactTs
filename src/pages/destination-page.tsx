@@ -1,6 +1,4 @@
-import { FunctionComponent, Ref, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useGetDestinationById } from "../supabase/destinations-supabase";
+import { FunctionComponent, useEffect, useRef } from "react";
 import NavigationBar from "../components/navigation/navigation-bar";
 import { useLink } from "../hooks/useLink";
 import Footer from "../components/footer";
@@ -11,18 +9,19 @@ import '../styles/components/_destination-page.scss'
 import Program from "../components/destination-page/program";
 import Suggestions from "../components/destination-page/suggestions";
 import Reservation from "../components/destination-page/reservation";
+import { useChoiceDestination } from "../hooks/useChoiceDestination";
+import { useGetDestinationById, useGetDestinations } from "../supabase/destinations-supabase";
 
 const DestinationPage: FunctionComponent = () => {
-    const { id } = useParams<{ id: string }>()
+
     const { toggleLinkActif } = useLink()
+    const { destinationChoice } = useChoiceDestination()
     const { stateGetDestination, getDestination, destination } = useGetDestinationById()
     useEffect(() => {
+        if (destinationChoice)
+            getDestination(destinationChoice?.id)
         toggleLinkActif('destination')
-        if (id) {
-            getDestination(id)
-        }
     }, [])
-
     const refOrganisation = useRef<HTMLDivElement>(null)
     const scrollOrganisation = () => {
         refOrganisation.current?.scrollIntoView({ behavior: 'smooth' })
