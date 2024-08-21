@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { FunctionComponent, Ref, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetDestinationById } from "../supabase/destinations-supabase";
 import NavigationBar from "../components/navigation/navigation-bar";
@@ -23,17 +23,20 @@ const DestinationPage: FunctionComponent = () => {
         }
     }, [])
 
-
+    const refOrganisation = useRef<HTMLDivElement>(null)
+    const scrollOrganisation = () => {
+        refOrganisation.current?.scrollIntoView({ behavior: 'smooth' })
+    }
 
     return (
         <>
             <NavigationBar />
             <SectionPresentation destination={destination} stateSupabase={stateGetDestination} />
             <SectionLocalisation destination={destination} stateSupabase={stateGetDestination} />
-            <SectionDispo destination={destination} stateSupabase={stateGetDestination} />
+            <SectionDispo destination={destination} stateSupabase={stateGetDestination} scrollOrganisation={scrollOrganisation} />
             {
                 destination && (
-                    <div className="w-full bg-white py-14 px-4 sm:px-8 lg:px-14 flex flex-wrap justify-between">
+                    <div ref={refOrganisation} className="w-full bg-white py-14 px-4 sm:px-8 lg:px-14 flex flex-wrap justify-between">
                         <Program destination={destination} />
                         <Suggestions destination={destination} />
                         <Reservation destination={destination} />

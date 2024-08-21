@@ -6,9 +6,10 @@ import LoadingDateDispo from "./loading-date-dispo";
 
 type Props = {
     destination: Destination | undefined,
-    stateSupabase: stateSupabase
+    stateSupabase: stateSupabase,
+    scrollOrganisation: () => void
 }
-const SectionDispo: FunctionComponent<Props> = ({ destination, stateSupabase }) => {
+const SectionDispo: FunctionComponent<Props> = ({ destination, stateSupabase, scrollOrganisation }) => {
 
     return (
         <div className="w-full px-4 sm:px-8 lg:px-14  pt-14 bg-background relative">
@@ -16,7 +17,7 @@ const SectionDispo: FunctionComponent<Props> = ({ destination, stateSupabase }) 
             <div className="w-full flex flex-wrap justify-around ">
                 {
                     stateSupabase.isLoading ? (
-                        Array.from({ length : 3 }).map((_, index) =>
+                        Array.from({ length: 3 }).map((_, index) =>
                             <LoadingDateDispo key={index} />
                         )
                     ) : (
@@ -24,7 +25,7 @@ const SectionDispo: FunctionComponent<Props> = ({ destination, stateSupabase }) 
                             destination.organisations.map((organisation, index) => {
                                 const color = index % 2 === 0 ? 'primary' : 'secondary';
                                 return (
-                                    <DateDispoCard organisation={organisation} color={color} key={index} />
+                                    <DateDispoCard organisation={organisation} scrollOrganisation={scrollOrganisation} color={color} key={index} />
                                 )
                             })
                         )

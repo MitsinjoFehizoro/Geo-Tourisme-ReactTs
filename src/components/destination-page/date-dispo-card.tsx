@@ -1,15 +1,21 @@
 import { FunctionComponent } from "react";
-import { NavLink } from "react-router-dom";
 import { Organisation } from "../../models/organisation";
 import { formatDateMoyen } from "../../tools/format-date";
 import { formatPrice } from "../../tools/format-price";
+import { useChoiceOrganisation } from "../../hooks/useChoiceOrganisation";
 
 type Props = {
     organisation: Organisation,
-    color: string
+    color: string,
+    scrollOrganisation: () => void
 }
-const DateDispoCard: FunctionComponent<Props> = ({ organisation, color }) => {
+const DateDispoCard: FunctionComponent<Props> = ({ organisation, color, scrollOrganisation }) => {
 
+    const { handleOrganisationChoice } = useChoiceOrganisation()
+    const handleClick = (organisaion: Organisation) => {
+        handleOrganisationChoice(organisaion)
+        scrollOrganisation()
+    }
     return (
         <div className="relative w-80 h-96 py-14 pr-14 mb-8">
             <div className={`bg-${color}/50 w-full h-full`}></div>
@@ -32,9 +38,9 @@ const DateDispoCard: FunctionComponent<Props> = ({ organisation, color }) => {
                         </div>
                         <p>{formatPrice(organisation.stranger_price)}</p>
                     </div>
-                    <NavLink to='' className={`bg-${color}/50 pt-3 pb-2 w-full text-xs uppercase text-white rounded hover:scale-105 transition`} >
+                    <div onClick={() => handleClick(organisation)} className={`bg-${color}/50 pt-3 pb-2 w-full text-xs uppercase text-white rounded hover:scale-105 transition cursor-pointer`} >
                         plus de détail
-                    </NavLink>
+                    </div>
                 </div>
             </div>
         </div >
