@@ -1,9 +1,9 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent } from "react";
 import { reservation_card } from "../../styles/base/tailwind";
-import ReservationTable from "../reservation-table";
+import ReservationTable from "./reservation-table";
 import { stateSupabase } from "../../tools/type";
 import { Reservation } from "../../models/reservation";
-import { LoadingReservationNumber, ReservationNumber } from "../reservation-number";
+import { LoadingReservationNumber, ReservationNumber } from "./reservation-number";
 
 type Props = {
     stateGetReservations: stateSupabase,
@@ -24,7 +24,7 @@ const LeftReservationCard: FunctionComponent<Props> = ({ stateGetReservations, r
         })
     }
     return (
-        <div className="w-2/6">
+        <div className="w-full sm:w-10/12 lg:w-5/12 mb-14">
             <div className="mb-6">
                 <h1 className="mb-2 text-2xl text-secondary">Gestion de réservations</h1>
                 <p className="text-sm">

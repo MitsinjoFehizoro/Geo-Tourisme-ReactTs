@@ -1,17 +1,16 @@
 import { FunctionComponent, PropsWithChildren, useEffect } from "react";
-import NavigationBar from "../components/navigation/navigation-bar";
-import LeftReservationCard from "../components/card/left-reservation-card";
-import RightReservationCard from "../components/card/right-reservation-card";
-import { useGetReservations } from "../supabase/reservations-supabase";
-import { useAuth } from "../hooks/useAuth";
-import EditParticipantModal from "../components/modal/edit-participant-modal";
-import { ModalContextProvider, useModal } from "../hooks/useModal";
-import { useLink } from "../hooks/useLink";
-import Footer from "../components/footer";
+import NavigationBar from "../navigation/navigation-bar";
+import { useGetReservations } from "../../supabase/reservations-supabase";
+import { useAuth } from "../../hooks/useAuth";
+import EditParticipantModal from "../modal/edit-participant-modal";
+import { ModalContextProvider, useModal } from "../../hooks/useModal";
+import { useLink } from "../../hooks/useLink";
+import Footer from "../footer";
+import LeftReservationCard from "./left-reservation-card";
+import RightReservationCard from "./right-reservation-card";
 
 const ReservationPage: FunctionComponent = () => {
     const { toggleLinkActif } = useLink()
-    const { isShowModal } = useModal()
     const { isAuth } = useAuth()
     const { stateGetReservations, reservations, getReservations } = useGetReservations()
     useEffect(() => {
@@ -25,7 +24,7 @@ const ReservationPage: FunctionComponent = () => {
             <EditParticipantModal />
             <ContainerReservationPage>
                 <NavigationBar />
-                <section className="w-full min-h-[100vh] pt-32 pb-16 bg-background flex flex-row justify-evenly relative">
+                <section className="w-full min-h-[100vh] pt-32 pb-16 px-4 bg-background flex flex-wrap flex-row justify-evenly relative">
                     <LeftReservationCard stateGetReservations={stateGetReservations} reservations={reservations} />
                     <RightReservationCard stateGetReservations={stateGetReservations} reservations={reservations} />
                 </section>

@@ -3,10 +3,12 @@
 
 .reservationTable {
     table {
-
         th,
         td {
             padding: .75em 1.5em;
+            @media (max-width : 768px ) {
+                padding: .75em .5em;;
+            }
         }
 
         thead {

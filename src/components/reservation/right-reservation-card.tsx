@@ -27,14 +27,13 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
             setNbLocaux(reservationChoice.local)
             setNbStranger(reservationChoice.stranger)
         }
-        console.log('testeee');
     }, [reservationChoice])
 
     return (
-        <section className="w-3/6">
-            <div className="w-full p-12 bg-white shadow rounded">
-                <div className="flex flex-row justify-between">
-                    <div className="w-1/2 pr-4">
+        <section className="w-full sm:w-10/12 lg:w-6/12">
+            <div className="w-full py-12 px-4 md:px-8 xl:px-12 bg-white shadow rounded">
+                <div className="flex flex-wrap flex-row justify-between">
+                    <div className="w-full md:w-1/2 pr-0 md:pr-4 pb-4 md:pb-0">
                         <p className="text-sm">Nous allons à</p>
                         {
                             stateGetReservations.isLoading ? (
@@ -44,7 +43,7 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
                             )
                         }
                     </div>
-                    <div className="w-1/2 text-right">
+                    <div className="w-full md:w-1/2 text-right">
                         <p className="text-sm">Pendant 5 jours, le :</p>
                         {
                             stateGetReservations.isLoading ? (
@@ -79,7 +78,7 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
                         <tr>
                             <th className="text-primary text-base">Participants</th>
                             <th className="text-sm text-secondary">Montant / personne</th>
-                            <th className="text-sm text-secondary">Total</th>
+                            <th className="hidden sm:block text-sm text-secondary">Total</th>
                         </tr>
                     </thead>
                     {
@@ -91,23 +90,23 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
                                     <tr>
                                         <td>
                                             <div className="flex flex-row items-center mb-2 justify-between rounded border-[1px] border-background">
-                                                <p className="mt-1 mx-4 pb-1">{nbLocaux} participants locaux</p>
+                                                <p className="mt-1 mx-4 pb-1">{nbLocaux} locaux</p>
                                                 <i onClick={toogleStateShowModal} className={`fa fa-edit ${i_reservation}`}></i>
                                             </div>
                                         </td>
                                         <td>{formatPrice(reservationChoice.organisations.local_price)}</td>
-                                        <td>{formatPrice(reservationChoice.organisations.local_price * nbLocaux)}</td>
+                                        <td className="hidden sm:block sm:pt-3">{formatPrice(reservationChoice.organisations.local_price * nbLocaux)}</td>
                                     </tr>
 
                                     <tr>
                                         <td>
                                             <div className="flex flex-row items-center justify-between mb-2 rounded border-[1px] border-background overflow-hidden">
-                                                <p className="mt-1 mx-4 pb-1">{nbStranger} participants étrangers</p>
+                                                <p className="mt-1 mx-4 pb-1">{nbStranger} étrangers</p>
                                                 <i onClick={toogleStateShowModal} className={`fa fa-edit ${i_reservation}`}></i>
                                             </div>
                                         </td>
                                         <td>{formatPrice(reservationChoice.organisations.stranger_price)}</td>
-                                        <td>{formatPrice(reservationChoice.organisations.stranger_price * nbStranger)}</td>
+                                        <td className="hidden sm:block sm:pt-3">{formatPrice(reservationChoice.organisations.stranger_price * nbStranger)}</td>
                                     </tr>
                                 </tbody>
                             )
@@ -159,20 +158,20 @@ const RightReservationCard: FunctionComponent<Props> = ({ stateGetReservations, 
                     }
                 </div>
             </div>
-            <div className={`p-4 my-4 flex justify-end  ${reservation_card}`}>
-                <button className="py-2 px-8 bg-red-400 text-white rounded-md flex items-center text-sm hover:-rotate-2 transition ease-in">
+            <div className={`p-4 my-4 flex justify-around md:justify-end  ${reservation_card}`}>
+                <button className="py-2 px-6 bg-red-400 text-white rounded-md flex items-center text-sm hover:-rotate-2 transition ease-in">
                     <i className="fa fa-circle-xmark mr-1 pb-[1.5px]"></i>
                     <p>Annuler</p>
                 </button>
-                <p className="mx-2" />
-                <button className="py-2 px-8 bg-green-400 text-white rounded-md flex items-center text-sm hover:-rotate-2 transition ease-in">
+                <p className="mx-1"/>
+                <button className="py-2 px-6 bg-green-400 text-white rounded-md flex items-center text-sm hover:-rotate-2 transition ease-in">
                     <i className="fa fa-circle-check mr-1 pb-[1.5px]"></i>
                     <p>Confirmer</p>
                 </button>
             </div>
             {
                 reservationChoice && (
-                    <div className="py-4 px-12 text-sm bg-red-100 border-[1px] border-red-500 rounded">
+                    <div className="py-4 px-4 md:px-8 xl:px-12 text-sm bg-red-100 border-[1px] border-red-500 rounded">
                         Votre réservation est encore <Encours />. Veuillez la <Confirme /> et effectuer un paiement de 50%, soit <span>{formatPrice(reservationChoice.total / 2)}</span>, avant le jeudi 17 août 2024.
                     </div>
                 )

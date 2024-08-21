@@ -93,7 +93,6 @@ export const useGetReservations = () => {
             if (errorReservations) {
                 handleErrorSupabase(errorReservations, addToast, setStateGetReservations)
             } else {
-                console.log(dataReservations);
                 setReservations(dataReservations)
                 setStateGetReservations({ isLoading: false, error: null })
             }

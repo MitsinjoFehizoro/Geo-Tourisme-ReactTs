@@ -3,7 +3,7 @@ import Root from './pages/root'
 import SignUpPage from './pages/sign-up-page'
 import LoginPage from './pages/login-page'
 import HomePage from './pages/home-page'
-import ReservationPage from './pages/reservation-page'
+import ReservationPage from './components/reservation/reservation-page'
 import DestinationPage from './pages/destination-page'
 import PageNotFound from './pages/page-not-found'
 

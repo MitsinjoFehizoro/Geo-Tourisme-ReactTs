@@ -1,11 +1,11 @@
 import { FunctionComponent, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import '../styles/components/_reservation-table.scss'
-import { reservation_card } from "../styles/base/tailwind";
-import { Reservation } from "../models/reservation";
-import { stateSupabase } from "../tools/type";
-import { formatDateSimple } from "../tools/format-date";
-import { useChoicieReservation } from "../hooks/useChoiceReservation";
+import '../../styles/components/_reservation-table.scss'
+import { reservation_card } from "../../styles/base/tailwind";
+import { Reservation } from "../../models/reservation";
+import { stateSupabase } from "../../tools/type";
+import { formatDateSimple } from "../../tools/format-date";
+import { useChoicieReservation } from "../../hooks/useChoiceReservation";
 
 type Props = {
     stateGetReservations: stateSupabase,
@@ -27,8 +27,8 @@ const ReservationTable: FunctionComponent<Props> = ({ stateGetReservations, rese
                     annulation
                 </NavLink>
             </div>
-            <table className="w-full text-left text-sm">
-                <thead>
+            <table className="w-full text-sm text-center md:text-left overflow-hidden">
+                <thead >
                     <tr>
                         <th>Date</th>
                         <th>Destination</th>
@@ -42,7 +42,7 @@ const ReservationTable: FunctionComponent<Props> = ({ stateGetReservations, rese
                 }
                 {
                     reservations && (
-                        <tbody >
+                        <tbody>
                             {
                                 reservations.map((reservation, index) =>
                                     <tr key={index} onClick={() => handleReservationChoice(reservation)} className={`${reservation.id === reservationChoice?.id ? 'active' : ''}`}>
