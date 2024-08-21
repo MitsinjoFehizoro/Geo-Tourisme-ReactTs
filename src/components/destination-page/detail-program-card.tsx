@@ -1,14 +1,14 @@
 import { FunctionComponent } from "react"
-import { program } from "../../tools/type"
 import { formatDateComplet } from "../../tools/format-date"
+import { Program } from "../../models/program"
 
 type Props = {
-    program: program
+    program: Program
 }
 const DetailProgamCard: FunctionComponent<Props> = ({ program }) => {
     return (
         <div className="mb-6 shadow-sm">
-            <div className="relative w-full h-96" >
+            <div className="relative w-full h-72 md:h-96" >
                 <img src={program.galerie} className="w-full h-full" alt="" />
                 <div className="absolute z-0 w-full left-0 bottom-0 svg-contain">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

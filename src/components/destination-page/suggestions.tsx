@@ -1,14 +1,14 @@
 import { FunctionComponent, useEffect } from "react";
-import TitleProgramCard from "./card/title-program-card";
-import CustomTextarea from "./form/custom-textarea";
-import CustomButton from "./custom-button";
-import StandardCard from "./card/standard-card";
-import { Destination } from "../models/destination";
-import { useSuggesionValidation } from "../hooks/useSuggestionValidation";
-import { useCreateSuggestion, useGetSuggestions } from "../supabase/suggestions-supabase";
-import { useChoiceOrganisation } from "../hooks/useChoiceOrganisation";
-import { useAuth } from "../hooks/useAuth";
-import { Suggestion } from "../models/suggestion";
+import TitleProgramCard from "./title-program-card";
+import CustomTextarea from "../form/custom-textarea";
+import CustomButton from "../custom-button";
+import StandardCard from "../card/standard-card";
+import { Destination } from "../../models/destination";
+import { useSuggesionValidation } from "../../hooks/useSuggestionValidation";
+import { useCreateSuggestion, useGetSuggestions } from "../../supabase/suggestions-supabase";
+import { useChoiceOrganisation } from "../../hooks/useChoiceOrganisation";
+import { useAuth } from "../../hooks/useAuth";
+import { Suggestion } from "../../models/suggestion";
 
 type Props = {
     destination: Destination
@@ -28,7 +28,7 @@ const Suggestions: FunctionComponent<Props> = ({ destination }) => {
             getSuggestions(organisationChoice)
     }, [organisationChoice])
     return (
-        <div className="w-full">
+        <div className="w-full md:w-5/12 lg:w-6/12 xl:w-4/12  my-12 md:my-0">
             <TitleProgramCard title="Votre suggestion pour le :" destination={destination} />
             <StandardCard>
                 {

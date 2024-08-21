@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Program from "./program";
 import Suggestions from "./suggestions";
 import Reservation from "./reservation";
-import { Destination } from "../models/destination";
+import { Destination } from "../../models/destination";
 
 type Props = {
     destination: Destination

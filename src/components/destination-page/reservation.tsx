@@ -1,11 +1,10 @@
 import { FunctionComponent, useState } from "react";
-import TitleProgramCard from "./card/title-program-card";
-import StandardCard from "./card/standard-card";
-import { Destination } from "../models/destination";
-import { useAuth } from "../hooks/useAuth";
-import { useCreateReservation } from "../supabase/reservations-supabase";
-import { useChoiceOrganisation } from "../hooks/useChoiceOrganisation";
-import ReservationForm from "./form/reservation-form";
+import TitleProgramCard from "./title-program-card";
+import StandardCard from "../card/standard-card";
+import { Destination } from "../../models/destination";
+import { useAuth } from "../../hooks/useAuth";
+import { useCreateReservation } from "../../supabase/reservations-supabase";
+import ReservationForm from "../form/reservation-form";
 
 type Props = {
     destination: Destination
@@ -25,7 +24,7 @@ const Reservation: FunctionComponent<Props> = ({ destination }) => {
     }
 
     return (
-        <div className="w-full">
+        <div className="w-full md:w-6/12 lg:w-5/12 xl:w-3/12 mt-0 md:mt-8 lg:mt-0">
             <TitleProgramCard title="Reserver le :" destination={destination} />
             {
                 !isAuth && (
@@ -35,7 +34,7 @@ const Reservation: FunctionComponent<Props> = ({ destination }) => {
                 )
             }
             <StandardCard>
-                <div className="m-2">
+                <div className="m-1">
                     <p className="w-12 h-12 mb-3 flex items-center justify-center rounded-full bg-primary">
                         <i className="fa fa-lightbulb text-white"></i>
                     </p>

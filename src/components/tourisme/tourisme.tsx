@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
-import '../styles/components/_tourisme.scss';
+import '../../styles/components/_tourisme.scss';
 import { motion } from 'framer-motion';
-import { useLink } from "../hooks/useLink";
-import StyleImage from "./tourisme/style-image";
-import SlideTourisme from "./tourisme/slide-tourisme";
+import { useLink } from "../../hooks/useLink";
+import StyleImage from "./style-image";
+import SlideTourisme from "./slide-tourisme";
 
 const Tourisme: FunctionComponent = () => {
     const { links, toggleLinkActif } = useLink()

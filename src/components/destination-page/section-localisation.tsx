@@ -29,7 +29,7 @@ const SectionLocalisation: FunctionComponent<Props> = ({ destination, stateSupab
             </div>
             <div className="w-full md:w-6/12 h-96">
                 {
-                    <div className="relative w-full h-full rounded-xl bg-primary/50 md:bg-background">
+                    <div className="relative w-full h-full rounded-xl bg-background">
                         {
                             stateSupabase.isLoading ? (
                                 <div className="w-full h-full bg-secondary/20 absolute top-4 right-4 rounded-xl animate-pulse" />

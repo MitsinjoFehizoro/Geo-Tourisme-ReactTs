@@ -9,7 +9,7 @@ const Temoin: FunctionComponent = () => {
         <motion.section
             initial='offscreen'
             whileInView='onscreen'
-            viewport={{ once: true, amount: .5 }}
+            viewport={{ once: true, amount: .4 }}
             transition={{ staggerChildren: .2 }}
             className="bg-background py-14  px-8 md:px-14 flex flex-col items-end relative">
             <motion.h1 variants={variantsStandard} className="text-2xl lg:text-3xl text-secondary text-center md:text-right mb-1 w-full">Ce que nos clients disent ?</motion.h1>

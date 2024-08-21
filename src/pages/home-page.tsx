@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect } from "react";
 import Accueil from "../components/accueil/accueil";
-import Tourisme from "../components/tourisme";
+import Tourisme from "../components/tourisme/tourisme";
 import Destination from "../components/destination/destination";
 import Temoin from "../components/temoin/Temoin";
 import Contact from "../components/contact/conctact";

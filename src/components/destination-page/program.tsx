@@ -1,24 +1,36 @@
-import { FunctionComponent, useRef } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { motion, useScroll } from "framer-motion";
-import '../styles/components/_program.scss'
-import { useChoiceOrganisation } from "../hooks/useChoiceOrganisation";
-import TitleProgramCard from "./card/title-program-card";
-import DetailProgamCard from "./card/detail-program-card";
-import { Destination } from "../models/destination";
-import LocalisationCard from "./destination-page/localisation-card";
+import '../../styles/components/_program.scss'
+import { useChoiceOrganisation } from "../../hooks/useChoiceOrganisation";
+import { Destination } from "../../models/destination";
+import TitleProgramCard from "./title-program-card";
+import DetailProgamCard from "./detail-program-card";
 
 
 type Props = {
-    destination: Destination
+    destination: Destination,
 }
 const Program: FunctionComponent<Props> = ({ destination }) => {
     const { organisationChoice } = useChoiceOrganisation()
     const refScroll = useRef<HTMLDivElement>(null)
     const { scrollYProgress } = useScroll({ container: refScroll })
+
+    const refDiv = useRef<HTMLDivElement>(null)
+    const [heightDiv, setHeightDiv] = useState(0)
+    const handleHeightDiv = () => {
+        if (refDiv.current)
+            setHeightDiv(refDiv.current.offsetHeight)
+    }
+    useEffect(() => {
+        handleHeightDiv()
+        window.addEventListener('resize', handleHeightDiv)
+        console.log(heightDiv);
+        return () => window.removeEventListener('resize', handleHeightDiv)
+    }, [refDiv])
     return (
-        <div className="w-96 flex flex-col">
+        <div className="w-full md:w-6/12 lg:w-5/12 xl:w-4/12 flex flex-col">
             <TitleProgramCard title="Où allons-nous le :" destination={destination} />
-            <div className="relative p-4 rounded-md shadow overflow-hidden">
+            <div className="relative p-4 rounded-md shadow">
                 <svg className="absolute top-6 left-4 z-10" id='progress' width="90" height="90" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="30" pathLength="1" className="stroke-background/80" />
                     <motion.circle
@@ -30,7 +42,7 @@ const Program: FunctionComponent<Props> = ({ destination }) => {
                         style={{ pathLength: scrollYProgress }}
                     />
                 </svg>
-                <div className="overflow-auto rounded" style={{ height: '90vh' }} ref={refScroll}>
+                <div className="overflow-auto rounded h-[90vh]"  ref={refScroll}>
                     {
                         organisationChoice?.programs.map(program =>
                             <DetailProgamCard program={program} key={program.id} />

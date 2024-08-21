@@ -29,7 +29,7 @@ const ReservationPage: FunctionComponent = () => {
                     <LeftReservationCard stateGetReservations={stateGetReservations} reservations={reservations} />
                     <RightReservationCard stateGetReservations={stateGetReservations} reservations={reservations} />
                 </section>
-                <Footer />
+                <Footer color="white" />
             </ContainerReservationPage>
         </ModalContextProvider>
     )
