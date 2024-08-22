@@ -7,12 +7,12 @@ import { i_slide, p_indiceSlideActive, p_indiceSlideInactive } from "../../style
 const SlideTourisme: FunctionComponent = () => {
     const slideTourisme = [
         {
-            title: 'GEO-TOURISME',
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, esse blanditiis distinctio repellat, voluptas odio laboriosam magnam in sapiente consequuntur reiciendis architecto porro est, nam incidunt culpa. Voluptatibus, omnis voluptates. Lorem ipsum dolor sit amet consectetur adipisicing elit.Culpa perferendis totam vel suscipit voluptatibus possimus facilis! Eaque nihil nisi sapiente debitis! laboriosam magnam in sapiente consequuntur reicien'
+            title: 'TOURISME',
+            description: "Le tourisme vous permet de découvrir et d'explorer des destinations variées, en leur offrant des opportunités de loisirs, de détente, et de découverte culturelle. Il inclut la visite de lieux d'intérêt, la participation à des activités récréatives et la découverte des traditions locales."
         },
         {
-            title: 'TOURISME',
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, esse blanditiis distinctio repellat, voluptas odio laboriosam magnam in sapiente consequuntur reiciendis architecto porro est, nam incidunt culpa. Voluptatibus, omnis voluptates. Lorem ipsum dolor sit amet consectetur adipisicing elit.Culpa perferendis'
+            title: 'GEO-TOURISME',
+            description: "Le géotourisme se concentre sur la découverte des formations géologiques, des paysages naturels et des phénomènes géologiques uniques d'une région. Il vous permet d'explorer les aspects géologiques d'un lieu, tels que les volcans, les montagnes, les grottes, et les fossiles, tout en apprenant sur leur formation et leur importance."
         },
     ];
     const [showPrevSlide, setShowPrevSlide] = useState<boolean>(true);

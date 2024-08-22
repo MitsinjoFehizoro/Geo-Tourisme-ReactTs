@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useRef } from "react";
 import { motion, useScroll } from "framer-motion";
 import '../../styles/components/_program.scss'
 import { useChoiceOrganisation } from "../../hooks/useChoiceOrganisation";
@@ -15,18 +15,6 @@ const Program: FunctionComponent<Props> = ({ destination }) => {
     const refScroll = useRef<HTMLDivElement>(null)
     const { scrollYProgress } = useScroll({ container: refScroll })
 
-    const refDiv = useRef<HTMLDivElement>(null)
-    const [heightDiv, setHeightDiv] = useState(0)
-    const handleHeightDiv = () => {
-        if (refDiv.current)
-            setHeightDiv(refDiv.current.offsetHeight)
-    }
-    useEffect(() => {
-        handleHeightDiv()
-        window.addEventListener('resize', handleHeightDiv)
-        console.log(heightDiv);
-        return () => window.removeEventListener('resize', handleHeightDiv)
-    }, [refDiv])
     return (
         <div className="w-full md:w-6/12 lg:w-5/12 xl:w-4/12 flex flex-col">
             <TitleProgramCard title="Où allons-nous le :" destination={destination} />
@@ -42,7 +30,7 @@ const Program: FunctionComponent<Props> = ({ destination }) => {
                         style={{ pathLength: scrollYProgress }}
                     />
                 </svg>
-                <div className="overflow-auto rounded h-[90vh]"  ref={refScroll}>
+                <div className="overflow-auto rounded h-[90vh]" ref={refScroll}>
                     {
                         organisationChoice?.programs.map(program =>
                             <DetailProgamCard program={program} key={program.id} />

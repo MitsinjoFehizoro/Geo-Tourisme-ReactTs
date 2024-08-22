@@ -10,11 +10,21 @@ import Program from "../components/destination-page/program";
 import Suggestions from "../components/destination-page/suggestions";
 import Reservation from "../components/destination-page/reservation";
 import { useChoiceDestination } from "../hooks/useChoiceDestination";
+import { useGetDestinationById } from "../supabase/destinations-supabase";
 
 const DestinationPage: FunctionComponent = () => {
 
     const { toggleLinkActif } = useLink()
-    const { stateChoiceDestination, destinationChoice } = useChoiceDestination()
+    const { destinationChoice } = useChoiceDestination()
+    const { destination, stateGetDestination, getDestination } = useGetDestinationById()
+
+    useEffect(() => {
+        if (destinationChoice) {
+            getDestination(destinationChoice.id)
+        } else { //solution vonjy maika 
+            getDestination("7a962045-f42a-4316-9600-393aec2b5669")
+        }
+    }, [destinationChoice])
     useEffect(() => {
         toggleLinkActif('destination')
     }, [])
@@ -26,15 +36,15 @@ const DestinationPage: FunctionComponent = () => {
     return (
         <>
             <NavigationBar />
-            <SectionPresentation destination={destinationChoice} stateSupabase={stateChoiceDestination} />
-            <SectionLocalisation destination={destinationChoice} stateSupabase={stateChoiceDestination} />
-            <SectionDispo destination={destinationChoice} stateSupabase={stateChoiceDestination} scrollOrganisation={scrollOrganisation} />
+            <SectionPresentation destination={destination} stateSupabase={stateGetDestination} />
+            <SectionLocalisation destination={destination} stateSupabase={stateGetDestination} />
+            <SectionDispo destination={destination} stateSupabase={stateGetDestination} scrollOrganisation={scrollOrganisation} />
             {
-                destinationChoice && (
+                destination && (
                     <div ref={refOrganisation} className="w-full bg-white py-14 px-4 sm:px-8 lg:px-14 flex flex-wrap justify-between">
-                        <Program destination={destinationChoice} />
-                        <Suggestions destination={destinationChoice} />
-                        <Reservation destination={destinationChoice} />
+                        <Program destination={destination} />
+                        <Suggestions destination={destination} />
+                        <Reservation destination={destination} />
                     </div>
                 )
             }

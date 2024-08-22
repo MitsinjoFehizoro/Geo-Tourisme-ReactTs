@@ -22,7 +22,7 @@ export const useGetDestinations = () => {
             setStateGetDestination({ isLoading: true, error: null })
             const { data: dataDestinations, error: errorDestinations } = await supabase
                 .from('destinations')
-                .select('*')
+                .select('*, organisations(* , programs(*))')
             if (errorDestinations) {
                 handleErrorSupabase(errorDestinations, addToast, setStateGetDestination)
             } else {
@@ -43,5 +43,43 @@ export const useGetDestinations = () => {
         tourismes,
         geo,
         getDestinations
+    }
+}
+
+export const useGetDestinationById = () => {
+
+    const [stateGetDestination, setStateGetDestination] = useState<stateSupabase>(
+        {
+            isLoading: false,
+            error: null
+        }
+    )
+    const [destination, setDestination] = useState<Destination | null>(null)
+    const { addToast } = useToast()
+    const getDestination = async (id: string) => {
+        try {
+            setStateGetDestination({ isLoading: true, error: null })
+            const { data: dataDestination, error: errorDestination } = await supabase
+                .from('destinations')
+                .select(`*, organisations(*, programs (*))`)
+                .eq('id', id)
+                .single()
+            if (errorDestination) {
+                console.log(errorDestination);
+                handleErrorSupabase(errorDestination, addToast, setStateGetDestination)
+            } else {
+                setDestination(dataDestination)
+                setStateGetDestination({ error: null, isLoading: false })
+            }
+        } catch (error) {
+            handleErrorSupabase(error as Error, addToast, setStateGetDestination)
+            console.log('teste2');
+        }
+
+    }
+    return {
+        stateGetDestination,
+        destination,
+        getDestination
     }
 }

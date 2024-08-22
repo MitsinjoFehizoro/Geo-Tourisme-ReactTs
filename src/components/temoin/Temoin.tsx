@@ -13,7 +13,7 @@ const Temoin: FunctionComponent = () => {
             transition={{ staggerChildren: .2 }}
             className="bg-background py-14  px-8 md:px-14 flex flex-col items-end relative">
             <motion.h1 variants={variantsStandard} className="text-2xl lg:text-3xl text-secondary text-center md:text-right mb-1 w-full">Ce que nos clients disent ?</motion.h1>
-            <motion.p variants={variantsStandard} className="w-full md:w-2/3 lg:w-1/3  text-sm text-center md:text-right mb-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et illum veritatis consequuntur vero. </motion.p>
+            <motion.p variants={variantsStandard} className="w-full md:w-2/3 lg:w-1/3  text-sm text-center md:text-right mb-4">Découvrez les témoignages de nos clients, qui partagent leurs expériences exceptionnelles vécus grâce à notre accompagnement. </motion.p>
             <motion.div variants={variantsStandard} className="w-full flex flex-wrap justify-around">
                 <TemoinCard />
                 <TemoinCard />
