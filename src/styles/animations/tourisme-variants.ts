@@ -39,9 +39,9 @@ export const variantsImage_2: Variants = {
 }
 
 export const variantsImage_3: Variants = {
-    offscreen: { opacity: 0, x: 100, y: 100 },
+    offscreen: { opacity: 0, scale: 0, x: 100, y: 100 },
     onscreen: {
-        opacity: 1, x: 0, y: 0,
+        opacity: 1, x: 0, y: 0, scale: 1,
         transition: {
             type: "tween",
             duration: 0.6,
