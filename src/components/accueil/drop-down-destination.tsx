@@ -15,7 +15,7 @@ const DropDownDestination: FunctionComponent<Props> = ({ destinations, stateSupa
     const { destinationChoice, handleDestinationChoice } = useChoiceDestination()
     const handleClick = (destination: Destination) => {
         setIsDown(!isDown)
-        handleDestinationChoice(destination.id)
+        handleDestinationChoice(destination)
     }
     return (
         <div className="relative w-full mb-4">
