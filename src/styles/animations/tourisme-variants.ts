@@ -28,7 +28,7 @@ export const variantsImage_1: Variants = {
     }
 }
 export const variantsImage_2: Variants = {
-    offscreen: { opacity: 0, x: -100, y: 100 },
+    offscreen: { opacity: 0, x: -200, y: 100 },
     onscreen: {
         opacity: 1, x: 0, y: 0,
         transition: {

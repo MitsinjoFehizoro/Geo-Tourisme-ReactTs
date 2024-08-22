@@ -14,7 +14,7 @@ const Tourisme: FunctionComponent = () => {
             onViewportEnter={() => toggleLinkActif('tourisme')}
             ref={links['tourisme'].refDestination}
             className="relative bg-background flex flex-col lg:flex-row items-center justify-around px-4 pt-14 pb-12 lg:pb-16">
-            <StyleImage />
+            {/* <StyleImage /> */}
             <SlideTourisme />
         </motion.section>
     );
