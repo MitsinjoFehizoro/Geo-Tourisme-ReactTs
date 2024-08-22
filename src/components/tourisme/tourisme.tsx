@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import '../../styles/components/_tourisme.scss';
 import { motion } from 'framer-motion';
 import { useLink } from "../../hooks/useLink";
-import StyleImage from "./style-image";
+// import StyleImage from "./style-image";
 import SlideTourisme from "./slide-tourisme";
 
 const Tourisme: FunctionComponent = () => {
