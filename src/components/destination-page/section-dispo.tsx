@@ -5,7 +5,7 @@ import DateDispoCard from "./date-dispo-card";
 import LoadingDateDispo from "./loading-date-dispo";
 
 type Props = {
-    destination: Destination | undefined,
+    destination: Destination | null,
     stateSupabase: stateSupabase,
     scrollOrganisation: () => void
 }

@@ -7,7 +7,7 @@ import HistoryCard from "./history-card";
 import { useHeightNav } from "../../hooks/useHeightNav";
 
 type Props = {
-    destination: Destination | undefined,
+    destination: Destination | null,
     stateSupabase: stateSupabase
 }
 const SectionPresentation: FunctionComponent<Props> = ({ destination, stateSupabase }) => {

@@ -10,16 +10,12 @@ import Program from "../components/destination-page/program";
 import Suggestions from "../components/destination-page/suggestions";
 import Reservation from "../components/destination-page/reservation";
 import { useChoiceDestination } from "../hooks/useChoiceDestination";
-import { useGetDestinationById, useGetDestinations } from "../supabase/destinations-supabase";
 
 const DestinationPage: FunctionComponent = () => {
 
     const { toggleLinkActif } = useLink()
-    const { destinationChoice } = useChoiceDestination()
-    const { stateGetDestination, getDestination, destination } = useGetDestinationById()
+    const { stateChoiceDestination, destinationChoice } = useChoiceDestination()
     useEffect(() => {
-        if (destinationChoice)
-            getDestination(destinationChoice?.id)
         toggleLinkActif('destination')
     }, [])
     const refOrganisation = useRef<HTMLDivElement>(null)
@@ -30,15 +26,15 @@ const DestinationPage: FunctionComponent = () => {
     return (
         <>
             <NavigationBar />
-            <SectionPresentation destination={destination} stateSupabase={stateGetDestination} />
-            <SectionLocalisation destination={destination} stateSupabase={stateGetDestination} />
-            <SectionDispo destination={destination} stateSupabase={stateGetDestination} scrollOrganisation={scrollOrganisation} />
+            <SectionPresentation destination={destinationChoice} stateSupabase={stateChoiceDestination} />
+            <SectionLocalisation destination={destinationChoice} stateSupabase={stateChoiceDestination} />
+            <SectionDispo destination={destinationChoice} stateSupabase={stateChoiceDestination} scrollOrganisation={scrollOrganisation} />
             {
-                destination && (
+                destinationChoice && (
                     <div ref={refOrganisation} className="w-full bg-white py-14 px-4 sm:px-8 lg:px-14 flex flex-wrap justify-between">
-                        <Program destination={destination} />
-                        <Suggestions destination={destination} />
-                        <Reservation destination={destination} />
+                        <Program destination={destinationChoice} />
+                        <Suggestions destination={destinationChoice} />
+                        <Reservation destination={destinationChoice} />
                     </div>
                 )
             }

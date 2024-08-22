@@ -4,7 +4,7 @@ import { stateSupabase } from "../../tools/type"
 import LocalisationCard from "./localisation-card"
 
 type Props = {
-    destination: Destination | undefined,
+    destination: Destination | null,
     stateSupabase: stateSupabase
 }
 const SectionLocalisation: FunctionComponent<Props> = ({ destination, stateSupabase }) => {

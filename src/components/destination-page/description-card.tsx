@@ -3,7 +3,7 @@ import { Destination } from "../../models/destination";
 import { stateSupabase } from "../../tools/type";
 
 type Props = {
-    destination: Destination | undefined
+    destination: Destination | null
     stateSupabase: stateSupabase
 }
 const DescriptionCard: FunctionComponent<Props> = ({ destination, stateSupabase }) => {

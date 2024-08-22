@@ -4,7 +4,6 @@ import { supabase } from "./supabase-client"
 import { handleErrorSupabase } from '../tools/handle-error';
 import { useToast } from '../hooks/useToast';
 import { Destination } from '../models/destination';
-import { useNavigate } from 'react-router-dom';
 
 export const useGetDestinations = () => {
     const [stateGetDestination, setStateGetDestination] = useState<stateSupabase>(
@@ -44,40 +43,5 @@ export const useGetDestinations = () => {
         tourismes,
         geo,
         getDestinations
-    }
-}
-
-export const useGetDestinationById = () => {
-    const [stateGetDestination, setStateGetDestination] = useState<stateSupabase>(
-        {
-            isLoading: false,
-            error: null
-        }
-    )
-    const navigate = useNavigate()
-    const { addToast } = useToast()
-    const [destination, setDestination] = useState<Destination>()
-    const getDestination = async (id: string) => {
-        try {
-            setStateGetDestination({ isLoading: true, error: null })
-            const { data: dataDestination, error: errorDestination } = await supabase
-                .from('destinations')
-                .select(`*, organisations (*, programs (*))`)
-                .eq('id', id)
-                .single()
-            if (errorDestination) {
-                navigate('/page-not-found')
-            } else {
-                setDestination(dataDestination)
-                setStateGetDestination({ error: null, isLoading: false })
-            }
-
-        } catch (error) {
-            handleErrorSupabase(error as Error, addToast, setStateGetDestination)
-        }
-    }
-
-    return {
-        stateGetDestination, getDestination, destination
     }
 }
