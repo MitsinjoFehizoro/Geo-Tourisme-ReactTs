@@ -1,4 +1,4 @@
-import { FunctionComponent, RefObject, useEffect, useState } from "react"
+import { FunctionComponent, useEffect, useState } from "react"
 import { i_reservation, reservation_card } from "../../styles/base/tailwind"
 import '../../styles/components/card/_right-reservation-card.scss'
 import { useChoicieReservation } from "../../hooks/useChoiceReservation"

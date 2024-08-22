@@ -13,7 +13,7 @@ const FormSearch: FunctionComponent = () => {
         <form className="w-full md:w-96 px-4 py-8 bg-background rounded">
             <DropDownDestination destinations={destinations} stateSupabase={stateGetDestination} />
             <DropDownMonths stateSupabase={stateGetDestination} />
-            <CustomButton text="Rechercher" />
+            <CustomButton text="Rechercher" isLoading={false} />
         </form>
     )
 }

@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithChildren, createContext, useContext, useEffect, useState } from "react"
+import { FunctionComponent, PropsWithChildren, createContext, useContext, useState } from "react"
 import Toast from "../components/toast"
 import { toast } from "../tools/type"
 

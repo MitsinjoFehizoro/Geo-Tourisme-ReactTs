@@ -1,5 +1,4 @@
 import { FunctionComponent } from "react";
-import StandardCard from "../card/standard-card";
 import CustomButton from "../custom-button";
 import { i_reservation } from "../../styles/base/tailwind";
 import { stateSupabase } from "../../tools/type";

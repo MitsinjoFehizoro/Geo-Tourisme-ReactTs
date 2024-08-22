@@ -3,7 +3,7 @@ import { Destination } from "../../models/destination";
 import { stateSupabase } from "../../tools/type";
 
 type Props = {
-    destination: Destination | OnBeforeUnloadEventHandlerNonNull
+    destination: Destination | null
     stateSupabase: stateSupabase
 }
 const HistoryCard: FunctionComponent<Props> = ({ destination, stateSupabase }) => {
