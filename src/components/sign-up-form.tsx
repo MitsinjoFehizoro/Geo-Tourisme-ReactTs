@@ -32,7 +32,7 @@ const SignUpForm: FunctionComponent = () => {
 
     return (
         <>
-            <form className="mt-8 mx-4" onSubmit={handleSubmit}>
+            <form className="mt-8 md:mx-4 mx-2" onSubmit={handleSubmit}>
                 <h1 className="text-xl font-bold text-center text-secondary mb-6" >S'inscrire : </h1>
                 <CustomInput
                     type="email"
@@ -57,9 +57,9 @@ const SignUpForm: FunctionComponent = () => {
                 <CustomButton isLoading={stateAuth.isLoading} text="Valider" />
             </form>
             <div className="w-full mb-4 mt-4 flex flex-row items-center justify-center">
-                <div className="w-1/3 h-[1px] bg-background" />
-                <NavLink to='/login' className='mx-2 text-sm hover:text-primary'>Se connecter</NavLink>
-                <div className="w-1/3 h-[1px] bg-background" />
+                <div className="w-2/6 md:w-1/3 h-[1px] bg-background" />
+                <NavLink to='/login' className='w-28 text-center text-sm hover:text-primary'>Se connecter</NavLink>
+                <div className="w-2/6 md:w-1/3 h-[1px] bg-background" />
             </div>
         </>
     )

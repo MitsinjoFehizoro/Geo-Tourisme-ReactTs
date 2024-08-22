@@ -4,13 +4,14 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { motion } from "framer-motion";
 import { variantsLeftNav, variantsLeftNavChild } from "../../styles/animations/left-nav-variants";
+import CustomButton from "../custom-button";
 
 type Props = {
     isOpen: boolean,
     setIsOpen: (b: boolean) => void
 }
 const LeftNav: FunctionComponent<Props> = ({ isOpen, setIsOpen }) => {
-    const { isAuth, clientAuth } = useAuth()
+    const { isAuth, clientAuth, stateAuth, logout } = useAuth()
     const { links, linkActif, toggleLinkActif, toggleScrollActif, toggleKeyActif } = useLink()
     const handleClickLink = (key: string) => {
         toggleLinkActif(key), toggleScrollActif(key), toggleKeyActif(key), setIsOpen(false)
@@ -34,19 +35,23 @@ const LeftNav: FunctionComponent<Props> = ({ isOpen, setIsOpen }) => {
                 {
                     Object.entries(links).map(([key, link], index) =>
                         link == links['reservation'] ? (
-                            <motion.div
-                                key={index}
-                                variants={variantsLeftNavChild}
-                                className="w-full h-full"
-                                onClick={() => handleClickLink(key)}
-                            >
-                                <NavLink
-                                    to='/reservations'
-                                    className={`${link === linkActif ? 'border-primary text-primary bg-white' : 'border-white text-background bg-white/20'} block py-2 mb-2 w-full h-full rounded text-center text-sm  border-l-2`}
+
+                            isAuth && (
+                                <motion.div
+                                    key={index}
+                                    variants={variantsLeftNavChild}
+                                    className="w-full h-full"
+                                    onClick={() => handleClickLink(key)}
                                 >
-                                    {link.title}
-                                </NavLink>
-                            </motion.div>
+                                    <NavLink
+                                        to='/reservations'
+                                        className={`${link === linkActif ? 'border-primary text-primary bg-white' : 'border-white text-background bg-white/20'} block py-2 mb-2 w-full h-full rounded text-center text-sm  border-l-2`}
+                                    >
+                                        {link.title}
+                                    </NavLink>
+                                </motion.div>
+                            )
+
                         ) : (
                             <motion.div
                                 key={index}
@@ -68,13 +73,13 @@ const LeftNav: FunctionComponent<Props> = ({ isOpen, setIsOpen }) => {
             </div>
             {
                 isAuth ? (
-                    <motion.div variants={variantsLeftNavChild} className="flex flex-col mt-4">
-                        <NavLink to='/signup' className="mb-2 text-sm text-background rounded bg-primary text-center w-full  py-[7px]">Se déconnecter</NavLink>
+                    <motion.div onClick={logout} variants={variantsLeftNavChild} className="flex flex-col mt-4">
+                        <CustomButton text="Se déconnecter" isLoading={stateAuth.isLoading} />
                     </motion.div>
                 ) : (
                     <motion.div variants={variantsLeftNavChild} className="flex flex-col mt-4">
                         <NavLink to='/signup' className="mb-2 text-sm text-secondary rounded bg-background text-center w-full  py-[7px]">S'inscrire</NavLink>
-                        <NavLink to='/signup' className="mb-2 text-sm text-background rounded bg-primary text-center w-full  py-[7px]">Se connecter</NavLink>
+                        <NavLink to='/login' className="mb-2 text-sm text-background rounded bg-primary text-center w-full  py-[7px]">Se connecter</NavLink>
                     </motion.div>
                 )
             }
