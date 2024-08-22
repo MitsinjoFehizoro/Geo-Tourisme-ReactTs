@@ -73,7 +73,7 @@ const LeftNav: FunctionComponent<Props> = ({ isOpen, setIsOpen }) => {
             </div>
             {
                 isAuth ? (
-                    <motion.div onClick={logout} variants={variantsLeftNavChild} className="flex flex-col mt-4">
+                    <motion.div onClick={() => { logout(), setIsOpen(false) }} variants={variantsLeftNavChild} className="flex flex-col mt-4">
                         <CustomButton text="Se déconnecter" isLoading={stateAuth.isLoading} />
                     </motion.div>
                 ) : (
