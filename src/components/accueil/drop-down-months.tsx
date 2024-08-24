@@ -13,22 +13,9 @@ const DropDownMonths: FunctionComponent<Props> = ({ stateSupabase }) => {
     const [isDown, setIsDown] = useState<boolean>(false)
     const handleClick = () => {
         setIsDown(!isDown)
+
     }
-    interface Month { value: number, month: string }
-    const months: Month[] = [
-        { value: 1, month: 'Janvier' },
-        { value: 2, month: 'Fevrier' },
-        { value: 3, month: 'Mars' },
-        { value: 4, month: 'Avril' },
-        { value: 5, month: 'Mai' },
-        { value: 6, month: 'Juin' },
-        { value: 7, month: 'Juillet' },
-        { value: 8, month: 'Août' },
-        { value: 9, month: 'Septembre' },
-        { value: 10, month: 'Octobre' },
-        { value: 11, month: 'Novembre' },
-        { value: 12, month: 'Decembre' },
-    ]
+   
     return (
         <div className="relative w-full mb-4">
             <div
