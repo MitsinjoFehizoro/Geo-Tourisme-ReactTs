@@ -5,7 +5,10 @@ import PictureSlide from "./picture-slide";
 import Introduction from "./introduction";
 import FormSearch from "./form-search";
 import { useHeightNav } from "../../hooks/useHeightNav";
-import { DateSearchContextProvider } from "../../hooks/useDateSearch";
+import {useDateSearch } from "../../hooks/useDateSearch";
+import { useChoiceDestination } from "../../hooks/useChoiceDestination";
+import { useToast } from "../../hooks/useToast";
+import { useNavigate } from "react-router-dom";
 
 const Accueil: FunctionComponent = () => {
     const [scrollY, setScrollY] = useState<number>(0)
@@ -47,6 +50,19 @@ const Accueil: FunctionComponent = () => {
     }, [heightSection, scrollY, heightDiv, heightNav])
 
     const { links, toggleLinkActif } = useLink()
+
+    const { destinationChoice } = useChoiceDestination()
+    const { selectedDateSearch } = useDateSearch()
+    const { addToast } = useToast()
+    const navigate = useNavigate()
+    const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (destinationChoice && selectedDateSearch) {
+            navigate('/search')
+        } else {
+            addToast({ toast: '📍 Merci de préciser la destination et la date de votre choix.', isSucces: false })
+        }
+    }
     return (
         <motion.section
             viewport={{ amount: .8 }}
@@ -58,7 +74,7 @@ const Accueil: FunctionComponent = () => {
             <PictureSlide />
             <div ref={refDiv} className="px-6 sm:px-8 lg:px-0 fixed w-full flex flex-wrap items-center justify-around pb-44 md:pb-0" style={{ top: topDiv, transition: 'top .5s ease-out' }}>
                 <Introduction />
-                <FormSearch color1="white" color2="background" isResponsive={true} />
+                <FormSearch color1="white" color2="background" isResponsive={true} onSubmit={onSubmit} />
             </div>
         </motion.section>
     )
