@@ -6,6 +6,7 @@ import HomePage from './pages/home-page'
 import ReservationPage from './components/reservation/reservation-page'
 import DestinationPage from './pages/destination-page'
 import PageNotFound from './pages/page-not-found'
+import SearchPage from './pages/search-page'
 
 const route = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const route = createBrowserRouter([
       {
         path: 'destinations',
         element: <DestinationPage />
+      },
+      {
+        path: 'search',
+        element: <SearchPage />
       }
     ]
   }

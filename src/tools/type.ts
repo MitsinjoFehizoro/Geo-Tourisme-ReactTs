@@ -21,3 +21,9 @@ export type stateAxios = {
     isLoading: boolean,
     errorMessage: string
 }
+
+export type dateSearch = {
+    monthValue: number
+    month: string,
+    year: number
+}

@@ -17,9 +17,9 @@ const DestinationCard: FunctionComponent<Props> = ({ destination }) => {
         <motion.div
             initial='offscreen'
             whileInView='onscreen'
-            viewport={{ once: true, amount: .5 }}
+            viewport={{ once: true, amount: .3 }}
             transition={{ staggerChildren: .2 }}
-            className="containt flex justify-center items-center flex-col w-80 mb-14 mx-1"
+            className="containt flex justify-center items-center flex-col w-80 mb-14"
         >
             <div className="relative w-full h-80 flex justify-center">
                 <motion.img variants={variantsStandard} src={destination.galeries[0]} alt="" className="w-full h-full" />

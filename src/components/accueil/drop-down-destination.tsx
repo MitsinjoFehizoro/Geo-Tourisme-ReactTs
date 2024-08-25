@@ -6,11 +6,14 @@ import { Destination } from "../../models/destination";
 import { variantsDestination, variantsDestinationChild, variantsParents } from "../../styles/animations/accueil-variants";
 import { useChoiceDestination } from "../../hooks/useChoiceDestination";
 
+
 type Props = {
-    destinations: Destination[] | undefined
-    stateSupabase: stateSupabase
+    destinations: Destination[] | undefined,
+    stateSupabase: stateSupabase,
+    color1: string,
+    color2: string
 }
-const DropDownDestination: FunctionComponent<Props> = ({ destinations, stateSupabase }) => {
+const DropDownDestination: FunctionComponent<Props> = ({ destinations, stateSupabase, color1, color2 }) => {
     const [isDown, setIsDown] = useState<boolean>(false)
     const { destinationChoice, handleDestinationChoice } = useChoiceDestination()
     const handleClick = (destination: Destination) => {
@@ -20,7 +23,7 @@ const DropDownDestination: FunctionComponent<Props> = ({ destinations, stateSupa
     return (
         <div className="relative w-full mb-4">
             <div
-                className="flex flex-row justify-between items-center w-full h-10 px-4 mb-2 bg-white rounded-md cursor-pointer"
+                className={`bg-${color1} flex flex-row justify-between items-center w-full h-10 px-4 mb-2 rounded-md cursor-pointer`}
                 onClick={() => setIsDown(!isDown)}
             >
                 <p className="text-sm">
@@ -42,7 +45,7 @@ const DropDownDestination: FunctionComponent<Props> = ({ destinations, stateSupa
             </div>
             <motion.div
                 variants={variantsParents}
-                animate={isDown ? 'visible' : 'hidden'} className="bg-white absolute w-full h-48 rounded-md z-10 flex items-center origin-top">
+                animate={isDown ? 'visible' : 'hidden'} className={`bg-${color1} absolute w-full h-48 rounded-md z-10 flex items-center origin-top`}>
                 <div className="w-full h-40 px-4 overflow-auto ">
                     {
                         stateSupabase.isLoading ? (
@@ -52,7 +55,7 @@ const DropDownDestination: FunctionComponent<Props> = ({ destinations, stateSupa
                         ) : (
                             destinations && (
                                 <motion.div
-                                    className="bg-white rounded-md w-full "
+                                    className={`bg-${color1} rounded-md w-full`}
                                     variants={variantsDestination}
                                     animate={isDown ? 'visible' : 'hidden'}
                                 >
@@ -60,7 +63,7 @@ const DropDownDestination: FunctionComponent<Props> = ({ destinations, stateSupa
                                         destinations.map((destination, index) => (
                                             <motion.p
                                                 key={index}
-                                                className="flex items-center px-4 w-full h-9 bg-background rounded mb-1 text-sm cursor-pointer"
+                                                className={`bg-${color2} flex items-center px-4 w-full h-9 rounded mb-1 text-sm cursor-pointer`}
                                                 variants={variantsDestinationChild}
                                                 onClick={() => handleClick(destination)}
                                             >

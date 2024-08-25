@@ -9,6 +9,7 @@ import { ToastContextProvider } from './hooks/useToast.tsx'
 import { AuthContextProvider } from './hooks/useAuth.tsx'
 import { ReservationContextProvider } from './hooks/useChoiceReservation.tsx'
 import { DestinationChoiceContextProvider } from './hooks/useChoiceDestination.tsx'
+import { DateSearchContextProvider } from './hooks/useDateSearch.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -19,7 +20,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <OrganisationChoiceContextProvider>
               <ReservationContextProvider>
                 <ToastContextProvider>
-                  <App />
+                  <DateSearchContextProvider>
+                    <App />
+                  </DateSearchContextProvider>
                 </ToastContextProvider>
               </ReservationContextProvider>
             </OrganisationChoiceContextProvider>
