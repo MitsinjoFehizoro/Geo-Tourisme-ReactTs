@@ -11,9 +11,10 @@ import CustomButton from "../custom-button";
 
 type Props = {
     color1: string,
-    color2: string
+    color2: string,
+    isResponsive: boolean
 }
-const FormSearch: FunctionComponent<Props> = ({ color1, color2 }) => {
+const FormSearch: FunctionComponent<Props> = ({ color1, color2, isResponsive }) => {
     const { stateGetDestination, destinations, getDestinations } = useGetDestinations()
     useEffect(() => {
         getDestinations()
@@ -31,7 +32,7 @@ const FormSearch: FunctionComponent<Props> = ({ color1, color2 }) => {
         }
     }
     return (
-        <form className={`bg-${color2} w-full md:w-80 px-4 py-8 rounded`} onSubmit={onSubmit}>
+        <form className={`bg-${color2} ${isResponsive ? 'w-full md:w-96' : 'w-80 max-h-60' }  px-4 py-8 rounded h-auto`} onSubmit={onSubmit}>
             <DropDownDestination destinations={destinations} stateSupabase={stateGetDestination} color1={color1} color2={color2} />
             <DropDownMonths stateSupabase={stateGetDestination} color1={color1} color2={color2} />
             <CustomButton text='Rechercher' isLoading={false} />

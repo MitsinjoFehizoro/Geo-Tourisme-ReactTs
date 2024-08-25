@@ -58,7 +58,7 @@ const Accueil: FunctionComponent = () => {
             <PictureSlide />
             <div ref={refDiv} className="px-6 sm:px-8 lg:px-0 fixed w-full flex flex-wrap items-center justify-around pb-44 md:pb-0" style={{ top: topDiv, transition: 'top .5s ease-out' }}>
                 <Introduction />
-                <FormSearch color1="white" color2="background" />
+                <FormSearch color1="white" color2="background" isResponsive={true} />
             </div>
         </motion.section>
     )
