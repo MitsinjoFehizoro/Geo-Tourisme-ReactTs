@@ -5,7 +5,7 @@ import PictureSlide from "./picture-slide";
 import Introduction from "./introduction";
 import FormSearch from "./form-search";
 import { useHeightNav } from "../../hooks/useHeightNav";
-import {useDateSearch } from "../../hooks/useDateSearch";
+import { useDateSearch } from "../../hooks/useDateSearch";
 import { useChoiceDestination } from "../../hooks/useChoiceDestination";
 import { useToast } from "../../hooks/useToast";
 import { useNavigate } from "react-router-dom";
@@ -59,6 +59,7 @@ const Accueil: FunctionComponent = () => {
         e.preventDefault()
         if (destinationChoice && selectedDateSearch) {
             navigate('/search')
+            toggleLinkActif('destination')
         } else {
             addToast({ toast: '📍 Merci de préciser la destination et la date de votre choix.', isSucces: false })
         }
