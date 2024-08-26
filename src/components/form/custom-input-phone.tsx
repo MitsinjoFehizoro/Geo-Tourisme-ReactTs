@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { field, stateAxios } from "../../tools/type";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { variantsCountry, variantsDestinationChild } from "../../styles/animations/accueil-variants";
 import LoadingSpin from "../loading/loading-spin";
 
@@ -81,38 +81,40 @@ const CustomInputPhone: FunctionComponent<Props> = ({ stateAxios, handleSelected
             {
                 stateAxios.data && (
                     <div className="absolute w-full h-0 bottom-0 z-10">
-                        <motion.div
-                            variants={variantsCountry}
-                            animate={stateCountry ? 'visible' : 'hidden'}
-                            className="relative bg-white border-[2px] rounded pb-4"
-                        >
-                            <input
-                                className="w-full border-b-2 border-background outline-none bg-white text-sm px-4 pb-1 pt-2"
-                                type="text"
-                                onChange={hanldeAllCountry}
-                                placeholder="Recherche..."
-                            />
-                            <div className="h-40 px-4 overflow-y-auto overflow-x-hidden">
-                                {
-                                    allCountry.map((country, index) => (
-                                        <motion.div
-                                            key={index}
-                                            variants={variantsDestinationChild}
-                                            animate={stateCountry ? 'visible' : 'hidden'}
-                                            className="flex flex-row py-1 items-center justify-center cursor-pointer"
-                                            onClick={() => { setSelectedCountry(country), setStateCountry(!stateCountry) }}
-                                        >
-                                            <span>{(country as { flag: string }).flag}</span>
-                                            <p className="text-sm w-full px-2">{((country as { name: object }).name as { common: string }).common}</p>
-                                            <span className="text-sm">
-                                                {(country as { idd: { root: string } }).idd.root}
-                                                {(country as { idd: { suffixes: string[] } }).idd.suffixes?.[0]}
-                                            </span>
-                                        </motion.div>
-                                    ))
-                                }
-                            </div>
-                        </motion.div>
+                        <AnimatePresence initial={false}>
+                            <motion.div
+                                variants={variantsCountry}
+                                animate={stateCountry ? 'visible' : 'hidden'}
+                                className="relative bg-white border-[2px] rounded pb-4"
+                            >
+                                <input
+                                    className="w-full border-b-2 border-background outline-none bg-white text-sm px-4 pb-1 pt-2"
+                                    type="text"
+                                    onChange={hanldeAllCountry}
+                                    placeholder="Recherche..."
+                                />
+                                <div className="h-40 px-4 overflow-y-auto overflow-x-hidden">
+                                    {
+                                        allCountry.map((country, index) => (
+                                            <motion.div
+                                                key={index}
+                                                variants={variantsDestinationChild}
+                                                animate={stateCountry ? 'visible' : 'hidden'}
+                                                className="flex flex-row py-1 items-center justify-center cursor-pointer"
+                                                onClick={() => { setSelectedCountry(country), setStateCountry(!stateCountry) }}
+                                            >
+                                                <span>{(country as { flag: string }).flag}</span>
+                                                <p className="text-sm w-full px-2">{((country as { name: object }).name as { common: string }).common}</p>
+                                                <span className="text-sm">
+                                                    {(country as { idd: { root: string } }).idd.root}
+                                                    {(country as { idd: { suffixes: string[] } }).idd.suffixes?.[0]}
+                                                </span>
+                                            </motion.div>
+                                        ))
+                                    }
+                                </div>
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
                 )
             }

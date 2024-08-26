@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { FunctionComponent, useState } from "react";
 import LoadingSpin from "../loading/loading-spin";
 import { stateSupabase } from "../../tools/type";
@@ -43,40 +43,42 @@ const DropDownDestination: FunctionComponent<Props> = ({ destinations, stateSupa
                     )
                 }
             </div>
-            <motion.div
-                variants={variantsParents}
-                animate={isDown ? 'visible' : 'hidden'} className={`bg-${color1} absolute w-full h-48 rounded-md z-10 flex items-center origin-top`}>
-                <div className="w-full h-40 px-4 overflow-auto ">
-                    {
-                        stateSupabase.isLoading ? (
-                            <div className="w-full h-full flex items-center justify-center">
-                                <LoadingSpin />
-                            </div>
-                        ) : (
-                            destinations && (
-                                <motion.div
-                                    className={`bg-${color1} rounded-md w-full`}
-                                    variants={variantsDestination}
-                                    animate={isDown ? 'visible' : 'hidden'}
-                                >
-                                    {
-                                        destinations.map((destination, index) => (
-                                            <motion.p
-                                                key={index}
-                                                className={`bg-${color2} flex items-center px-4 w-full h-9 rounded mb-1 text-sm cursor-pointer`}
-                                                variants={variantsDestinationChild}
-                                                onClick={() => handleClick(destination)}
-                                            >
-                                                {destination.title}
-                                            </motion.p>
-                                        ))
-                                    }
-                                </motion.div>
+            <AnimatePresence initial={false}>
+                <motion.div
+                    variants={variantsParents}
+                    animate={isDown ? 'visible' : 'hidden'} className={`bg-${color1} absolute w-full h-48 rounded-md z-10 flex items-center origin-top`}>
+                    <div className="w-full h-40 px-4 overflow-auto ">
+                        {
+                            stateSupabase.isLoading ? (
+                                <div className="w-full h-full flex items-center justify-center">
+                                    <LoadingSpin />
+                                </div>
+                            ) : (
+                                destinations && (
+                                    <motion.div
+                                        className={`bg-${color1} rounded-md w-full`}
+                                        variants={variantsDestination}
+                                        animate={isDown ? 'visible' : 'hidden'}
+                                    >
+                                        {
+                                            destinations.map((destination, index) => (
+                                                <motion.p
+                                                    key={index}
+                                                    className={`bg-${color2} flex items-center px-4 w-full h-9 rounded mb-1 text-sm cursor-pointer`}
+                                                    variants={variantsDestinationChild}
+                                                    onClick={() => handleClick(destination)}
+                                                >
+                                                    {destination.title}
+                                                </motion.p>
+                                            ))
+                                        }
+                                    </motion.div>
+                                )
                             )
-                        )
-                    }
-                </div>
-            </motion.div>
+                        }
+                    </div>
+                </motion.div>
+            </AnimatePresence>
         </div>
     )
 }
