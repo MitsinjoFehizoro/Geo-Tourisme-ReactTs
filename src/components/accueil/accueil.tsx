@@ -5,7 +5,7 @@ import PictureSlide from "./picture-slide";
 import Introduction from "./introduction";
 import FormSearch from "./form-search";
 import { useHeightNav } from "../../hooks/useHeightNav";
-import { useDateSearch } from "../../hooks/useDateSearch";
+import {useDateSearch } from "../../hooks/useDateSearch";
 import { useChoiceDestination } from "../../hooks/useChoiceDestination";
 import { useToast } from "../../hooks/useToast";
 import { useNavigate } from "react-router-dom";
@@ -73,7 +73,7 @@ const Accueil: FunctionComponent = () => {
             style={{ minHeight: heightDiv }}
         >
             <PictureSlide />
-            <div ref={refDiv} className="px-6 sm:px-8 lg:px-0 fixed w-full flex flex-wrap items-center justify-around pb-44 md:pb-0" style={{ top: topDiv, transition: 'top .5s ease-out' }}>
+            <div ref={refDiv} className="px-6 sm:px-8 lg:px-0 absolute w-full flex flex-wrap items-center justify-around pb-44 md:pb-0" style={{ top: topDiv, transition: 'top .5s ease-out' }}>
                 <Introduction />
                 <FormSearch color1="white" color2="background" isResponsive={true} onSubmit={onSubmit} />
             </div>

@@ -20,7 +20,7 @@ const DropDownMonths: FunctionComponent<Props> = ({ stateSupabase, color1, color
         toggleDateSearch(dateSearch)
     }
     return (
-        <div className="relative w-full mb-4">
+        <div className="relative w-full mb-4 ">
             <div
                 className={`bg-${color1} flex flex-row justify-between items-center w-full h-10 px-4 mb-2 rounded-md cursor-pointer`}
                 onClick={() => setIsDown(!isDown)}
@@ -45,7 +45,7 @@ const DropDownMonths: FunctionComponent<Props> = ({ stateSupabase, color1, color
                 <motion.div
                     variants={variantsParents}
                     animate={isDown ? 'visible' : 'hidden'} className={`bg-${color1} absolute w-full h-48 rounded-md z-10 flex items-center origin-top`}>
-                    <div className="w-full h-40 px-4 overflow-auto ">
+                    <div className="w-full h-40 px-4 overflow-auto">
                         {
                             stateSupabase.isLoading ? (
                                 <div className="w-full h-full flex items-center justify-center">
