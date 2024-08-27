@@ -10,25 +10,28 @@ import { AuthContextProvider } from './hooks/useAuth.tsx'
 import { ReservationContextProvider } from './hooks/useChoiceReservation.tsx'
 import { DestinationChoiceContextProvider } from './hooks/useChoiceDestination.tsx'
 import { DateSearchContextProvider } from './hooks/useDateSearch.tsx'
+import { InformationContextProvider } from './hooks/useInformation.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <LinkContextProvider>
-        <HeightNavContextProvider>
-          <DestinationChoiceContextProvider>
-            <OrganisationChoiceContextProvider>
-              <ReservationContextProvider>
-                <ToastContextProvider>
-                  <DateSearchContextProvider>
-                    <App />
-                  </DateSearchContextProvider>
-                </ToastContextProvider>
-              </ReservationContextProvider>
-            </OrganisationChoiceContextProvider>
-          </DestinationChoiceContextProvider>
-        </HeightNavContextProvider>
-      </LinkContextProvider>
-    </AuthContextProvider>
+    <InformationContextProvider>
+      <AuthContextProvider>
+        <LinkContextProvider>
+          <HeightNavContextProvider>
+            <DestinationChoiceContextProvider>
+              <OrganisationChoiceContextProvider>
+                <ReservationContextProvider>
+                  <ToastContextProvider>
+                    <DateSearchContextProvider>
+                      <App />
+                    </DateSearchContextProvider>
+                  </ToastContextProvider>
+                </ReservationContextProvider>
+              </OrganisationChoiceContextProvider>
+            </DestinationChoiceContextProvider>
+          </HeightNavContextProvider>
+        </LinkContextProvider>
+      </AuthContextProvider>
+    </InformationContextProvider>
   </React.StrictMode>,
 )
