@@ -7,7 +7,7 @@ import Contact from "../components/contact/conctact";
 import Separation from "../components/separation"
 import { useLink } from "../hooks/useLink";
 import NavigationBar from "../components/navigation/navigation-bar";
-import WhyUs from "../components/temoin/why-us/why-us";
+import WhyUs from "../components/why-us/why-us";
 const HomePage: FunctionComponent = () => {
     const { keyActif, toggleScrollActif } = useLink()
     useEffect(() => {

@@ -29,7 +29,7 @@ export const useInformation = () => {
             setStateGetInformation({ isLoading: true, error: null })
             const { data: dataInformation, error: errorInformation } = await supabase
                 .from('informations')
-                .select('*')
+                .select('*, why_us(*)')
                 .limit(1)
                 .single()
             if (errorInformation) {
