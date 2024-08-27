@@ -12,7 +12,7 @@ const Introduction: FunctionComponent = () => {
                 stateGetInformation.isLoading ? (
                     <>
                         <h1 className="w-full h-5 mb-6 bg-background animate-pulse" />
-                        {Array.from({ length: 4 }).map((_, index) => (
+                        {Array.from({ length: 7 }).map((_, index) => (
                             <p key={index} className="w-full bg-background h-2 mb-4" />
                         ))}
                     </>
