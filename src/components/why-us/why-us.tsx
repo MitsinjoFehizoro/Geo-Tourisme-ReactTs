@@ -25,7 +25,7 @@ const WhyUs: FunctionComponent = () => {
         <motion.section
             ref={links['apropos'].refDestination}
             onViewportEnter={() => toggleLinkActif('apropos')}
-            className="relative overflow-hidden "
+            className="relative overflow-hidden"
             style={{ height: heightDiv }}
         >
             <div className="absolute top-0 left-0 w-full h-full bg-secondary/90" />
