@@ -21,7 +21,6 @@ export const useCreateContact = () => {
                 addToast({ toast: 'Veuillez entrer votre adresse email.', isSucces: false })
                 return
             }
-            return
         }
         if (!description.isValid) {
             addToast({ toast: 'Veuillez entrez un message valide.', isSucces: false })
