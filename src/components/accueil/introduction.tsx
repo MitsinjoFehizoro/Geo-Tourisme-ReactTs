@@ -6,7 +6,7 @@ const Introduction: FunctionComponent = () => {
     const { stateGetInformation, information } = useInformation()
 
     return (
-        <div className="flex flex-col justify-center w-full  md:w-6/12 lg:w-5/12 h-full lg:mb-0 mb-8">
+        <div className="flex flex-col justify-center w-full  md:w-6/12 lg:w-5/12 h-full lg:mb-0 mb-8 mx-1">
             {
                 stateGetInformation.isLoading ? (
                     <>

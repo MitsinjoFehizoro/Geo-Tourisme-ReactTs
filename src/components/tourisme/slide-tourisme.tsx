@@ -65,7 +65,7 @@ const SlideTourisme: FunctionComponent = () => {
                                 slideTourisme.map((slide, index) => (
                                     <div
                                         key={index}
-                                        className="w-1/2 px-2"
+                                        className="w-1/2 px-2 min-h-72 md:min-h-0"
                                     >
                                         <h1 className="text-2xl lg:text-3xl text-primary mb-2">{(slide as { title: string }).title}</h1>
                                         <p>{(slide as { description: string }).description}</p>

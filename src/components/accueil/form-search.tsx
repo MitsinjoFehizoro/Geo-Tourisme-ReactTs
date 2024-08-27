@@ -18,7 +18,7 @@ const FormSearch: FunctionComponent<Props> = ({ color1, color2, isResponsive, on
     }, [])
 
     return (
-        <form className={`bg-${color2} ${isResponsive ? 'w-full md:w-96' : 'w-80 max-h-60 mb-14'}  px-4 py-8 rounded h-auto mb-4`} onSubmit={onSubmit}>
+        <form className={`bg-${color2} ${isResponsive ? 'w-full md:w-96' : 'w-80 max-h-60 mb-14'}  px-4 py-8 rounded h-auto  mb-4`} onSubmit={onSubmit}>
             <DropDownDestination destinations={destinations} stateSupabase={stateGetDestination} color1={color1} color2={color2} />
             <DropDownMonths stateSupabase={stateGetDestination} color1={color1} color2={color2} />
             <CustomButton text='Rechercher' isLoading={false} />
