@@ -53,12 +53,14 @@ const SlideTourisme: FunctionComponent = () => {
                     style={{ width: widthDiv * 2 }}>
                     {
                         stateGetInformation.isLoading ? (
-                            <div className="w-1/2 px-2 min-h-72 md:min-h-0">
+                            <div className="w-1/2 px-2">
                                 <h1 className="w-56 h-5 mb-4 bg-white animate-pulse" />
-                                {
-                                    Array.from({ length: 7 }).map((_, index) => (
-                                        <p key={index} className="w-full bg-white animate-pulse h-2 mb-3" />
-                                    ))}
+                                {Array.from({ length: 7 }).map((_, index) => (
+                                    <p key={index} className="w-full bg-white animate-pulse h-2 mb-3" />
+                                ))}
+                                {Array.from({ length: 5 }).map((_, index) => (
+                                    <p key={index} className="w-full bg-white animate-pulse h-2 md:h-0 mb-3" />
+                                ))}
                             </div>
                         ) : (
                             slideTourisme.length > 0 && (
