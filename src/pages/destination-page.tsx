@@ -25,13 +25,14 @@ const DestinationPage: FunctionComponent = () => {
             getDestination("7a962045-f42a-4316-9600-393aec2b5669")
         }
     }, [destinationChoice])
-    useEffect(() => {
-        toggleLinkActif('destination')
-    }, [])
+
     const refOrganisation = useRef<HTMLDivElement>(null)
     const scrollOrganisation = () => {
         refOrganisation.current?.scrollIntoView({ behavior: 'smooth' })
     }
+    useEffect(() => {
+        toggleLinkActif('destination')
+    }, [])
 
     return (
         <>

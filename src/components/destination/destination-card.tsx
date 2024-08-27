@@ -36,7 +36,7 @@ const DestinationCard: FunctionComponent<Props> = ({ destination }) => {
             </div>
             <motion.p variants={variantsStandard} className="truncature text-center pt-12">{destination.description}</motion.p>
             <motion.div variants={variantsStandard} className="mt-6">
-                <NavLink to={`destinations`} onClick={() => handleDestinationChoice(destination)} className="transition ease-in duration-200 w-36 pb-2 border-b-2 border-black text-sm text-center hover:text-primary hover:border-primary cursor-pointer">VOIR PLUS DE DETAIL</NavLink>
+                <NavLink to={`/destinations`} onClick={() => handleDestinationChoice(destination)} className="transition ease-in duration-200 w-36 pb-2 border-b-2 border-black text-sm text-center hover:text-primary hover:border-primary cursor-pointer">VOIR PLUS DE DETAIL</NavLink>
             </motion.div>
         </motion.div>
     )

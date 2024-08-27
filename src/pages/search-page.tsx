@@ -12,6 +12,7 @@ import { Organisation } from "../models/organisation";
 import LoadingDateDispo from "../components/destination-page/loading-date-dispo";
 import DateDispoCard from "../components/destination-page/date-dispo-card";
 import { useNavigate } from "react-router-dom";
+import { useChoiceOrganisation } from "../hooks/useChoiceOrganisation";
 
 const SearchPage: FunctionComponent = () => {
     const { destinationChoice } = useChoiceDestination()
@@ -41,6 +42,11 @@ const SearchPage: FunctionComponent = () => {
         setRefresh(!refresh)
     }
 
+    const { handleOrganisationChoice } = useChoiceOrganisation()
+    const scrollOrganisation = (organisation: Organisation) => {
+        handleOrganisationChoice(organisation)
+        navigate('/destinations')
+    }
     return (
         <>
             <NavigationBar />
@@ -79,7 +85,7 @@ const SearchPage: FunctionComponent = () => {
                                 const color = index % 2 === 0 ? 'primary' : 'secondary';
                                 return (
                                     <>
-                                        <DateDispoCard key={index} organisation={organisation} scrollOrganisation={() => console.log('teste')} color={color} />
+                                        <DateDispoCard key={index} organisation={organisation} scrollOrganisation={() => scrollOrganisation(organisation)} color={color} />
                                     </>
 
                                 )
