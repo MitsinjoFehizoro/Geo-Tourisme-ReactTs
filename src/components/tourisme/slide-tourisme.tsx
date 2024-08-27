@@ -58,7 +58,7 @@ const SlideTourisme: FunctionComponent = () => {
                                 {Array.from({ length: 7 }).map((_, index) => (
                                     <p key={index} className="w-full bg-white animate-pulse h-2 mb-3" />
                                 ))}
-                                {Array.from({ length: 5 }).map((_, index) => (
+                                {Array.from({ length: 6 }).map((_, index) => (
                                     <p key={index} className="w-full bg-white animate-pulse h-2 md:h-0 mb-3" />
                                 ))}
                             </div>
