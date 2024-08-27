@@ -2,21 +2,19 @@ import { motion } from "framer-motion";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { variantsParentSlide, variantsSlide } from "../../styles/animations/tourisme-variants";
 import { i_slide, p_indiceSlideActive, p_indiceSlideInactive } from "../../styles/base/tailwind";
+import { useInformation } from "../../hooks/useInformation";
 
 
 const SlideTourisme: FunctionComponent = () => {
-    const slideTourisme = [
-        {
-            title: 'TOURISME',
-            description: "Le tourisme vous permet de découvrir et d'explorer des destinations variées, en leur offrant des opportunités de loisirs, de détente, et de découverte culturelle. Il inclut la visite de lieux d'intérêt, la participation à des activités récréatives et la découverte des traditions locales."
-        },
-        {
-            title: 'GEO-TOURISME',
-            description: "Le géotourisme se concentre sur la découverte des formations géologiques, des paysages naturels et des phénomènes géologiques uniques d'une région. Il vous permet d'explorer les aspects géologiques d'un lieu, tels que les volcans, les montagnes, les grottes, et les fossiles, tout en apprenant sur leur formation et leur importance."
-        },
-    ];
-    const [showPrevSlide, setShowPrevSlide] = useState<boolean>(true);
+    const { stateGetInformation, information } = useInformation()
+    const [slideTourisme, setSlideTourisme] = useState<{ title: string, description: string }[]>([])
+    useEffect(() => {
+        if (information) {
+            setSlideTourisme([{ title: 'TOURISME', description: information.tourisme }, { title: 'GEO-TOURISME', description: information.geo_tourisme }])
+        }
+    }, [information])
 
+    const [showPrevSlide, setShowPrevSlide] = useState<boolean>(true);
     const refDiv = useRef<HTMLDivElement>(null);
     const refHeight = useRef<HTMLDivElement>(null)
     const [widthDiv, setWidthDiv] = useState(0);
@@ -53,15 +51,29 @@ const SlideTourisme: FunctionComponent = () => {
                     transition={{ type: 'spring', bounce: 0.4, duration: 1 }}
                     className="absolute flex flex-row pb-8"
                     style={{ width: widthDiv * 2 }}>
-                    {slideTourisme.map((slide, index) => (
-                        <div
-                            key={index}
-                            className="w-1/2 px-2"
-                        >
-                            <h1 className="text-2xl lg:text-3xl text-primary mb-2">{slide.title}</h1>
-                            <p>{slide.description}</p>
-                        </div>
-                    ))}
+                    {
+                        stateGetInformation.isLoading ? (
+                            <div className="w-1/2 px-2">
+                                <h1 className="w-56 h-5 mb-4 bg-white animate-pulse" />
+                                {
+                                    Array.from({ length: 7 }).map((_, index) => (
+                                        <p key={index} className="w-full bg-white animate-pulse h-2 mb-3" />
+                                    ))}
+                            </div>
+                        ) : (
+                            slideTourisme.length > 0 && (
+                                slideTourisme.map((slide, index) => (
+                                    <div
+                                        key={index}
+                                        className="w-1/2 px-2"
+                                    >
+                                        <h1 className="text-2xl lg:text-3xl text-primary mb-2">{(slide as { title: string }).title}</h1>
+                                        <p>{(slide as { description: string }).description}</p>
+                                    </div>
+                                ))
+                            )
+                        )
+                    }
                 </motion.div>
                 <div className="slide absolute bottom-0 w-full flex flex-row justify-center items-center mt-4">
                     <p className={showPrevSlide ? p_indiceSlideActive : p_indiceSlideInactive} />
